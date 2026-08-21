@@ -65,6 +65,15 @@
 .live-guide strong{font-size:14px;margin-bottom:3px}
 .live-guide span{color:#6d7b8d;font-size:12px}
 
+.live-recommendations{margin:26px 0 52px}
+.live-recommendations h2{margin-bottom:14px;color:#142e4b;font-size:22px;letter-spacing:-.04em}
+.recommendation-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.recommendation-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:20px;border:1px solid #e4eaf1;border-radius:18px;background:#fff;color:#142e4b;text-align:left;cursor:pointer;box-shadow:0 10px 24px rgba(18,55,92,.07);transition:.2s}
+.recommendation-card:hover,.recommendation-card.active{border-color:#1e88ff;transform:translateY(-3px);box-shadow:0 15px 28px rgba(30,136,255,.16)}
+.recommendation-card strong{font-size:16px}.recommendation-card>span:not(.recommendation-rank){color:#1e88ff;font-size:14px;font-weight:800}.recommendation-card small{color:#6d7b8d}
+.recommendation-rank{position:absolute;top:14px;right:15px;display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#eaf4ff;color:#1e88ff;font-size:12px;font-weight:900}
+.recommendation-loading,.recommendation-error{margin:0;padding:22px;border-radius:16px;background:#fff;color:#617087;text-align:center}
+
 @keyframes livePulse{50%{opacity:.45;transform:scale(.72)}}@keyframes markerPulse{50%{box-shadow:0 10px 20px rgba(105,42,8,.32),0 0 0 9px rgba(230,76,31,.12)}}
 
 @media(max-width:768px){
@@ -84,3 +93,5 @@
     .live-guide{grid-template-columns:1fr;margin:14px 18px 30px;gap:9px}
     .live-guide>div{padding:14px}
     .live-guide i{width:37px;height:37px;font-size:20px}}
+
+@media(max-width:768px){.live-recommendations{margin:22px 18px 36px}.recommendation-list{grid-template-columns:1fr}.recommendation-card{padding:17px}}
