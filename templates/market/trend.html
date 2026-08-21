@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부동산 시장동향 | 집찾GO</title>
+  <title>부동산 분석 | 집찾GO</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="../../static/css/common.css">
-  <link rel="stylesheet" href="../../static/css/trend.css">
+  <link rel="stylesheet" href="/static/css/common.css">
+  <link rel="stylesheet" href="/static/css/trend.css">
 </head>
 <body>
 <header class="main-header" id="mainHeader">
-  <a href="../../index.html" class="logo"><img src="../../static/images/logo.png" alt="집찾GO"></a>
+  <a href="/index.html" class="logo"><img src="/static/images/logo.png" alt="집찾GO"></a>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="top-nav" id="mobileNav">
-    <a class="guest-menu" href="../../templates/member/login.html"><i class="ti ti-login"></i> 로그인</a>
-    <a class="guest-menu" href="../../templates/member/signup.html"><i class="ti ti-user-plus"></i> 회원가입</a>
-    <a href="../../templates/support/contact.html"><i class="ti ti-headset"></i> 고객센터</a>
-    <a class="user-menu" href="../../templates/favorite/favorite.html"><i class="ti ti-heart"></i> 관심매물</a>
+    <a class="guest-menu" href="/templates/member/login.html"><i class="ti ti-login"></i> 로그인</a>
+    <a class="guest-menu" href="/templates/member/signup.html"><i class="ti ti-user-plus"></i> 회원가입</a>
+    <a href="/templates/support/contact.html"><i class="ti ti-headset"></i> 고객센터</a>
+    <a class="user-menu" href="/templates/favorite/favorite.html"><i class="ti ti-heart"></i> 관심매물</a>
     <a class="user-menu logout-btn" href="#"><i class="ti ti-logout"></i> 로그아웃</a>
   </nav>
 </header>
@@ -25,33 +25,34 @@
   <section class="trend-hero">
     <div class="trend-bg one"></div><div class="trend-bg two"></div>
     <p class="trend-badge"><i class="ti ti-chart-line"></i> 집찾GO 부동산 데이터 센터</p>
-    <h1>숫자를 넘어 흐름을 읽는<br><span>부동산 시장동향</span></h1>
+    <h1>숫자를 넘어 흐름을 읽는<br><span>부동산 분석</span></h1>
     <p class="trend-desc">매매, 전월세, 거래량, 관심 지역 이동까지<br>집을 선택할 때 필요한 시장 정보를 한곳에서 비교해 보세요.</p>
+  
   </section>
 
   <section class="trend-summary" aria-label="핵심 시장 분석">
-    <a href="../../templates/market/sale.html" class="summary-card link-card">
+    <a href="/templates/market/sale.html" class="summary-card link-card">
       <div class="summary-icon"><i class="ti ti-building-skyscraper"></i></div>
       <h3>매매가격</h3>
       <strong data-market="saleStatus">불러오는 중</strong>
       <p data-market="saleText">국토교통부 실거래가 데이터를 확인하고 있어요.</p>
       <span class="card-more">매매 자세히 보기 <i class="ti ti-arrow-right"></i></span>
     </a>
-    <a href="../../templates/market/jeonse.html" class="summary-card link-card">
+    <a href="/templates/market/jeonse.html" class="summary-card link-card">
       <div class="summary-icon"><i class="ti ti-home-dollar"></i></div>
-      <h3>전세시장</h3>
+      <h3>전월세 시장</h3>
       <strong data-market="jeonseStatus">불러오는 중</strong>
       <p data-market="jeonseText">전월세 실거래 데이터를 확인하고 있어요.</p>
-      <span class="card-more">전세 자세히 보기 <i class="ti ti-arrow-right"></i></span>
+      <span class="card-more">전월세 자세히 보기 <i class="ti ti-arrow-right"></i></span>
     </a>
-    <a href="../../templates/market/volume.html" class="summary-card link-card">
+    <a href="/templates/market/volume.html" class="summary-card link-card">
       <div class="summary-icon"><i class="ti ti-chart-bar"></i></div>
       <h3>거래량</h3>
       <strong data-market="volumeStatus">불러오는 중</strong>
       <p data-market="volumeText">전월 대비 거래량 변화를 계산하고 있어요.</p>
       <span class="card-more">거래량 자세히 보기 <i class="ti ti-arrow-right"></i></span>
     </a>
-    <a href="../../templates/market/region.html" class="summary-card link-card">
+    <a href="/templates/market/region.html" class="summary-card link-card">
       <div class="summary-icon"><i class="ti ti-map-pin-star"></i></div>
       <h3>관심지역</h3>
       <strong data-market="hotRegion">불러오는 중</strong>
@@ -61,21 +62,41 @@
   </section>
 
   <section class="trend-content">
-    <a href="../../templates/market/ai-report.html" class="trend-panel ai-panel link-panel">
-      <div>
+    <a href="/templates/market/ai-report.html" class="trend-panel ai-panel link-panel">
+      <div class="ai-panel-head">
         <p class="panel-label">AI 시장 종합 분석</p>
-        <h2>오늘의 부동산 흐름</h2>
-        <p data-market="aiText">국토교통부 실거래가 데이터를 기준으로 오늘의 부동산 흐름을 분석하고 있어요.</p>
+        <h2>매매와 전월세 흐름을 한 화면에서 해석해요</h2>
+        <p data-market="aiText">국토교통부 실거래가 데이터를 기준으로 매매가격, 전월세 보증금, 거래량 변화를 함께 분석하고 있어요.</p>
+      </div>
+      <div class="ai-metric-strip" aria-label="AI 분석 핵심 지표">
+        <span>
+          <i class="ti ti-home-stats"></i>
+          <em>매매 평균</em>
+          <strong data-market="saleAvg">-</strong>
+          <b data-market="saleRate">-</b>
+        </span>
+        <span>
+          <i class="ti ti-home-dollar"></i>
+          <em>전월세 보증금</em>
+          <strong data-market="jeonseAvg">-</strong>
+          <b data-market="jeonseRate">-</b>
+        </span>
+        <span>
+          <i class="ti ti-activity"></i>
+          <em>매매 거래량</em>
+          <strong data-market="tradeCount">-</strong>
+          <b data-market="volumeRate">-</b>
+        </span>
       </div>
       <div class="ai-point-list">
-        <span><i class="ti ti-check"></i> 기준월 <b data-market="marketMonth">-</b></span>
-        <span><i class="ti ti-check"></i> 데이터 <b data-market="marketSource">-</b></span>
-        <span><i class="ti ti-check"></i> 분석지역 <b data-market="regionName">-</b></span>
+        <span><i class="ti ti-calendar-stats"></i> 기준월 <b data-market="marketMonth">-</b></span>
+        <span><i class="ti ti-database"></i> 데이터 <b data-market="marketSource">-</b></span>
+        <span><i class="ti ti-map-pin"></i> 분석지역 <b data-market="regionName">-</b></span>
       </div>
-      <span class="region-more">AI 분석 시작하기 <i class="ti ti-arrow-right"></i></span>
+      <span class="region-more">매매·전월세 AI 리포트 보기 <i class="ti ti-arrow-right"></i></span>
     </a>
 
-    <a href="../../templates/market/region-flow.html" class="trend-panel region-flow-link">
+    <a href="/templates/market/region-flow.html" class="trend-panel region-flow-link">
       <p class="panel-label">관심 지역 이동 분석</p>
       <h2>사람들의 관심은 어디로 이동할까요?</h2>
       <div class="region-list">
@@ -89,22 +110,21 @@
   </section>
 
   <section class="issue-section">
-    <div class="issue-title"><p class="panel-label">의사결정 보조지표</p><h2>집을 선택할 때 함께 볼 정보</h2></div>
-    <div class="issue-grid">
-      <a href="../../templates/market/rate.html" class="issue-card-link">
-        <i class="ti ti-percentage"></i><h3>금리와 대출 부담</h3>
-        <p>기준금리와 주택담보대출 금리 변화가 월 상환액과 매수 가능 예산에 미치는 영향을 확인합니다.</p>
-        <span>금리 영향 확인 <i class="ti ti-arrow-right"></i></span>
-      </a>
-      <a href="../../templates/market/traffic.html" class="issue-card-link">
-        <i class="ti ti-train"></i><h3>교통 개발과 접근성</h3>
-        <p>철도와 도로 개발계획, 주요 업무지구 접근성을 함께 보며 지역의 교통 경쟁력을 비교합니다.</p>
-        <span>교통 정보 확인 <i class="ti ti-arrow-right"></i></span>
-      </a>
-      <a href="../../templates/market/school.html" class="issue-card-link">
-        <i class="ti ti-school"></i><h3>학군과 교육환경</h3>
-        <p>학교 접근성과 교육환경, 생활권 정보를 함께 확인해 가족의 생활 조건에 맞는 지역을 찾습니다.</p>
-        <span>학군 정보 확인 <i class="ti ti-arrow-right"></i></span>
+    <div class="issue-title"><p class="panel-label">매매 실무 계산</p><h2>계약 전에 미리 확인할 비용</h2></div>
+    <div class="issue-grid issue-grid-single">
+      <a href="/templates/market/cost.html" class="issue-card-link issue-card-wide">
+        <i class="ti ti-calculator"></i>
+        <div>
+          <h3>매매 비용 계산기</h3>
+          <strong>중개수수료 · 취득세 · 자금계획</strong>
+          <p>거래금액을 입력하면 중개수수료, 취득세, 대출 반영 후 필요한 현금을 한 화면에서 계산합니다.</p>
+          <ul class="issue-feature-list">
+            <li><i class="ti ti-receipt-2"></i>중개수수료</li>
+            <li><i class="ti ti-file-percent"></i>취득세</li>
+            <li><i class="ti ti-wallet"></i>자금계획</li>
+          </ul>
+          <span>계산기 열기 <i class="ti ti-arrow-right"></i></span>
+        </div>
       </a>
     </div>
   </section>
@@ -112,12 +132,14 @@
 
 <footer class="trend-footer">
   <div class="footer-inner">
-    <div class="footer-brand"><a href="../../index.html"><img src="../../static/images/logo.png" alt="집찾GO"></a><div><h2>집찾GO</h2><p>AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.</p></div></div>
-    <div class="footer-menu"><a href="../../index.html">메인</a><a href="../../templates/property/map.html">지도</a><a href="../../templates/property/register.html">매물 등록</a><a href="../../templates/support/Servise.html">서비스 소개</a></div>
+    <div class="footer-brand"><a href="/index.html"><img src="/static/images/logo.png" alt="집찾GO"></a><div><h2>집찾GO</h2><p>AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.</p></div></div>
+    <div class="footer-menu"><a href="/index.html">메인</a><a href="/templates/property/map.html">지도</a><a href="/templates/property/register.html">매물 등록</a><a href="/templates/property/local.html">서비스 소개</a></div>
   </div>
-  <div class="footer-bottom"><p>집찾GO | AI 부동산 추천 플랫폼<span>시장 데이터는 참고용 정보입니다.</span><span>help@jipchatgo.com</span></p><p>Copyright 2026 집찾GO. All rights reserved.</p></div>
+  <div class="footer-bottom"><p>집찾GO | 부동산 분석 서비스<span>실거래·지역·비용 정보를 한곳에서 제공합니다.</span><span>help@jipchatgo.com</span></p><p>Copyright 2026 집찾GO. All rights reserved.</p></div>
 </footer>
-<script src="../../static/js/market-api.js"></script>
-<script src="../../static/js/common.js"></script>
+<script src="/static/js/user-region.js"></script>
+<script src="/static/js/market-api.js"></script>
+<script src="/static/js/common.js"></script>
 </body>
 </html>
+

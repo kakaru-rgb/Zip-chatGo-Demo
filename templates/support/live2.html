@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>중개 LIVE | 집챗GO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/main.css">
+  <link rel="stylesheet" href="../../static/css/trend.css">
+  <link rel="stylesheet" href="../../static/css/live.css">
+</head>
+<body>
+  <header class="main-header" id="mainHeader">
+    <a href="../../index.html" class="logo"><img src="../../static/images/logo.png" alt="집챗GO"></a>
+    <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    <nav class="top-nav" id="mobileNav">
+      
+      <a href="./contact.html"><i class="ti ti-headset"></i> 고객센터</a>
+    </nav>
+  </header>
+
+  <main class="live-page">
+    <section class="live-intro" aria-labelledby="liveTitle">
+      <p class="live-eyebrow"><span></span> ZIPCHATGO LIVE</p>
+      <h1 id="liveTitle">AI가 지도에서 찾은<br><strong>오늘의 추천 매물</strong></h1>
+      <p>추천 매물 3건을 데이터베이스에서 조회하여 지도에 표시합니다.</p>
+    </section>
+
+    <section class="live-stage" aria-label="AI 추천 매물 지도">
+      <div id="liveMap" class="live-map" aria-label="추천 매물 지도"></div>
+      <div class="video-shade"></div>
+      <div class="live-header">
+        <a class="back-link" href="./Servise.html" aria-label="서비스 페이지로 돌아가기"><i class="ti ti-x"></i></a>
+        <div class="live-brand">중개 <b>LIVE</b></div>
+        <span class="viewer-count"><i class="ti ti-database"></i> DB 연동</span>
+      </div>
+      <aside class="camera-panel" aria-label="중개사 소개 영상">
+        <div class="camera-title"><span class="live-dot"></span> 중개사 소개</div>
+        <div id="cameraPreview"><iframe width="560" height="315" src="https://www.youtube.com/embed/9-fmwaooLoI?si=Gq_jkbimKMvkJpgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      </aside>
+      <div class="broadcast-copy">
+        <span class="now-badge"><i></i> LIVE NOW</span>
+        <h2>조건에 맞는 매물을<br>지도에서 확인하세요.</h2>
+        <p id="propertyInfo" aria-live="polite">추천 매물을 불러오는 중입니다.</p>
+      </div>
+      <div class="ai-status"><i class="ti ti-sparkles"></i><div><strong>AI 추천 매물 조회</strong><span>SQLite 데이터베이스 기반</span></div></div>
+      <button class="sound-toggle" id="mapRecenter" type="button" aria-label="현재 추천 매물로 이동"><i class="ti ti-focus-centered"></i></button>
+    </section>
+
+    <section class="live-recommendations" aria-labelledby="recommendationTitle">
+      <h2 id="recommendationTitle">추천 매물 3건</h2>
+      <div id="recommendationList" class="recommendation-list" aria-live="polite">
+        <p class="recommendation-loading">추천 매물을 불러오는 중입니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="trend-footer">
+    <div class="footer-inner"><div class="footer-brand"><a href="../../index.html"><img src="../../static/images/logo.png" alt="집챗GO"></a><div><h2>집챗GO</h2><p>AI 부동산 추천 플랫폼</p></div></div></div>
+  </footer>
+
+  <script src="../../static/js/common.js"></script>
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=m4rxvrgqbo"></script>
+  <script src="../../static/js/live2.js"></script>
+</body>
+</html>

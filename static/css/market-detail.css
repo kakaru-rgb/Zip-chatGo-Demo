@@ -1,6 +1,6 @@
 /* ==========================
    market-detail.css
-   시장동향 상세페이지 공통
+   부동산 분석 상세페이지 공통
 ========================== */
 
 .market-detail-page {
@@ -310,6 +310,7 @@
   }
 
   .detail-hero h1 {
+    font-size: 32px;
     letter-spacing: -1.2px;
   }
 
@@ -429,11 +430,211 @@
 }
 
 /* ==========================
+   매매 비용 계산기
+========================== */
+
+.cost-page {
+  display: grid;
+  gap: 34px;
+}
+
+.cost-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.cost-card {
+  scroll-margin-top: 110px;
+  padding: 28px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid rgba(226, 232, 240, .95);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, .08);
+}
+
+.cost-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.cost-card-head > i {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(30, 136, 255, .12), rgba(23, 212, 179, .16));
+  color: #1E88FF;
+  font-size: 28px;
+}
+
+.cost-card-head span {
+  display: block;
+  margin-bottom: 4px;
+  color: #1E88FF;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.cost-card-head h2 {
+  color: #0F172A;
+  font-size: 22px;
+  letter-spacing: -.7px;
+}
+
+.cost-form {
+  display: grid;
+  gap: 12px;
+}
+
+.cost-form label {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.cost-form label > span {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.label-hint {
+  color: #94A3B8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cost-form input,
+.cost-form select {
+  width: 100%;
+  height: 48px;
+  padding: 0 42px 0 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 14px;
+  background: white;
+  color: #0F172A;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.cost-form input:disabled {
+  background: #F1F5F9;
+  color: #94A3B8;
+}
+
+.cost-form small {
+  position: absolute;
+  right: 14px;
+  top: 39px;
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.amount-preview {
+  display: block;
+  min-height: 18px;
+  color: #1E88FF;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.cost-result {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #F8FBFF, #EFF7FF);
+  border: 1px solid rgba(30, 136, 255, .16);
+}
+
+.cost-result span {
+  display: block;
+  color: #64748B;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.cost-result strong {
+  display: block;
+  color: #0F172A;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.cost-result p {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.cost-note {
+  margin-top: 0;
+}
+
+.sale-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.sale-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 17px;
+  border: 1px solid #DCE3EC;
+  border-radius: 14px;
+  background: #fff;
+  color: #0F172A;
+  text-decoration: none;
+  font-weight: 900;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.sale-actions a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(30, 136, 255, .35);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, .12);
+}
+
+.sale-actions a:active {
+  transform: translateY(-1px);
+}
+
+.sale-actions a:last-child {
+  color: #fff;
+  border: 0;
+  background: linear-gradient(135deg, #1E88FF, #17D4B3);
+}
+
+.sale-actions a:last-child:hover {
+  box-shadow: 0 16px 32px rgba(30, 136, 255, .24);
+  filter: saturate(1.06);
+}
+
+/* ==========================
    상세페이지 반응형
-   footer는 trend.css의 시장동향 footer 디자인을 그대로 사용
+   footer는 trend.css의 부동산 분석 footer 디자인을 그대로 사용
 ========================== */
 
 @media (max-width: 900px) {
+  .cost-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sale-actions {
+    flex-direction: column;
+  }
+
   .report-nav-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -451,6 +652,38 @@
 }
 
 @media (max-width: 520px) {
+  .detail-hero {
+    padding: 36px 20px;
+  }
+
+  .detail-hero h1 {
+    font-size: 29px;
+  }
+
+  .cost-card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .cost-card-head {
+    align-items: flex-start;
+  }
+
+  .cost-card-head h2 {
+    font-size: 20px;
+  }
+
+  .cost-result strong {
+    font-size: 25px;
+    line-height: 1.25;
+    word-break: keep-all;
+  }
+
+  .label-hint {
+    display: block;
+    margin-top: 3px;
+  }
+
   .report-nav-grid {
     grid-template-columns: 1fr;
   }

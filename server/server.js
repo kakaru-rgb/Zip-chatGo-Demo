@@ -1,12 +1,16 @@
 import 'dotenv/config';
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { XMLParser } from 'fast-xml-parser';
+import { DatabaseSync } from 'node:sqlite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
+const dataDirectory = path.join(__dirname, 'data');
+const databasePath = path.join(dataDirectory, 'jipchatgo.sqlite');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +40,8 @@ const parser = new XMLParser({
   isArray: (name) => name === 'item'
 });
 
+const db = initializeDatabase();
+
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -53,6 +59,28 @@ app.get('/api/market/health', (req, res) => {
     defaultDealYmd: DEFAULT_DEAL_YMD,
     source: hasServiceKey() ? 'molit-openapi' : 'demo'
   });
+});
+
+// LIVE 화면에서 사용할 추천 매물 3건입니다. 매물 데이터는 SQLite DB에서 조회합니다.
+app.get('/api/live/recommendations', (req, res) => {
+  try {
+    const recommendations = db.prepare(`
+      SELECT id, building_name, property_type, sale_price, exclusive_area,
+             floor, address, district, latitude, longitude, thumbnail_url
+      FROM properties
+      WHERE latitude IS NOT NULL AND longitude IS NOT NULL
+      ORDER BY
+        CASE WHEN exclusive_area BETWEEN 59 AND 100 THEN 0 ELSE 1 END,
+        sale_price ASC,
+        id ASC
+      LIMIT 3
+    `).all();
+
+    res.json({ ok: true, recommendations });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ ok: false, message: '추천 매물을 조회하지 못했습니다.' });
+  }
 });
 
 app.get('/api/market/summary', async (req, res) => {
@@ -378,6 +406,65 @@ function getPrevYmd(ymd) {
 
 function hasServiceKey() {
   return Boolean(MOLIT_SERVICE_KEY && !MOLIT_SERVICE_KEY.includes('여기에') && !MOLIT_SERVICE_KEY.includes('YOUR_'));
+}
+
+function initializeDatabase() {
+  fs.mkdirSync(dataDirectory, { recursive: true });
+  const database = new DatabaseSync(databasePath);
+  database.exec(`
+    CREATE TABLE IF NOT EXISTS properties (
+      id INTEGER PRIMARY KEY,
+      building_name TEXT NOT NULL,
+      property_type TEXT,
+      sale_price REAL,
+      deposit REAL,
+      monthly_rent REAL,
+      maintenance_fee REAL,
+      exclusive_area REAL,
+      floor INTEGER,
+      built_year INTEGER,
+      address TEXT,
+      district TEXT,
+      latitude REAL,
+      longitude REAL,
+      thumbnail_url TEXT,
+      created_at TEXT,
+      updated_at TEXT
+    )
+  `);
+
+  const { count } = database.prepare('SELECT COUNT(*) AS count FROM properties').get();
+  if (count > 0) return database;
+
+  const sourcePath = path.join(projectRoot, 'static', 'data', 'properties.json');
+  const sourceProperties = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+  const insert = database.prepare(`
+    INSERT INTO properties (
+      id, building_name, property_type, sale_price, deposit, monthly_rent,
+      maintenance_fee, exclusive_area, floor, built_year, address, district,
+      latitude, longitude, thumbnail_url, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  database.exec('BEGIN');
+  try {
+    for (const item of sourceProperties) {
+      insert.run(
+        item.id, item.building_name || '이름 없는 매물', item.property_type || null,
+        item.sale_price || null, item.deposit || null, item.monthly_rent || null,
+        item.maintenance_fee || null, item.exclusive_area || null, item.floor || null,
+        item.built_year || null, item.address || null, item.district || null,
+        item.latitude || null, item.longitude || null, item.thumbnail_url || null,
+        item.created_at || null, item.updated_at || null
+      );
+    }
+    database.exec('COMMIT');
+  } catch (error) {
+    database.exec('ROLLBACK');
+    throw error;
+  }
+
+  return database;
 }
 
 app.listen(PORT, () => {

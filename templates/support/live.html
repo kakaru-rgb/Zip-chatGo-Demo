@@ -16,10 +16,7 @@
     <a href="../../index.html" class="logo"><img src="../../static/images/logo.png" alt="집챗GO"></a>
     <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
     <nav class="top-nav" id="mobileNav">
-      <a target="_blank" rel="noopener noreferrer" href="../../templates/member/login.html"><i class="ti ti-login"></i> 로그인</a>
-      <a target="_blank" rel="noopener noreferrer" href="../../templates/member/signup.html"><i class="ti ti-user-plus"></i> 회원 가입</a>
-      <a target="_blank" rel="noopener noreferrer" href="../../templates/support/contact.html"><i class="ti ti-headset"></i> 고객센터</a>
-      <a target="_blank" rel="noopener noreferrer" href="../../templates/property/register.html"><i class="ti ti-heart"></i> 문의하기</a>
+      <a href="./contact.html"><i class="ti ti-headset"></i> 고객센터</a>
     </nav>
   </header>
 
@@ -33,6 +30,16 @@
     <section class="live-stage" aria-label="AI 매물 추천 라이브 방송">
       <div id="liveMap" class="live-map" aria-label="성수동 인근 지도"></div>
       <div class="video-shade"></div>
+      <div class="property-video-modal" id="propertyVideoModal" hidden aria-hidden="true">
+        <button class="property-video-backdrop" id="propertyVideoBackdrop" type="button" aria-label="영상 닫기"></button>
+        <section class="property-video-panel" role="dialog" aria-modal="true" aria-labelledby="propertyVideoTitle">
+          <div class="property-video-header">
+            <strong id="propertyVideoTitle">추천 매물 영상</strong>
+            <button class="property-video-close" id="propertyVideoClose" type="button" aria-label="영상 닫기"><i class="ti ti-x"></i></button>
+          </div>
+          <div class="property-video-frame"><iframe id="propertyYoutube" title="추천 매물 YouTube 영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </section>
+      </div>
 
       <div class="live-header">
         <a class="back-link" href="./Servise.html" aria-label="서비스 페이지로 돌아가기"><i class="ti ti-x"></i></a>
