@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>시장동향 | 집찾GO</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/trend.css">  
+  <link rel="stylesheet" href="../../static/css/modelhouse.css">
+</head>
+
+<body>
+
+<header class="main-header" id="mainHeader">
+  <a href="../../index.html" class="logo">
+    <img src="../../static/images/logo.png" alt="집찾GO">
+  </a>
+
+  <button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="top-nav" id="mobileNav">
+    <a target="_blank" rel="noopener noreferrer" href="../../templates/member/login.html">
+      <i class="ti ti-login"></i> 로그인
+    </a>
+
+    <a target="_blank" rel="noopener noreferrer" href="../../templates/member/signup.html">
+      <i class="ti ti-user-plus"></i> 회원 가입
+    </a>
+
+    <a target="_blank" rel="noopener noreferrer" href="../../templates/support/contact.html">
+      <i class="ti ti-headset"></i> 뉴스룸
+    </a>
+
+    <a target="_blank" rel="noopener noreferrer" href="../../templates/property/register.html">
+      <i class="ti ti-heart"></i> 문의하기
+    </a>
+    
+  </a>
+  </nav>
+</header>
+
+  <main class="modelhouse-page">
+    <section class="modelhouse-hero" aria-labelledby="modelhouse-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> MOBILE MODEL HOUSE</p>
+        <h1 id="modelhouse-title">손안에서 먼저 만나는<br><em>프리미엄 라이프</em></h1>
+        <p class="hero-description">침실부터 거실, 주방과 욕실, 단지 전경까지. 실제 모델하우스를 거니는 듯한 장면 전환으로 새로운 집의 일상을 미리 만나보세요.</p>
+        <div class="hero-guide"><i class="ti ti-sparkles"></i><span>오른쪽 화면을 터치하거나 잠시 감상해 보세요.</span></div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="stage-orbit orbit-one"></div><div class="stage-orbit orbit-two"></div>
+        <div class="mobile-frame" aria-label="자동 재생되는 모바일 모델하우스">
+          <div class="phone-speaker"></div>
+          <div class="phone-screen">
+            <div class="screen-header"><span class="screen-brand">ZIPCHAT <b>GO</b></span><span class="live-mark"><i></i> TOUR</span></div>
+            <div class="scene-viewport" id="sceneViewport">
+              <div class="scene-image scene-image-current" id="sceneCurrent"></div>
+              <div class="scene-image scene-image-next" id="sceneNext"></div>
+              <div class="scene-shade"></div>
+              <div class="floorplan-overlay" id="floorplanOverlay" aria-hidden="true"><span class="plan-line p1"></span><span class="plan-line p2"></span><span class="plan-line p3"></span><span class="plan-room r1">LIVING</span><span class="plan-room r2">BED</span><span class="plan-room r3">KITCHEN</span></div>
+              <div class="scene-copy"><p id="sceneNumber">01 — 07</p><h2 id="sceneTitle">마스터 침실</h2><span id="sceneSubtitle">고요한 아침을 위한 가장 사적인 공간</span></div>
+              <div class="scene-progress"><i id="sceneProgress"></i></div>
+            </div>
+            <div class="screen-controls">
+              <button id="prevScene" type="button" aria-label="이전 장면"><i class="ti ti-chevron-left"></i></button>
+              <div class="scene-dots" id="sceneDots" aria-label="장면 선택"></div>
+              <button id="nextScene" type="button" aria-label="다음 장면"><i class="ti ti-chevron-right"></i></button>
+            </div>
+          </div>
+          <div class="phone-home"></div>
+        </div>
+        <p class="stage-caption">VIRTUAL SHOWROOM <span>·</span> 24/7 OPEN</p>
+      </div>
+    </section>
+  </main>
+
+<footer class="trend-footer">
+
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="../../index.html">
+        <img src="../../static/images/logo.png" alt="집찾GO">
+      </a>
+
+      <div>
+        <h2>집찾GO</h2>
+        <p>AI가 조건에 맞는 집을 더 쉽고 빠르게 찾아드립니다.</p>
+      </div>
+    </div>
+
+    <div class="footer-menu">
+      <a href="../../index.html">홈</a>
+      <a href="../../templates/market/trend.html">시장동향</a>
+      <a href="../../templates/property/register.html">매물등록</a>
+      <a href="../../templates/support/contact.html">고객센터</a>
+    </div>
+
+  </div>
+ 
+
+
+  <div class="footer-bottom">
+    <p>
+      집찾GO | AI 부동산 추천 플랫폼
+      <span>대표: 홍길동</span>
+      <span>사업자등록번호: 111-00-005544</span>
+      <span>이메일: jipchatgo@email.com</span>
+    </p>
+
+    <p>
+      Copyright © 2026 집찾GO. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+
+  <script src="../../static/js/common.js"></script>
+  <script src="../../static/js/modelhouse.js"></script>
+</body>
+</html>

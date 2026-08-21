@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      교통 접근성과 개발계획 | 집찾GO
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/sale.css">
+  </head>
+  <body>
+    <header class="main-header" id="mainHeader">
+      <a href="/index.html" class="logo">
+        <img src="/static/images/logo.png" alt="집찾GO">
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+      </button>
+      <nav class="top-nav" id="mobileNav">
+        <a class="guest-menu" href="/templates/member/login.html">
+          <i class="ti ti-login">
+          </i>
+          로그인
+        </a>
+        <a class="guest-menu" href="/templates/member/signup.html">
+          <i class="ti ti-user-plus">
+          </i>
+          회원가입
+        </a>
+        <a href="/templates/support/contact.html">
+          <i class="ti ti-headset">
+          </i>
+          고객센터
+        </a>
+        <a class="user-menu" href="/templates/favorite/favorite.html">
+          <i class="ti ti-heart">
+          </i>
+          관심매물
+        </a>
+        <a class="user-menu logout-btn" href="#">
+          <i class="ti ti-logout">
+          </i>
+          로그아웃
+        </a>
+      </nav>
+    </header>
+    <main class="sale-page">
+      <section class="sale-hero traffic-hero">
+        <div>
+          <span class="live-badge">
+            <i>
+            </i>
+            LIVE · 교통 접근성
+          </span>
+          <h1>
+            매일의 출퇴근과 미래 교통을
+            <br>
+            <strong>
+              함께 비교하세요
+            </strong>
+          </h1>
+          <p>
+            주요 업무지구까지의 예상 이동시간, 환승 횟수와 철도 개발사업 진행단계를 지역별로 비교합니다.
+          </p>
+        </div>
+        <div class="update-state">
+          <i class="ti ti-refresh">
+          </i>
+          <span>
+            기준 시각
+            <strong id="updatedAt">
+              --:--:--
+            </strong>
+          </span>
+        </div>
+      </section>
+      <section class="compare-filter">
+        <label>
+          <span>
+            출발 지역
+          </span>
+          <select id="regionFilter">
+          </select>
+        </label>
+        <label>
+          <span>
+            목적지
+          </span>
+          <select id="destination">
+            <option value="gangnam">
+              강남역
+            </option>
+            <option value="yeouido">
+              여의도
+            </option>
+            <option value="gwanghwamun">
+              광화문
+            </option>
+            <option value="pangyo">
+              판교
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            출발 시간
+          </span>
+          <select id="departTime">
+            <option value="peak">
+              평일 08:00
+            </option>
+            <option value="normal">
+              평일 10:00
+            </option>
+            <option value="weekend">
+              주말 10:00
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            이동 수단
+          </span>
+          <select id="transportType">
+            <option value="transit">
+              대중교통
+            </option>
+            <option value="car">
+              자동차
+            </option>
+          </select>
+        </label>
+        <button id="analyzeBtn" type="button">
+          <i class="ti ti-route">
+          </i>
+          경로 분석
+        </button>
+      </section>
+      <div class="data-notice">
+        <i class="ti ti-info-circle">
+        </i>
+        <span>
+          시연용 예상값입니다. 실제 이동시간은 출발 위치, 교통상황과 운행정보에 따라 달라지며 개발계획은 관계기관 고시를 확인해야 합니다.
+        </span>
+      </div>
+      <section class="metric-grid">
+        <article>
+          <div class="metric-head">
+            <span>
+              예상 이동시간
+            </span>
+            <i class="ti ti-clock">
+            </i>
+          </div>
+          <strong id="travelTime">
+            -
+          </strong>
+          <p id="timeCompare">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              환승 횟수
+            </span>
+            <i class="ti ti-transfer">
+            </i>
+          </div>
+          <strong id="transferCount">
+            -
+          </strong>
+          <p id="routeText">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              역 접근성
+            </span>
+            <i class="ti ti-walk">
+            </i>
+          </div>
+          <strong id="stationAccess">
+            -
+          </strong>
+          <p>
+            주거지 평균 기준
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              교통 종합점수
+            </span>
+            <i class="ti ti-map-2">
+            </i>
+          </div>
+          <strong id="trafficScore">
+            -
+          </strong>
+          <p id="scoreText">
+            -
+          </p>
+        </article>
+      </section>
+      <section class="dashboard-grid">
+        <article class="dashboard-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                COMMUTE ROUTE
+              </span>
+              <h2>
+                추천 이동 경로
+              </h2>
+            </div>
+            <small id="routeTitle">
+              -
+            </small>
+          </div>
+          <div class="route-line" id="routeLine">
+          </div>
+        </article>
+        <aside class="dashboard-card compare-summary">
+          <div class="card-heading">
+            <div>
+              <span>
+                COMMUTE INSIGHT
+              </span>
+              <h2>
+                출퇴근 분석
+              </h2>
+            </div>
+          </div>
+          <div class="ai-score-ring" id="trafficRing">
+            <strong id="ringScore">
+              -
+            </strong>
+            <span>
+              접근성 점수
+            </span>
+          </div>
+          <div class="insight-box">
+            <i class="ti ti-bulb">
+            </i>
+            <p id="trafficInsight">
+              조건을 선택해 주세요.
+            </p>
+          </div>
+        </aside>
+      </section>
+      <section class="dashboard-card ranking-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              DEVELOPMENT PROJECTS
+            </span>
+            <h2>
+              주요 교통 개발사업
+            </h2>
+          </div>
+          <small>
+            사업 단계는 시연용 예시입니다
+          </small>
+        </div>
+        <div class="project-grid" id="projectGrid">
+        </div>
+      </section>
+      <section class="dashboard-card transaction-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              REGION COMPARISON
+            </span>
+            <h2>
+              주요 지역 교통 접근성 비교
+            </h2>
+          </div>
+          <label class="table-search">
+            <i class="ti ti-search">
+            </i>
+            <input id="regionSearch" type="search" placeholder="지역명 검색">
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  지역
+                </th>
+                <th>
+                  목적지
+                </th>
+                <th>
+                  예상시간
+                </th>
+                <th>
+                  환승
+                </th>
+                <th>
+                  역 접근
+                </th>
+                <th>
+                  교통점수
+                </th>
+                <th>
+                  주요 노선
+                </th>
+              </tr>
+            </thead>
+            <tbody id="trafficTableBody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="dashboard-card">
+        <div class="card-heading">
+          <div>
+            <span>
+              REALITY CHECK
+            </span>
+            <h2>
+              교통 호재 확인 체크리스트
+            </h2>
+          </div>
+        </div>
+        <div class="check-grid">
+          <article>
+            <i class="ti ti-file-check">
+            </i>
+            <h3>
+              사업 단계
+            </h3>
+            <p>
+              단순 발표인지 착공·공사 중인지 진행단계를 구분하세요.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-map-pin">
+            </i>
+            <h3>
+              실제 역 위치
+            </h3>
+            <p>
+              예정 역까지의 보행거리와 경사, 환승 동선을 확인하세요.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-calendar-time">
+            </i>
+            <h3>
+              개통 시점
+            </h3>
+            <p>
+              사업 지연 가능성과 입주·매도 시점을 함께 고려하세요.
+            </p>
+          </article>
+        </div>
+      </section>
+      <nav class="sale-actions">
+        <a href="/templates/market/trend.html">
+          <i class="ti ti-arrow-left">
+          </i>
+          목록으로 돌아가기
+        </a>
+        <a href="/index.html">
+          <i class="ti ti-home">
+          </i>
+          메인으로 이동
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html">
+            <img src="/static/images/logo.png" alt="집찾GO">
+          </a>
+          <div>
+            <h2>
+              집찾GO
+            </h2>
+            <p>
+              AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.
+            </p>
+          </div>
+        </div>
+        <nav class="footer-links">
+          <a href="/index.html">
+            메인
+          </a>
+          <a href="/templates/market/trend.html">
+            부동산 분석
+          </a>
+          <a href="/templates/support/contact.html">
+            고객센터
+          </a>
+        </nav>
+      </div>
+      <div class="footer-info">
+        <span>
+          집찾GO
+        </span>
+        <span>
+          부동산 분석 서비스
+        </span>
+        <span>
+          실거래·지역·비용 정보를 한곳에서
+        </span>
+      </div>
+    </footer>
+    <script src="/static/js/common.js">
+    </script>
+    <script src="/static/js/traffic.js">
+    </script>
+  </body>
+</html>

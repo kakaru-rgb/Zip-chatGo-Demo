@@ -1,0 +1,827 @@
+.logo img{
+    height:60px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:40px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#1E3A5F;
+    font-size:16px;
+    font-weight:600;
+}
+
+nav a:hover{
+    color:#4A90E2;
+}
+
+
+/* Hero Section new */
+/* .hero{
+    position:relative;
+    height:700px;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.heroSwiper{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+.heroSwiper img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-content{
+    position:relative;
+    z-index:10;
+    color:#fff;
+    text-align:center;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.25);
+    z-index:2;
+} */
+
+/* Hero Section */
+.hero{
+    position:relative;
+    isolation:isolate;
+    height:700px;
+    padding:48px 24px;
+    background:url('../images/building1.png');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:1;
+    width:min(720px, 100%);
+    padding:58px 64px 54px;
+    color:#f8fbff;
+    text-shadow:0 3px 14px rgba(3, 14, 29, .7);
+}
+
+.hero-content::before{
+    content:none;
+}
+
+.hero-content h1{
+    margin:0 0 20px;
+    color:#fffaf0;
+    font-size:clamp(34px, 4vw, 54px);
+    font-weight:800;
+    line-height:1.2;
+    letter-spacing:-.055em;
+    text-shadow:0 3px 0 rgba(15, 34, 59, .72), 0 7px 20px rgba(0, 0, 0, .55);
+}
+
+.hero-content p{
+    max-width:570px;
+    margin:0 auto 34px;
+    color:#f4e4bc;
+    font-size:20px;
+    font-weight:500;
+    line-height:1.85;
+    letter-spacing:-.02em;
+    text-shadow:0 2px 12px rgba(0, 0, 0, .85), 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.hero-content button{
+    position:relative;
+    min-width:205px;
+    padding:16px 30px;
+    border:1px solid rgba(255, 241, 197, .72);
+    border-radius:999px;
+    background:linear-gradient(135deg, #f6d58d 0%, #d99c42 52%, #b97322 100%);
+    box-shadow:0 12px 25px rgba(0, 0, 0, .25), inset 0 1px 1px rgba(255, 255, 255, .55);
+    color:#172b46;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:800;
+    letter-spacing:-.02em;
+    transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.hero-content button:hover{
+    filter:brightness(1.07);
+    transform:translateY(-3px);
+    box-shadow:0 18px 30px rgba(0, 0, 0, .32), inset 0 1px 1px rgba(255, 255, 255, .65);
+}
+
+.hero-content button:active{
+    transform:translateY(0);
+    box-shadow:0 8px 16px rgba(0, 0, 0, .25);
+}
+
+.hero-content button:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:4px;
+}
+
+.hero-content a.btn-primary{
+    position:relative;
+    display:inline-block;
+    min-width:205px;
+    padding:16px 30px;
+    border:1px solid rgba(212, 175, 55, .8);
+    border-radius:999px;
+    background:linear-gradient(135deg, #d4af37 0%, #f4e4bc 50%, #d4af37 100%);
+    box-shadow:0 12px 25px rgba(212, 175, 55, .4), inset 0 1px 1px rgba(255, 255, 255, .55);
+    color:#0a0a0a;
+    cursor:pointer;
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.02em;
+    text-decoration:none;
+    transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.hero-content a.btn-primary:hover{
+    filter:brightness(1.07);
+    transform:translateY(-3px);
+    box-shadow:0 18px 30px rgba(0, 0, 0, .32), inset 0 1px 1px rgba(255, 255, 255, .65);
+}
+
+.hero-content a.btn-primary:active{
+    transform:translateY(0);
+    box-shadow:0 8px 16px rgba(0, 0, 0, .25);
+}
+
+.hero-content a.btn-primary:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:4px;
+}
+
+/* Container 2 */
+.service-section{
+
+    padding:120px 200px;
+
+    background:white;
+
+
+
+}
+
+.service-wrap{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.service-card{
+
+    background:rgb(235, 236, 233);
+
+    border-radius:20px;
+
+    padding:45px 55px;
+
+    
+
+    text-align:center;
+
+    transition:.4s;
+
+    border:1px solid var(--border);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.service-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:0;
+
+    background:linear-gradient(180deg,#edeef0,transparent);
+
+    transition:.35s;
+
+    pointer-events:none;
+
+}
+
+.service-card:hover::before{
+
+    height:100%;
+
+}
+
+.service-card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0 25px 50px rgba(0,0,0,.15);
+
+}
+
+.service-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.35s;
+
+}
+
+.service-icon i{
+
+    font-size:42px;
+
+    color:#2563EB;
+
+}
+
+.service-card:hover .service-icon{
+
+    transform:scale(1.15);
+
+    background:#2563EB;
+
+}
+
+.service-card:hover .service-icon i{
+
+    color:white;
+
+}
+
+.service-card h3{
+
+    margin-top:30px;
+
+    font-size:26px;
+    
+}
+
+.service-card p{
+
+    margin-top:18px;
+
+    color:#666;
+
+    line-height:1.8;
+
+    min-height:70px;
+
+}
+
+.service-card a{
+
+    position:relative;
+
+    z-index:2;
+
+    cursor:pointer;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:25px;
+
+    color:#2563EB;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.service-card a i{
+
+    transition:.35s;
+
+}
+
+.service-card:hover a{
+
+    color:#1D4ED8;
+
+}
+
+.service-card:hover a i{
+
+    transform:translateX(6px);
+
+}
+
+/* ================================= 모바일 그림 ===================== */
+
+.phone{
+    width:54px;
+    height:82px;
+    background:#fff;
+    border-radius:12px;
+    position:relative;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.phone::before{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:4px;
+    background:#ddd;
+    border-radius:10px;
+    left:50%;
+    top:7px;
+    transform:translateX(-50%);
+}
+
+.screen{
+    position:absolute;
+    left:5px;
+    top:15px;
+    right:5px;
+    bottom:5px;
+    background:#eaf6ff;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+/* 집 */
+
+.house{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-45%);
+}
+
+.roof{
+    width:0;
+    height:0;
+    border-left:18px solid transparent;
+    border-right:18px solid transparent;
+    border-bottom:18px solid #1e73ff;
+    margin:auto;
+}
+
+.body{
+    width:30px;
+    height:24px;
+    background:#1e73ff;
+    margin:auto;
+    position:relative;
+    border-radius:0 0 4px 4px;
+}
+
+.door{
+    width:8px;
+    height:12px;
+    background:#fff;
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    border-radius:2px 2px 0 0;
+}
+
+.service-icon:hover .phone{
+    transform:rotate(-8deg);
+}
+
+.service-icon:hover .house{
+    animation:float 1.5s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform:translate(-50%,-45%);}
+    50%{transform:translate(-50%,-52%);}
+    100%{transform:translate(-50%,-45%);}
+}
+
+/* ================================= 집내놓기 그림 ===================== */
+
+
+.house-sale{
+    position:relative;
+}
+
+.sale-roof{
+    width:0;
+    height:0;
+    border-left:22px solid transparent;
+    border-right:22px solid transparent;
+    border-bottom:22px solid #fff;
+    margin:auto;
+}
+
+.sale-body{
+    width:42px;
+    height:34px;
+    background:#fff;
+    border-radius:4px;
+    position:relative;
+}
+
+.window{
+    width:10px;
+    height:10px;
+    background:#1e73ff;
+    position:absolute;
+    left:6px;
+    top:7px;
+    border-radius:2px;
+}
+
+.door{
+    width:10px;
+    height:16px;
+    background:#1e73ff;
+    position:absolute;
+    right:8px;
+    bottom:0;
+    border-radius:2px 2px 0 0;
+}
+
+/* + 버튼 */
+
+.plus{
+    position:absolute;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:#00C853;
+    right:-10px;
+    bottom:-10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+
+.plus span{
+    position:absolute;
+    background:#fff;
+}
+
+.plus span:first-child{
+    width:12px;
+    height:3px;
+    left:7px;
+    top:11px;
+    border-radius:2px;
+}
+
+.plus span:last-child{
+    width:3px;
+    height:12px;
+    left:11px;
+    top:7px;
+    border-radius:2px;
+}
+
+
+.service-icon:hover .plus{
+    animation:pulse .8s infinite;
+}
+
+.service-icon:hover .sale-body{
+    animation:houseFloat 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.15);}
+100%{transform:scale(1);}
+}
+
+@keyframes houseFloat{
+0%{transform:translateY(0);}
+50%{transform:translateY(-5px);}
+100%{transform:translateY(0);}
+}
+
+/* ================================= 중개 Live ===================== */
+
+.live-video{
+    position:relative;
+}
+
+.monitor{
+
+    width:60px;
+    height:44px;
+    background:#ffffff;
+    border-radius:8px;
+    position:relative;
+    box-shadow:0 5px 12px rgba(0,0,0,.15);
+
+}
+
+/* 집 */
+
+.live-house{
+
+    position:absolute;
+    left:50%;
+    top:52%;
+    transform:translate(-50%,-50%);
+
+}
+
+.roof{
+
+    width:0;
+    height:0;
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-bottom:12px solid #1e73ff;
+    margin:auto;
+
+}
+
+.body{
+
+    width:22px;
+    height:16px;
+    background:#1e73ff;
+    margin:auto;
+    position:relative;
+
+}
+
+.door{
+
+    width:6px;
+    height:8px;
+    background:#fff;
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+
+}
+
+/* 카메라 */
+
+.camera{
+
+    width:16px;
+    height:12px;
+    background:#ffffff;
+    position:absolute;
+    right:-14px;
+    top:16px;
+    border-radius:3px;
+
+}
+
+.camera::after{
+
+    content:"";
+    position:absolute;
+    right:-6px;
+    top:2px;
+
+    border-left:7px solid #ffffff;
+    border-top:4px solid transparent;
+    border-bottom:4px solid transparent;
+
+}
+
+.lens{
+
+    width:6px;
+    height:6px;
+    background:#1e73ff;
+    border-radius:50%;
+    margin:3px auto;
+
+}
+
+/* LIVE 표시 */
+
+.live-dot{
+
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#ff2d55;
+
+    position:absolute;
+    top:-6px;
+    left:-6px;
+
+}
+
+.icon-wrap:hover .live-dot{
+
+    animation:blink .8s infinite;
+
+}
+
+.service-icon:hover .camera{
+
+    transform:scale(1.08);
+
+}
+
+.service-icon:hover .monitor{
+
+    animation:float 1.5s infinite;
+
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:.2;}
+100%{opacity:1;}
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-5px);}
+100%{transform:translateY(0);}
+}
+
+
+/* ======================================================
+   반응형
+   ====================================================== */
+
+@media(max-width:992px){
+
+.service-wrap{
+
+grid-template-columns:1fr;
+
+}
+
+.about-card{
+
+width:100%;
+
+}
+
+.section-title h2{
+
+font-size:34px;
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.about-section,
+.service-section{
+
+padding:70px 0;
+
+}
+
+.section-title{
+
+margin-bottom:50px;
+
+}
+
+.section-title h2{
+
+font-size:28px;
+
+}
+
+.about-card{
+
+padding:35px 25px;
+
+}
+
+.service-card{
+
+padding:35px 25px;
+
+}
+
+.project-btn{
+
+width:100%;
+
+justify-content:center;
+
+}
+
+}
+
+/* Footer */
+footer{
+    background:#1E3A5F;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+footer p{
+    font-size:14px;
+    margin:5px 0;
+}
+
+/* 반응형 */
+@media(max-width:768px){
+
+    .hero{
+        height:auto;
+        min-height:620px;
+        padding:100px 20px 64px;
+        background-position:58% center;
+    }
+
+    .hero-content{
+        padding:46px 26px 42px;
+    }
+
+    .hero-content p{
+        font-size:15px;
+        line-height:1.75;
+    }
+
+    .hero-content button{
+        width:100%;
+    }
+
+    header{
+        padding:20px;
+        flex-direction:column;
+        height:auto;
+        gap:15px;
+    }
+
+    nav ul{
+        gap:20px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .info-section{
+        grid-template-columns:1fr;
+        padding:40px 20px;
+    }
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>부동산 지도 서비스</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/map.css" />
+</head>
+<body class="map-page">
+  <header class="main-header" id="mainHeader">
+    <a href="../../index.html" class="logo">
+      <img src="../../static/images/logo.png" alt="집찾GO">
+    </a>
+
+    <button class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="메뉴 열기"
+            aria-controls="mobileNav"
+            aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="top-nav" id="mobileNav">
+      <a class="guest-menu" href="../member/login.html">
+        <i class="ti ti-login" aria-hidden="true"></i>
+        로그인
+      </a>
+      <a class="guest-menu" href="../member/signup.html">
+        <i class="ti ti-user-plus" aria-hidden="true"></i>
+        회원가입
+      </a>
+      <a href="../support/contact.html">
+        <i class="ti ti-headset" aria-hidden="true"></i>
+        고객센터
+      </a>
+      <a class="user-menu" href="../favorite/favorite.html">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        관심매물
+      </a>
+      <a class="user-menu logout-btn" href="#">
+        <i class="ti ti-logout" aria-hidden="true"></i>
+        로그아웃
+      </a>
+    </nav>
+  </header>
+
+  <main class="map-page-main">
+    <aside id="propertySidebar">
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="지역, 단지명, 주소 검색" />
+        <button id="searchBtn">검색</button>
+      </div>
+
+      <div id="propertyListView" class="property-list-view">
+        <div class="mobile-property-list-toolbar">
+          <button id="mobilePropertyListBack"
+                  class="mobile-view-back"
+                  type="button"
+                  aria-label="지도로 돌아가기">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7"/>
+            </svg>
+          </button>
+          <strong>매물 목록</strong>
+          <span><b id="mobileResultCount">0</b>개</span>
+        </div>
+
+        <div class="filter-box">
+          <select id="typeFilter">
+            <option value="">전체 유형</option>
+            <option value="아파트">아파트</option>
+            <option value="오피스텔">오피스텔</option>
+            <option value="빌라">빌라</option>
+          </select>
+
+          <select id="priceFilter">
+            <option value="">전체 가격</option>
+            <option value="50000">5억 이하</option>
+            <option value="70000">7억 이하</option>
+            <option value="100000">10억 이하</option>
+            <option value="150000">15억 이하</option>
+          </select>
+        </div>
+
+        <div class="result-header">
+          <strong id="resultCount">0</strong>개 매물
+        </div>
+
+        <div id="propertyList" class="property-list"></div>
+      </div>
+
+      <section id="propertyDetailView"
+               class="property-detail"
+               aria-label="선택한 매물 상세정보"
+               hidden>
+        <div class="property-detail-toolbar">
+          <button id="propertyDetailBack" class="property-detail-back" type="button" aria-label="매물 목록으로 돌아가기">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7"/>
+            </svg>
+          </button>
+          <strong>매물 상세</strong>
+          <button id="propertyFavoriteToggle"
+                  class="property-favorite-toggle"
+                  type="button"
+                  aria-label="관심 매물에 추가"
+                  aria-pressed="false"
+                  title="관심 매물에 추가">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21S4 16.5 4 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 3.5C20 16.5 12 21 12 21Z"/>
+            </svg>
+          </button>
+          <button id="mobilePropertyDetailMap"
+                  class="mobile-detail-map-button"
+                  type="button">
+            지도
+          </button>
+        </div>
+        <div id="propertyDetailContent" class="property-detail-content"></div>
+      </section>
+    </aside>
+
+    <section id="map"></section>
+
+    <div class="map-right-controls">
+      <div class="distance-measure-controls" aria-label="지도 거리 측정 도구">
+        <button id="distanceMeasureToggle"
+                class="distance-measure-toggle"
+                type="button"
+                aria-pressed="false"
+                aria-controls="distanceMeasurePanel">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m5 18 13-13 3 3L8 21H5v-3Z"/>
+            <path d="m14 9 2 2m-5 1 2 2m-5 1 2 2"/>
+          </svg>
+          <span>거리</span>
+        </button>
+
+        <section id="distanceMeasurePanel" class="distance-measure-panel" aria-label="거리 측정 상태" hidden>
+          <div class="distance-measure-panel-head">
+            <div>
+              <strong>거리재기</strong>
+              <span id="distanceMeasurePointCount">0개 지점</span>
+            </div>
+            <b id="distanceMeasureTotal">—</b>
+          </div>
+
+          <p id="distanceMeasureGuide" class="distance-measure-guide">
+            지도를 클릭해 시작점을 지정하세요.
+          </p>
+
+          <div class="distance-measure-actions">
+            <button id="distanceMeasureUndo" type="button" disabled>되돌리기</button>
+            <button id="distanceMeasureFinish" class="is-primary" type="button" disabled>완료</button>
+            <button id="distanceMeasureClear" type="button">초기화</button>
+          </div>
+        </section>
+      </div>
+
+      <nav class="poi-controls" aria-label="주변 시설 표시">
+        <div class="poi-controls-title">주변 시설</div>
+        <div class="poi-toggle-list">
+        <button class="poi-toggle public" type="button" data-poi-category="공공기관" aria-pressed="false">
+          <span class="poi-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9h18M5 9v8m4-8v8m6-8v8m4-8v8M3 20h18M12 3l9 4H3l9-4Z"/>
+            </svg>
+          </span>
+          <span class="poi-toggle-label">공공</span>
+        </button>
+
+        <button class="poi-toggle education" type="button" data-poi-category="교육" aria-pressed="false">
+          <span class="poi-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m3 9 9-5 9 5-9 5-9-5Zm4 3v5c3 2 7 2 10 0v-5m4-3v6"/>
+            </svg>
+          </span>
+          <span class="poi-toggle-label">교육</span>
+        </button>
+
+        <button class="poi-toggle transport" type="button" data-poi-category="교통" aria-pressed="false">
+          <span class="poi-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 17h12a2 2 0 0 0 2-2V7c0-3-4-4-8-4S4 4 4 7v8a2 2 0 0 0 2 2Zm-2-7h16M7 20v-3m10 3v-3M8 14h.01M16 14h.01"/>
+            </svg>
+          </span>
+          <span class="poi-toggle-label">교통</span>
+        </button>
+
+        <button class="poi-toggle medical" type="button" data-poi-category="의료" aria-pressed="false">
+          <span class="poi-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21S4 16.5 4 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 3.5C20 16.5 12 21 12 21Z"/>
+              <path d="M8 12h2l1-3 2 6 1-3h2"/>
+            </svg>
+          </span>
+          <span class="poi-toggle-label">의료</span>
+        </button>
+
+        <button class="poi-toggle brokerage" type="button" data-poi-category="중개" aria-pressed="false">
+          <span class="poi-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m4 10 8-6 8 6v9H4v-9Z"/>
+              <path d="M7 11h10v5H7zM9 19v-3m6 3v-3"/>
+            </svg>
+          </span>
+          <span class="poi-toggle-label">중개</span>
+        </button>
+        </div>
+      </nav>
+    </div>
+  </main>
+
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=m4rxvrgqbo"></script>
+
+  <!-- 빠른 클러스터링 라이브러리 -->
+  <script src="https://unpkg.com/supercluster@8.0.1/dist/supercluster.min.js"></script>
+
+  <script src="../../static/js/common.js"></script>
+  <script src="../../static/js/map.js"></script>
+</body>
+</html>

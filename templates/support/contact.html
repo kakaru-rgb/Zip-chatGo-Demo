@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객센터 | 집찾GO</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/contact.css">
+</head>
+<body>
+
+<header class="main-header" id="mainHeader">
+  <a href="../../index.html" class="logo" aria-label="집찾GO 메인으로 이동">
+    <img src="../../static/images/logo.png" alt="집찾GO">
+  </a>
+
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="top-nav" id="mobileNav">
+    <a class="guest-menu" href="../../templates/member/login.html"><i class="ti ti-login"></i> 로그인</a>
+    <a class="guest-menu" href="../../templates/member/signup.html"><i class="ti ti-user-plus"></i> 회원가입</a>
+    <a class="active" href="../../templates/support/contact.html"><i class="ti ti-headset"></i> 고객센터</a>
+    <a class="user-menu" href="#"><i class="ti ti-heart"></i> 관심매물</a>
+    <a class="user-menu logout-btn" href="#"><i class="ti ti-logout"></i> 로그아웃</a>
+  </nav>
+</header>
+
+<main class="support-page">
+  <section class="support-hero">
+    <div>
+      <span class="support-label"><i class="ti ti-headset"></i> 집찾GO 고객센터</span>
+      <h1>무엇을 도와드릴까요?</h1>
+      <p>집을 찾는 과정에서 궁금하거나 불편한 점을 알려주세요.<br>필요한 답을 빠르게 찾을 수 있도록 도와드리겠습니다.</p>
+      <label class="help-search">
+        <i class="ti ti-search"></i>
+        <input id="faqSearch" type="search" placeholder="궁금한 내용을 검색해 보세요" autocomplete="off">
+      </label>
+    </div>
+    <i class="ti ti-messages hero-symbol" aria-hidden="true"></i>
+  </section>
+
+  <section class="quick-support" aria-label="빠른 고객 지원">
+    <a href="#faq"><i class="ti ti-help-circle"></i><span><strong>자주 묻는 질문</strong>바로 해결할 수 있어요</span><i class="ti ti-chevron-right"></i></a>
+    <a href="#inquiry"><i class="ti ti-message-plus"></i><span><strong>1:1 문의하기</strong>문의 내용을 남겨주세요</span><i class="ti ti-chevron-right"></i></a>
+    <a href="tel:02-1234-5678"><i class="ti ti-phone-call"></i><span><strong>전화 상담</strong>평일 09:00~18:00</span><i class="ti ti-chevron-right"></i></a>
+  </section>
+
+  <section class="notice-panel">
+    <div class="panel-title"><span><i class="ti ti-speakerphone"></i> 공지사항</span><a href="#">전체 보기 <i class="ti ti-arrow-right"></i></a></div>
+    <div class="notice-list">
+      <a href="#"><b>안내</b><span>집찾GO 서비스 이용 안내</span><time datetime="2026-07-01">2026.07.01</time></a>
+      <a href="#"><b>업데이트</b><span>시장동향 지역 분석 기능이 개선되었습니다</span><time datetime="2026-06-26">2026.06.26</time></a>
+      <a href="#"><b>점검</b><span>개인정보 보호 및 안전한 서비스 이용 안내</span><time datetime="2026-06-18">2026.06.18</time></a>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="section-heading">
+      <div><span>FAQ</span><h2>자주 묻는 질문</h2><p>고객님들이 가장 많이 궁금해하는 내용을 모았습니다.</p></div>
+      <div class="faq-tabs" role="group" aria-label="질문 분류">
+        <button class="active" type="button" data-category="all">전체</button>
+        <button type="button" data-category="account">계정</button>
+        <button type="button" data-category="service">서비스</button>
+        <button type="button" data-category="property">매물</button>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <article class="faq-item" data-category="service">
+        <button type="button" aria-expanded="false"><span><b>Q</b>AI 맞춤 추천은 어떻게 이용하나요?</span><i class="ti ti-chevron-down"></i></button>
+        <div class="faq-answer"><p>메인 화면 검색창에 예산, 희망 지역, 출퇴근 조건 등을 입력하면 AI가 조건을 분석해 어울리는 매물을 추천합니다. 조건을 구체적으로 입력할수록 더 적합한 결과를 확인할 수 있습니다.</p></div>
+      </article>
+      <article class="faq-item" data-category="account">
+        <button type="button" aria-expanded="false"><span><b>Q</b>회원가입 없이도 이용할 수 있나요?</span><i class="ti ti-chevron-down"></i></button>
+        <div class="faq-answer"><p>시장동향과 기본 탐색 기능은 로그인 없이 이용할 수 있습니다. 관심 매물 저장과 개인화 기능은 회원가입 후 이용할 수 있습니다.</p></div>
+      </article>
+      <article class="faq-item" data-category="property">
+        <button type="button" aria-expanded="false"><span><b>Q</b>등록된 매물 정보가 실제와 다르면 어떻게 하나요?</span><i class="ti ti-chevron-down"></i></button>
+        <div class="faq-answer"><p>해당 매물의 주소나 제목과 함께 1:1 문의를 남겨주세요. 담당자가 내용을 확인한 후 정보 수정 또는 노출 조치를 진행합니다.</p></div>
+      </article>
+      <article class="faq-item" data-category="service">
+        <button type="button" aria-expanded="false"><span><b>Q</b>시장동향 데이터는 어떤 정보를 보여주나요?</span><i class="ti ti-chevron-down"></i></button>
+        <div class="faq-answer"><p>매매·전세 흐름, 거래량, 지역별 변화, 금리와 교통·학군 등 집을 선택할 때 참고할 수 있는 주요 정보를 제공합니다.</p></div>
+      </article>
+      <article class="faq-item" data-category="account">
+        <button type="button" aria-expanded="false"><span><b>Q</b>로그아웃이나 회원 정보 변경은 어디에서 하나요?</span><i class="ti ti-chevron-down"></i></button>
+        <div class="faq-answer"><p>로그인 후 상단 메뉴에서 로그아웃할 수 있습니다. 회원 정보 변경 기능은 마이페이지에서 제공될 예정입니다.</p></div>
+      </article>
+      <p class="faq-empty" hidden>검색 결과가 없습니다. 1:1 문의를 이용해 주세요.</p>
+    </div>
+  </section>
+
+  <section class="inquiry-section" id="inquiry">
+    <div class="inquiry-info">
+      <span class="support-label"><i class="ti ti-message-circle-question"></i> 1:1 문의</span>
+      <h2>찾는 답변이 없으신가요?</h2>
+      <p>문의 내용을 자세히 남겨주시면 확인 후 입력하신 이메일로 답변해 드립니다.</p>
+      <div class="contact-guide">
+        <p><i class="ti ti-clock"></i><span><strong>운영 시간</strong>평일 09:00~18:00 · 주말 및 공휴일 휴무</span></p>
+        <p><i class="ti ti-mail"></i><span><strong>이메일</strong>help@jipchatgo.com</span></p>
+        <p><i class="ti ti-phone"></i><span><strong>대표 전화</strong>02-1234-5678</span></p>
+      </div>
+    </div>
+
+    <form class="inquiry-form" id="inquiryForm">
+      <div class="form-row">
+        <label>이름<input type="text" name="name" placeholder="이름을 입력해 주세요" required></label>
+        <label>이메일<input type="email" name="email" placeholder="answer@example.com" required></label>
+      </div>
+      <label>문의 유형
+        <select name="type" required><option value="">선택해 주세요</option><option>서비스 이용</option><option>계정 및 로그인</option><option>매물 정보</option><option>오류 신고</option><option>기타</option></select>
+      </label>
+      <label>문의 제목<input type="text" name="title" placeholder="문의 제목을 입력해 주세요" required maxlength="80"></label>
+      <label>문의 내용<textarea name="message" rows="6" placeholder="문의 내용을 자세히 입력해 주세요" required maxlength="1000"></textarea></label>
+      <label class="privacy-check"><input type="checkbox" required><span>문의 처리를 위한 개인정보 수집 및 이용에 동의합니다.</span></label>
+      <button class="submit-btn" type="submit">문의 접수하기 <i class="ti ti-send"></i></button>
+      <p class="form-result" id="formResult" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand"><a href="../../index.html"><img src="../../static/images/logo.png" alt="집찾GO"></a><div><h2>집찾GO</h2><p>AI가 조건에 맞는 집을 더 쉽고 빠르게 찾아드립니다.</p></div></div>
+    <nav class="footer-links" aria-label="하단 메뉴"><a href="../../index.html">메인</a><a href="../../templates/support/Servise.html">회사 서비스</a><a href="../../templates/market/trend.html">시장동향</a><a href="#inquiry">1:1 문의</a></nav>
+  </div>
+  <div class="footer-info"><span>집찾GO 고객센터</span><span>평일 09:00~18:00</span><span>help@jipchatgo.com</span></div>
+</footer>
+
+<script src="../../static/js/common.js"></script>
+<script src="../../static/js/contact.js"></script>
+</body>
+</html>

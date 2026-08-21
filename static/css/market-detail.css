@@ -1,0 +1,690 @@
+/* ==========================
+   market-detail.css
+   부동산 분석 상세페이지 공통
+========================== */
+
+.market-detail-page {
+  width: min(1180px, 92%);
+  margin: 110px auto 70px;
+}
+
+.detail-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 68px 56px;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top left, rgba(23, 212, 179, .25), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, .16), transparent 30%),
+    linear-gradient(135deg, #1E88FF, #17D4B3);
+  color: white;
+  box-shadow: 0 28px 76px rgba(30, 136, 255, .24);
+}
+
+.detail-hero::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  top: -90px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+}
+
+.detail-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .18);
+  backdrop-filter: blur(12px);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.detail-hero h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.16;
+  letter-spacing: -2px;
+  margin-bottom: 18px;
+}
+
+.detail-hero h1 span {
+  color: #EFFFFB;
+}
+
+.detail-hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  font-size: 18px;
+  line-height: 1.75;
+  opacity: .96;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 26px;
+  margin-top: 34px;
+}
+
+.detail-panel {
+  padding: 34px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(226, 232, 240, .9);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, .08);
+}
+
+.detail-panel h2 {
+  font-size: 28px;
+  letter-spacing: -1px;
+  color: #0F172A;
+  margin-bottom: 18px;
+}
+
+.detail-panel p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.point-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.point-list li {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 15px 16px;
+  border-radius: 18px;
+  background: #F8FAFC;
+  color: #334155;
+  line-height: 1.65;
+}
+
+.point-list i {
+  flex: 0 0 auto;
+  color: #17D4B3;
+  font-size: 21px;
+  margin-top: 2px;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.data-card {
+  padding: 24px;
+  border-radius: 24px;
+  background: white;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, .06);
+}
+
+.data-card span {
+  display: block;
+  color: #64748B;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.data-card strong {
+  display: block;
+  color: #0F172A;
+  font-size: 26px;
+  letter-spacing: -1px;
+}
+
+.data-card p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.side-card {
+  padding: 28px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(30, 136, 255, .09), rgba(23, 212, 179, .10)),
+    white;
+  border: 1px solid rgba(226, 232, 240, .9);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, .07);
+}
+
+.side-card h3 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #0F172A;
+}
+
+.side-list {
+  display: grid;
+  gap: 12px;
+}
+
+.side-list div {
+  padding: 14px 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(226, 232, 240, .75);
+}
+
+.side-list strong {
+  display: block;
+  font-size: 15px;
+  color: #0F172A;
+  margin-bottom: 5px;
+}
+
+.side-list span {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.55;
+}
+
+.region-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.region-detail-card {
+  padding: 26px;
+  border-radius: 26px;
+  background: white;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, .06);
+}
+
+.region-detail-card h3 {
+  font-size: 22px;
+  color: #0F172A;
+  margin-bottom: 10px;
+}
+
+.region-detail-card p {
+  color: #64748B;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.tag-row span {
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #EFF6FF;
+  color: #1E88FF;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+.detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 19px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 900;
+  transition: .25s ease;
+}
+
+.detail-btn.primary {
+  background: linear-gradient(135deg, #1E88FF, #17D4B3);
+  color: white;
+  box-shadow: 0 16px 36px rgba(30, 136, 255, .22);
+}
+
+.detail-btn.ghost {
+  background: white;
+  color: #0F172A;
+  border: 1px solid #E2E8F0;
+}
+
+.detail-btn:hover {
+  transform: translateY(-3px);
+}
+
+.notice-box {
+  margin-top: 26px;
+  padding: 20px;
+  border-radius: 22px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #475569;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .region-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .market-detail-page {
+    width: 92%;
+    margin-top: 92px;
+  }
+
+  .detail-hero {
+    padding: 44px 26px;
+    border-radius: 26px;
+  }
+
+  .detail-hero h1 {
+    font-size: 32px;
+    letter-spacing: -1.2px;
+  }
+
+  .detail-hero p {
+    font-size: 15px;
+  }
+
+  .detail-panel,
+  .side-card {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .detail-panel h2 {
+    font-size: 24px;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+  }
+
+  .detail-btn {
+    justify-content: center;
+  }
+}
+
+/* ==========================
+   상세페이지 하단 이동 영역
+========================== */
+
+.report-nav-section {
+  margin-top: 34px;
+  padding: 34px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(30, 136, 255, .06), rgba(23, 212, 179, .07)),
+    rgba(255, 255, 255, .92);
+  border: 1px solid rgba(226, 232, 240, .92);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, .07);
+}
+
+.panel-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1E88FF;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -.2px;
+  margin-bottom: 8px;
+}
+
+.report-nav-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 22px;
+}
+
+.report-nav-title h2 {
+  font-size: 28px;
+  letter-spacing: -1px;
+  color: #0F172A;
+}
+
+.report-nav-title p:last-child {
+  color: #64748B;
+  line-height: 1.65;
+}
+
+.report-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.report-nav-card {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 22px;
+  background: white;
+  border: 1px solid #E2E8F0;
+  color: inherit;
+  text-decoration: none;
+  transition: .25s ease;
+}
+
+.report-nav-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, .10);
+  border-color: rgba(30, 136, 255, .28);
+}
+
+.report-nav-card i {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(30, 136, 255, .12), rgba(23, 212, 179, .14));
+  color: #1E88FF;
+  font-size: 22px;
+}
+
+.report-nav-card strong {
+  color: #0F172A;
+  font-size: 17px;
+  letter-spacing: -.4px;
+}
+
+.report-nav-card span {
+  color: #64748B;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ==========================
+   매매 비용 계산기
+========================== */
+
+.cost-page {
+  display: grid;
+  gap: 34px;
+}
+
+.cost-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.cost-card {
+  scroll-margin-top: 110px;
+  padding: 28px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid rgba(226, 232, 240, .95);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, .08);
+}
+
+.cost-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.cost-card-head > i {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(30, 136, 255, .12), rgba(23, 212, 179, .16));
+  color: #1E88FF;
+  font-size: 28px;
+}
+
+.cost-card-head span {
+  display: block;
+  margin-bottom: 4px;
+  color: #1E88FF;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.cost-card-head h2 {
+  color: #0F172A;
+  font-size: 22px;
+  letter-spacing: -.7px;
+}
+
+.cost-form {
+  display: grid;
+  gap: 12px;
+}
+
+.cost-form label {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.cost-form label > span {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.label-hint {
+  color: #94A3B8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cost-form input,
+.cost-form select {
+  width: 100%;
+  height: 48px;
+  padding: 0 42px 0 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 14px;
+  background: white;
+  color: #0F172A;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.cost-form input:disabled {
+  background: #F1F5F9;
+  color: #94A3B8;
+}
+
+.cost-form small {
+  position: absolute;
+  right: 14px;
+  top: 39px;
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.amount-preview {
+  display: block;
+  min-height: 18px;
+  color: #1E88FF;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.cost-result {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #F8FBFF, #EFF7FF);
+  border: 1px solid rgba(30, 136, 255, .16);
+}
+
+.cost-result span {
+  display: block;
+  color: #64748B;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.cost-result strong {
+  display: block;
+  color: #0F172A;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.cost-result p {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.cost-note {
+  margin-top: 0;
+}
+
+.sale-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.sale-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 17px;
+  border: 1px solid #DCE3EC;
+  border-radius: 14px;
+  background: #fff;
+  color: #0F172A;
+  text-decoration: none;
+  font-weight: 900;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.sale-actions a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(30, 136, 255, .35);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, .12);
+}
+
+.sale-actions a:active {
+  transform: translateY(-1px);
+}
+
+.sale-actions a:last-child {
+  color: #fff;
+  border: 0;
+  background: linear-gradient(135deg, #1E88FF, #17D4B3);
+}
+
+.sale-actions a:last-child:hover {
+  box-shadow: 0 16px 32px rgba(30, 136, 255, .24);
+  filter: saturate(1.06);
+}
+
+/* ==========================
+   상세페이지 반응형
+   footer는 trend.css의 부동산 분석 footer 디자인을 그대로 사용
+========================== */
+
+@media (max-width: 900px) {
+  .cost-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sale-actions {
+    flex-direction: column;
+  }
+
+  .report-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .report-nav-section {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .report-nav-title h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .detail-hero {
+    padding: 36px 20px;
+  }
+
+  .detail-hero h1 {
+    font-size: 29px;
+  }
+
+  .cost-card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .cost-card-head {
+    align-items: flex-start;
+  }
+
+  .cost-card-head h2 {
+    font-size: 20px;
+  }
+
+  .cost-result strong {
+    font-size: 25px;
+    line-height: 1.25;
+    word-break: keep-all;
+  }
+
+  .label-hint {
+    display: block;
+    margin-top: 3px;
+  }
+
+  .report-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+      인기 지역 이동 흐름 | 집찾GO
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/sale.css">
+    <link rel="stylesheet" href="/static/css/region-flow.css">
+  </head>
+  <body>
+    <header class="main-header" id="mainHeader">
+      <a href="/index.html" class="logo">
+        <img src="/static/images/logo.png" alt="집찾GO">
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+      </button>
+      <nav class="top-nav" id="mobileNav">
+        <a class="guest-menu" href="/templates/member/login.html">
+          <i class="ti ti-login">
+          </i>
+          로그인
+        </a>
+        <a class="guest-menu" href="/templates/member/signup.html">
+          <i class="ti ti-user-plus">
+          </i>
+          회원가입
+        </a>
+        <a href="/templates/support/contact.html">
+          <i class="ti ti-headset">
+          </i>
+          고객센터
+        </a>
+        <a class="user-menu" href="/templates/favorite/favorite.html">
+          <i class="ti ti-heart">
+          </i>
+          관심매물
+        </a>
+        <a class="user-menu logout-btn" href="#">
+          <i class="ti ti-logout">
+          </i>
+          로그아웃
+        </a>
+      </nav>
+    </header>
+    <main class="sale-page">
+      <section class="sale-hero flow-hero">
+        <div>
+          <span class="live-badge">
+            <i>
+            </i>
+            LIVE · 관심 지역 이동
+          </span>
+          <h1>
+            사람들의 관심이
+            <br>
+            <strong>
+              어디로 이동하는지 확인하세요
+            </strong>
+          </h1>
+          <p>
+            검색·관심매물·지역 비교 데이터를 바탕으로 출발 지역에서 어떤 지역으로 관심이 이동하는지 분석합니다.
+          </p>
+        </div>
+        <div class="update-state">
+          <i class="ti ti-refresh">
+          </i>
+          <span>
+            마지막 갱신
+            <strong id="updatedAt">
+              --:--:--
+            </strong>
+          </span>
+        </div>
+      </section>
+      <section class="compare-filter">
+        <label>
+          <span>
+            출발 지역
+          </span>
+          <select id="originRegion">
+          </select>
+        </label>
+        <label>
+          <span>
+            주택 유형
+          </span>
+          <select id="housingFilter">
+            <option value="apartment">
+              아파트
+            </option>
+            <option value="officetel">
+              오피스텔
+            </option>
+            <option value="villa">
+              연립·다세대
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            비교 범위
+          </span>
+          <select id="ageFilter">
+            <option value="all">
+              서울·경기
+            </option>
+            <option value="seoul">
+              서울
+            </option>
+            <option value="gyeonggi">
+              경기
+            </option>
+            <option value="major">
+              주요 지역
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            조회 기간
+          </span>
+          <select id="periodFilter">
+            <option value="7">
+              최근 7일
+            </option>
+            <option value="30" selected>
+              최근 30일
+            </option>
+            <option value="90">
+              최근 3개월
+            </option>
+          </select>
+        </label>
+        <button id="analyzeBtn" type="button">
+          <i class="ti ti-route">
+          </i>
+          흐름 분석
+        </button>
+      </section>
+      <div class="data-notice">
+        <i class="ti ti-info-circle">
+        </i>
+        <span>
+          학교 시연용 샘플 데이터입니다. 실제 서비스에서는 익명화된 검색·찜·비교 행동 데이터를 집계해 반영합니다.
+        </span>
+      </div>
+      <section class="metric-grid">
+        <article>
+          <div class="metric-head">
+            <span>
+              관심 이동량
+            </span>
+            <i class="ti ti-arrows-transfer-up">
+            </i>
+          </div>
+          <strong id="totalMoves">
+            -
+          </strong>
+          <p id="moveChange">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              최다 유입 지역
+            </span>
+            <i class="ti ti-map-pin-star">
+            </i>
+          </div>
+          <strong id="topDestination">
+            -
+          </strong>
+          <p id="topShare">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              평균 예산 차이
+            </span>
+            <i class="ti ti-coins">
+            </i>
+          </div>
+          <strong id="budgetGap">
+            -
+          </strong>
+          <p id="budgetText">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              이동 집중도
+            </span>
+            <i class="ti ti-target-arrow">
+            </i>
+          </div>
+          <strong id="flowIndex">
+            -
+          </strong>
+          <p id="flowText">
+            -
+          </p>
+        </article>
+      </section>
+      <section class="flow-layout">
+        <article class="dashboard-card flow-map-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                INTEREST FLOW
+              </span>
+              <h2>
+                관심 지역 이동 흐름
+              </h2>
+            </div>
+            <small>
+              선 굵기는 관심 이동량을 의미합니다
+            </small>
+          </div>
+          <div class="flow-map" id="flowMap">
+            <svg id="flowSvg" aria-label="지역 관심 이동 흐름">
+            </svg>
+            <div class="origin-node" id="originNode">
+            </div>
+            <div id="destinationNodes">
+            </div>
+          </div>
+        </article>
+        <aside class="dashboard-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                TOP DESTINATIONS
+              </span>
+              <h2>
+                인기 이동 지역
+              </h2>
+            </div>
+          </div>
+          <div class="flow-ranking" id="flowRanking">
+          </div>
+        </aside>
+      </section>
+      <section class="dashboard-grid">
+        <article class="dashboard-card chart-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                DAILY TREND
+              </span>
+              <h2>
+                일별 관심 이동 추이
+              </h2>
+            </div>
+            <div class="chart-legend">
+              <span>
+                <i class="base-dot">
+                </i>
+                <b id="trendLegend">
+                  -
+                </b>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="flowChart" role="img" aria-label="일별 관심 이동 추이">
+            </svg>
+          </div>
+        </article>
+        <aside class="dashboard-card compare-summary">
+          <div class="card-heading">
+            <div>
+              <span>
+                AI INSIGHT
+              </span>
+              <h2>
+                이동 흐름 해석
+              </h2>
+            </div>
+          </div>
+          <div class="insight-box flow-insight">
+            <i class="ti ti-brain">
+            </i>
+            <p id="flowInsight">
+              조건을 선택해 주세요.
+            </p>
+          </div>
+          <div class="reason-list" id="reasonList">
+          </div>
+        </aside>
+      </section>
+      <section class="dashboard-card transaction-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              DESTINATION DETAIL
+            </span>
+            <h2>
+              유입 지역 상세 비교
+            </h2>
+          </div>
+          <label class="table-search">
+            <i class="ti ti-search">
+            </i>
+            <input id="regionSearch" type="search" placeholder="지역명 검색">
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  순위
+                </th>
+                <th>
+                  유입 지역
+                </th>
+                <th>
+                  관심 이동
+                </th>
+                <th>
+                  전월 대비
+                </th>
+                <th>
+                  84㎡ 평균가
+                </th>
+                <th>
+                  주요 이동 이유
+                </th>
+                <th>
+                  관심도
+                </th>
+              </tr>
+            </thead>
+            <tbody id="flowTableBody">
+            </tbody>
+          </table>
+        </div>
+        <p class="empty-deals" id="emptyRegions" hidden>
+          검색 결과가 없습니다.
+        </p>
+      </section>
+      <nav class="sale-actions">
+        <a href="/templates/market/trend.html">
+          <i class="ti ti-arrow-left">
+          </i>
+          목록으로 돌아가기
+        </a>
+        <a href="/index.html">
+          <i class="ti ti-home">
+          </i>
+          메인으로 이동
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html">
+            <img src="/static/images/logo.png" alt="집찾GO">
+          </a>
+          <div>
+            <h2>
+              집찾GO
+            </h2>
+            <p>
+              AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.
+            </p>
+          </div>
+        </div>
+        <nav class="footer-links">
+          <a href="/index.html">
+            메인
+          </a>
+          <a href="/templates/market/trend.html">
+            부동산 분석
+          </a>
+          <a href="/templates/property/local.html">
+            회사 서비스
+          </a>
+          <a href="/templates/support/contact.html">
+            고객센터
+          </a>
+        </nav>
+      </div>
+      <div class="footer-info">
+        <span>
+          집찾GO
+        </span>
+        <span>
+          부동산 분석 서비스
+        </span>
+        <span>
+          실거래·지역·비용 정보를 한곳에서
+        </span>
+      </div>
+    </footer>
+    <script src="/static/js/common.js">
+    </script>
+    <script src="/static/js/user-region.js">
+    </script>
+    <script src="/static/js/region-flow.js">
+    </script>
+  </body>
+</html>

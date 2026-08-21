@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI와 집 찾기 | 집찾GO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/chat.css">
+</head>
+<body>
+<header class="main-header" id="mainHeader">
+  <a href="../../index.html" class="logo"><img src="../../static/images/logo.png" alt="집찾GO"></a>
+  <div class="demo-status"><i></i> 대화 시연 모드</div>
+  <a class="chat-exit" href="../../index.html"><i class="ti ti-x"></i><span>대화 나가기</span></a>
+</header>
+
+<main class="chat-page">
+  <aside class="chat-sidebar">
+    <div class="assistant-profile"><div><i class="ti ti-message-chatbot"></i></div><span><strong>집찾GO AI</strong>나에게 맞는 집을 함께 찾아요</span></div>
+    <div class="conversation-progress">
+      <p>집 찾기 진행상황 <b id="progressText">0%</b></p>
+      <div><i id="progressBar"></i></div>
+    </div>
+    <ol id="stepList">
+      <li class="active"><i class="ti ti-message-circle"></i><span>시작하기<small>원하는 생활 이야기</small></span></li>
+      <li><i class="ti ti-coins"></i><span>예산 확인<small>보증금과 월 부담</small></span></li>
+      <li><i class="ti ti-map-pin"></i><span>지역 탐색<small>희망 생활권</small></span></li>
+      <li><i class="ti ti-route"></i><span>이동 조건<small>출퇴근과 교통</small></span></li>
+      <li><i class="ti ti-home-heart"></i><span>생활 조건<small>가구와 우선순위</small></span></li>
+      <li><i class="ti ti-sparkles"></i><span>추천 결과<small>지역과 다음 행동</small></span></li>
+    </ol>
+    <button id="resetChat" type="button"><i class="ti ti-refresh"></i> 대화 다시 시작</button>
+  </aside>
+
+  <section class="chat-workspace">
+    <div class="chat-heading"><div><strong>AI와 함께 집 찾기</strong><span id="chatSubTitle">편하게 이야기하면 AI가 조건을 정리해 드려요.</span></div><button id="mobileSummaryBtn" type="button"><i class="ti ti-list-check"></i></button></div>
+    <div class="message-list" id="messageList" aria-live="polite"></div>
+    <div class="typing-indicator" id="typingIndicator" hidden><span></span><span></span><span></span><b>답변을 정리하고 있어요</b></div>
+    <div class="quick-replies" id="quickReplies"></div>
+    <form class="chat-composer" id="chatForm">
+      <textarea id="chatInput" rows="1" placeholder="AI에게 편하게 이야기해 주세요" aria-label="메시지 입력"></textarea>
+      <button type="submit" aria-label="메시지 보내기"><i class="ti ti-arrow-up"></i></button>
+      <small>Enter로 전송 · Shift+Enter로 줄바꿈</small>
+    </form>
+  </section>
+
+  <aside class="condition-panel" id="conditionPanel">
+    <div class="condition-title"><span><i class="ti ti-list-check"></i> 함께 정리한 조건</span><button id="closeSummary" type="button"><i class="ti ti-x"></i></button></div>
+    <div class="condition-empty" id="conditionEmpty"><i class="ti ti-notes"></i><p>대화를 시작하면<br>조건이 여기에 정리됩니다.</p></div>
+    <dl id="conditionList"></dl>
+    <div class="privacy-note"><i class="ti ti-shield-lock"></i><p><strong>시연용 대화입니다</strong>입력 내용은 서버에 전송되거나 저장되지 않습니다.</p></div>
+  </aside>
+</main>
+
+<script src="../../static/js/chat.js"></script>
+</body>
+</html>

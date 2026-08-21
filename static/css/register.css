@@ -1,0 +1,1438 @@
+/* ==================================================
+   register.css
+   집찾GO — 매물 등록 페이지 전용 스타일
+   - 색상/여백 토큰은 common.css를 그대로 계승
+   - --tag : 부동산 창문에 붙는 종이 매물표에서 가져온 강조색
+   - 시그니처 요소: 실시간으로 채워지는 종이 전단지 미리보기
+================================================== */
+
+:root{
+  --tag:#FFB020;
+  --tag-dark:#B9720A;
+  --paper:#FFFFFF;
+  --line:#E3E9F3;
+  --line-strong:#CBD8EA;
+  --mono: "Space Mono", "Pretendard", monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 선택 영역 색상까지 브랜드 톤으로 */
+::selection{ background:rgba(30,136,255,0.18); color:var(--dark); }
+
+/* 키보드 포커스는 항상 눈에 보이게 (마우스 클릭 시엔 표시 안 함) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.chip:focus-within{
+  outline:2.5px solid var(--primary);
+  outline-offset:2px;
+  border-radius:8px;
+}
+
+/* ================= Hero ================= */
+.reg-hero{
+  width: min(1500px, 92%);
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1.1fr minmax(0, 0.9fr);
+  gap:56px;
+  align-items:center;
+  padding: 110px 4px 64px;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  font-weight:800;
+  color:var(--primary);
+  letter-spacing:1px;
+  margin-bottom:16px;
+}
+.eyebrow::before{
+  content:"";
+  width:18px; height:2px;
+  background:var(--gradient-main);
+  border-radius:2px;
+}
+.reg-hero h1{
+  font-size:44px;
+  line-height:1.32;
+  font-weight:900;
+  letter-spacing:-1px;
+  color:var(--dark);
+  margin-bottom:20px;
+}
+.hero-sub{
+  font-size:16px;
+  line-height:1.7;
+  color:var(--gray);
+  max-width:480px;
+  margin-bottom:26px;
+}
+.hero-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:32px;
+}
+.hero-badges span{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(30,136,255,0.08);
+  color:var(--primary);
+  font-size:13px;
+  font-weight:800;
+  transition:0.2s var(--ease);
+}
+.hero-badges span:hover{
+  background:rgba(30,136,255,0.14);
+  transform:translateY(-1px);
+}
+.hero-badges span i{ font-size:12px; }
+
+.cta-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:17px 28px;
+  border-radius:999px;
+  background:var(--gradient-main);
+  color:#fff;
+  font-weight:800;
+  font-size:15px;
+  box-shadow:0 18px 34px rgba(30,136,255,0.28);
+  overflow:hidden;
+  transition:0.3s var(--ease);
+}
+.cta-btn i{ transition:transform 0.3s var(--ease); }
+.cta-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform:translateX(-120%);
+  transition:transform 0.6s var(--ease);
+}
+.cta-btn:hover{ transform:translateY(-3px); box-shadow:0 22px 40px rgba(30,136,255,0.34); }
+.cta-btn:hover i{ transform:translateX(4px); }
+.cta-btn:hover::before{ transform:translateX(120%); }
+.cta-btn:active{ transform:translateY(-1px) scale(0.98); }
+
+/* 부동산 창문 매물표를 오마주한 티저 카드 */
+.flyer-teaser{
+  position:relative;
+  justify-self:center;
+  width:560px;
+  max-width:100%;
+  padding:44px 40px 52px;
+  background:var(--paper);
+  border-radius:10px;
+  box-shadow:0 24px 60px rgba(15,23,42,0.16);
+  transform:rotate(-3deg);
+  border:1px solid var(--line);
+  animation:paperSway 7s ease-in-out infinite;
+  transform-origin:top center;
+}
+.flyer-teaser:hover{ animation-play-state:paused; transform:rotate(-1deg) translateY(-2px); }
+.flyer-teaser::before{
+  content:"";
+  position:absolute;
+  top:-20px; left:0; right:0; height:44px;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)) no-repeat 36px 0 / 92px 44px,
+    linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)) no-repeat calc(100% - 128px) 0 / 92px 44px;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,0.08));
+}
+.flyer-teaser::after{
+  content:"";
+  position:absolute;
+  left:28px; right:28px; bottom:20px; height:0;
+  border-top:3px dashed var(--line-strong);
+}
+.flyer-teaser .fy-photo{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  aspect-ratio:16/10;
+  border-radius:10px;
+  background:url("../images/register_ex.png") center/cover no-repeat, var(--light);
+  border:1px solid var(--line);
+  margin-bottom:24px;
+}
+
+/* ---------- 사진 캐러셀 화살표 · 점 (예시 카드 / 실시간 미리보기 공용) ---------- */
+.fy-photo-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:rgba(15,23,42,0.5);
+  color:#fff;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:0.2s var(--ease);
+}
+.fy-photo-nav:hover{ background:rgba(15,23,42,0.75); transform:translateY(-50%) scale(1.06); }
+.fy-photo-nav:active{ transform:translateY(-50%) scale(0.94); }
+.fy-photo-nav.prev{ left:10px; }
+.fy-photo-nav.next{ right:10px; }
+
+.fy-photo-dots{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  display:flex;
+  gap:6px;
+}
+.fy-photo-dots span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.55);
+  transition:0.2s ease;
+}
+.fy-photo-dots span.active{
+  width:16px;
+  border-radius:999px;
+  background:#fff;
+}
+.flyer-teaser .fy-badge{
+  display:inline-block;
+  padding:8px 20px;
+  font-size:22px;
+  font-weight:800;
+  color:#fff;
+  background:var(--dark);
+  border-radius:8px;
+  margin-bottom:24px;
+}
+.flyer-teaser .fy-price{
+  font-family:var(--mono);
+  font-size:52px;
+  font-weight:700;
+  color:var(--tag-dark);
+  background:linear-gradient(180deg, transparent 60%, rgba(255,176,32,0.35) 60%);
+  display:inline-block;
+  margin-bottom:20px;
+}
+.flyer-teaser .fy-addr{ font-size:28px; font-weight:700; color:var(--text); margin-bottom:12px; }
+.flyer-teaser .fy-spec{ font-family:var(--mono); font-size:24px; color:var(--gray); }
+.flyer-teaser .fy-watermark{
+  position:absolute; right:28px; bottom:28px;
+  font-size:22px; font-weight:800; color:rgba(15,23,42,0.18);
+  letter-spacing:1px; transform:rotate(-8deg);
+}
+
+@keyframes paperSway{
+  0%, 100%{ transform:rotate(-3deg); }
+  50%{ transform:rotate(-1.4deg) translateY(-3px); }
+}
+
+/* ================= Steps nav ================= */
+.steps-nav{
+  position:relative;
+  display:flex;
+  gap:6px;
+  padding:8px;
+  margin: 0 auto 40px;
+  background:rgba(255,255,255,0.7);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  max-width:760px;
+}
+.step-tab{
+  position:relative;
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 8px;
+  border:0;
+  background:transparent;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  color:var(--gray);
+  cursor:pointer;
+  transition:0.28s var(--ease);
+}
+.step-tab:hover:not(.active){ color:var(--primary); background:rgba(30,136,255,0.06); }
+.step-tab .num{
+  font-family:var(--mono);
+  font-size:12px;
+  opacity:0.7;
+}
+.step-tab.active{
+  background:var(--gradient-main);
+  color:#fff;
+  box-shadow:0 10px 22px rgba(30,136,255,0.28);
+}
+.step-tab.active .num{ opacity:0.85; }
+.step-tab.done{ color:var(--accent); }
+.step-tab.done .num::after{ content:" ✓"; }
+
+/* ================= Register section ================= */
+.register-section{
+  width: min(1500px, 92%);
+  margin: 0 auto 70px;
+  display:grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap:36px;
+  align-items:flex-start;
+}
+
+.listing-form{
+  background:var(--paper);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-soft);
+  padding:40px;
+}
+.form-step{ display:none; }
+.form-step.active{ display:block; animation:fadeUp .45s var(--ease); }
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.form-step h2{
+  font-size:20px;
+  font-weight:900;
+  color:var(--dark);
+  margin-bottom:6px;
+}
+.form-step .step-desc{
+  font-size:13px;
+  color:var(--gray);
+  margin-bottom:26px;
+}
+
+.field{ margin-bottom:22px; }
+.price-hint{
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--primary);
+  margin-top:7px;
+}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.field label.optional::after{
+  content:"선택";
+  margin-left:6px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--gray);
+  background:var(--light);
+  padding:2px 7px;
+  border-radius:999px;
+}
+.field input[required] + label,
+.field label:has(+ input[required])::after{
+  content:"*";
+  color:var(--primary);
+  margin-left:3px;
+}
+.field input[type="text"],
+.field input[type="number"],
+.field input[type="tel"],
+.field select{
+  width:100%;
+  padding:13px 14px;
+  border-radius:12px;
+  border:1.5px solid var(--line);
+  font-size:14px;
+  background:var(--light);
+  transition:0.2s var(--ease);
+}
+.field input::placeholder{ color:#A6B2C6; }
+.field input:hover,
+.field select:hover{ border-color:var(--line-strong); }
+.field input:focus,
+.field select:focus{
+  outline:none;
+  border-color:var(--primary);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(30,136,255,0.12);
+}
+.field input:disabled{ background:#EEF1F6; color:#A6B2C6; cursor:not-allowed; }
+/* 숫자 입력 스핀 버튼 제거 (가격류 입력을 텍스트처럼 다루기 위함) */
+.field input[type=number]::-webkit-inner-spin-button,
+.field input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none; margin:0;
+}
+.field input[type=number]{ -moz-appearance:textfield; }
+
+.field-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.chip-group{ display:flex; flex-wrap:wrap; gap:10px; }
+.chip{
+  position:relative;
+  padding:11px 18px;
+  border-radius:999px;
+  border:1.5px solid var(--line);
+  font-size:13px;
+  font-weight:700;
+  color:var(--gray);
+  cursor:pointer;
+  background:#fff;
+  transition:0.2s var(--ease);
+}
+.chip:hover{ border-color:var(--primary); color:var(--primary); }
+.chip input{ position:absolute; opacity:0; width:1px; height:1px; }
+.chip.selected{
+  border-color:transparent;
+  background:var(--gradient-main);
+  color:#fff;
+}
+.chip.selected:hover{ color:#fff; }
+
+.tag-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+@media (max-width:520px){ .tag-grid{ grid-template-columns:repeat(2,1fr);} }
+
+.custom-tag-row{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+.custom-tag-row input{
+  flex:1;
+  padding:11px 14px;
+  border-radius:10px;
+  border:1.5px solid var(--line);
+  font-size:13px;
+  background:var(--light);
+  transition:0.2s var(--ease);
+}
+.custom-tag-row input:focus{
+  outline:none;
+  border-color:var(--primary);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(30,136,255,0.12);
+}
+.custom-tag-btn{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:0 18px;
+  border-radius:10px;
+  border:0;
+  background:var(--gradient-main);
+  color:#fff;
+  font-weight:800;
+  font-size:13px;
+  cursor:pointer;
+  transition:0.2s var(--ease);
+}
+.custom-tag-btn:hover{ transform:translateY(-2px); }
+.custom-tag-btn:active{ transform:translateY(0) scale(0.97); }
+.custom-tag-note{
+  font-size:11.5px;
+  color:var(--gray);
+  margin-top:8px;
+}
+
+.chip-custom{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding-right:10px;
+}
+.chip-custom .chip-remove{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:16px; height:16px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  font-size:9px;
+  transition:0.15s ease;
+}
+.chip-custom .chip-remove:hover{ background:rgba(255,255,255,0.4); }
+
+/* ---------- 상세정보 서브섹션 (관리비/옵션/교통/학군) ---------- */
+.subsection-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:800;
+  color:var(--dark);
+  padding-top:8px;
+  margin-bottom:18px;
+  border-top:1px solid var(--line);
+  padding-top:24px;
+}
+.subsection-title i{ color:var(--primary); font-size:15px; }
+
+/* ---------- 주소 + 위치 확인 (검색 자동완성) ---------- */
+.addr-input-row{
+  position:relative;
+  display:flex;
+  gap:8px;
+}
+.addr-input-row input{ flex:1; }
+.geo-btn{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:0 16px;
+  border-radius:10px;
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--primary);
+  font-weight:800;
+  font-size:12.5px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:0.2s var(--ease);
+}
+.geo-btn:hover{ border-color:var(--primary); background:rgba(30,136,255,0.05); }
+.geo-btn:active{ transform:scale(0.97); }
+.geo-btn:disabled{ opacity:0.6; cursor:not-allowed; }
+
+.addr-suggest-list{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  right:0;
+  z-index:20;
+  list-style:none;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 20px 44px rgba(15,23,42,0.16);
+  max-height:260px;
+  overflow-y:auto;
+  display:none;
+  padding:6px;
+}
+.addr-suggest-list.show{ display:block; animation:fadeUp 0.18s var(--ease); }
+.addr-suggest-list li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:10px;
+  font-size:13.5px;
+  color:var(--text);
+  cursor:pointer;
+  transition:background 0.15s ease;
+}
+.addr-suggest-list li i{
+  flex-shrink:0;
+  width:16px;
+  font-size:14px;
+  color:#B9C3D4;
+  transition:color 0.15s ease;
+}
+.addr-suggest-list li span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.addr-suggest-list li:hover{ background:var(--light); }
+.addr-suggest-list li:hover i{ color:var(--primary); }
+.addr-suggest-list li + li{ margin-top:2px; }
+
+/* ---------- 자동입력 뱃지 (공용) ---------- */
+.badge-auto{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:11px;
+  font-weight:800;
+  padding:3px 10px;
+  border-radius:999px;
+  background:rgba(23,212,179,0.14);
+  color:#0F9C86;
+  vertical-align:middle;
+  margin-left:6px;
+}
+.badge-auto::before{
+  content:"";
+  width:6px; height:6px;
+  border-radius:50%;
+  background:#17D4B3;
+}
+
+.map-preview{
+  position:relative;
+  border-radius:14px;
+  border:1.5px dashed var(--line);
+  background:
+    linear-gradient(90deg, rgba(30,136,255,0.05) 1px, transparent 1px) 0 0/24px 24px,
+    linear-gradient(0deg, rgba(30,136,255,0.05) 1px, transparent 1px) 0 0/24px 24px,
+    var(--light);
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  transition:0.25s var(--ease);
+}
+.map-preview.located{ border-style:solid; border-color:var(--line-strong); background-color:#fff; }
+.map-placeholder{ padding:22px; color:var(--gray); position:relative; z-index:1; }
+.map-preview.located .map-placeholder{ display:none; }
+.map-placeholder i{ font-size:26px; color:#B9C3D4; margin-bottom:10px; display:block; }
+.map-placeholder p{ font-size:12.5px; line-height:1.6; }
+.vworld-map{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:none;
+}
+.map-preview.located .vworld-map{ display:block; }
+.map-note{
+  font-size:11.5px;
+  color:var(--gray);
+  margin-top:8px;
+  line-height:1.5;
+}
+
+/* ---------- 학군정보: 자동입력 결과 패널 ---------- */
+.school-auto-panel{
+  border-radius:14px;
+  border:1.5px solid var(--line);
+  background:var(--light);
+  overflow:hidden;
+}
+.school-auto-empty{
+  padding:30px 22px;
+  text-align:center;
+  color:var(--gray);
+}
+.school-auto-empty i{ font-size:22px; color:#B9C3D4; margin-bottom:10px; display:block; }
+.school-auto-empty p{ font-size:12.5px; line-height:1.6; }
+.school-auto-row{
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+.school-auto-row:last-child{ border-bottom:0; }
+.school-auto-level{
+  display:inline-block;
+  font-size:11.5px;
+  font-weight:800;
+  color:var(--primary);
+  background:rgba(30,136,255,0.1);
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:10px;
+}
+.school-auto-zone{ font-size:13px; font-weight:800; color:var(--text); margin-bottom:8px; }
+.school-auto-schools{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
+.school-auto-schools span{
+  font-size:12.5px;
+  font-weight:700;
+  padding:5px 11px;
+  border-radius:999px;
+  background:var(--light);
+  color:var(--text);
+}
+.school-auto-note{ font-size:11.5px; color:var(--gray); }
+
+/* ---------- 지도 위 학군 요약 카드 (모달) ---------- */
+
+/* ---------- 교통정보 ---------- */
+.transit-fixed-row{
+  display:grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap:8px;
+  margin-bottom:8px;
+}
+.transit-fixed-row:last-child{ margin-bottom:0; }
+.transit-fixed-row input{
+  padding:11px 14px;
+  border-radius:10px;
+  border:1.5px solid var(--line);
+  font-size:13px;
+  background:var(--light);
+  transition:0.2s var(--ease);
+}
+.transit-fixed-row input::placeholder{ color:#A6B2C6; }
+.transit-fixed-row input:focus{
+  outline:none;
+  border-color:var(--primary);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(30,136,255,0.12);
+}
+
+@media (max-width:520px){
+  .transit-fixed-row{ grid-template-columns:1fr; }
+}
+
+/* ---------- 학군정보: 학교 입력 시 자동으로 칸이 늘어나는 리스트 ---------- */
+.school-group{ margin-bottom:18px; }
+.school-group:last-child{ margin-bottom:0; }
+.school-group > label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.school-input-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.school-input-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.school-input{
+  flex:1;
+  padding:11px 14px;
+  border-radius:10px;
+  border:1.5px solid var(--line);
+  font-size:13px;
+  background:var(--light);
+  transition:0.2s var(--ease);
+}
+.school-input::placeholder{ color:#A6B2C6; }
+.school-input:focus{
+  outline:none;
+  border-color:var(--primary);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(30,136,255,0.12);
+}
+.school-remove{
+  flex-shrink:0;
+  width:32px; height:32px;
+  border-radius:8px;
+  border:0;
+  background:var(--light);
+  color:var(--gray);
+  cursor:pointer;
+  font-size:12px;
+  transition:0.2s var(--ease);
+}
+.school-remove:hover{ background:#FEE2E2; color:var(--danger, #EF4444); }
+
+.upload-box{
+  display:block;
+  border:2px dashed var(--line);
+  border-radius:16px;
+  padding:34px 20px;
+  text-align:center;
+  cursor:pointer;
+  color:var(--gray);
+  transition:0.2s var(--ease);
+}
+.upload-box:hover,
+.upload-box.dragover{
+  border-color:var(--primary);
+  background:rgba(30,136,255,0.05);
+  color:var(--primary);
+}
+.upload-box i{
+  font-size:28px;
+  color:var(--primary);
+  margin-bottom:10px;
+  display:block;
+  transition:transform 0.25s var(--ease);
+}
+.upload-box:hover i{ transform:translateY(-3px); }
+
+.thumb-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+.thumb{
+  position:relative;
+  aspect-ratio:1;
+  border-radius:10px;
+  overflow:hidden;
+  border:2px solid transparent;
+}
+.thumb img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.3s var(--ease);
+}
+.thumb:hover img{ transform:scale(1.06); }
+.thumb.main{ border-color:var(--accent); }
+.thumb .main-tag{
+  position:absolute; bottom:4px; left:4px;
+  background:var(--accent); color:#fff;
+  font-size:10px; font-weight:800;
+  padding:2px 6px; border-radius:6px;
+}
+.thumb-remove{
+  position:absolute;
+  top:5px; left:5px;
+  width:20px; height:20px;
+  border:0;
+  border-radius:50%;
+  background:rgba(15,23,42,0.6);
+  color:#fff;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:0.15s ease;
+}
+.thumb-remove:hover{ background:var(--danger, #EF4444); }
+
+.form-nav{
+  display:flex;
+  justify-content:space-between;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.btn-ghost, .btn-primary{
+  padding:14px 26px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:14px;
+  border:0;
+  cursor:pointer;
+  transition:0.25s var(--ease);
+}
+.btn-ghost{
+  background:var(--light);
+  color:var(--gray);
+}
+.btn-ghost:hover{ background:#e9eff8; color:var(--text); }
+.btn-ghost:active{ transform:scale(0.97); }
+.btn-primary{
+  background:var(--gradient-main);
+  color:#fff;
+  margin-left:auto;
+  box-shadow:0 12px 26px rgba(30,136,255,0.24);
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 30px rgba(30,136,255,0.3); }
+.btn-primary:active{ transform:translateY(0) scale(0.98); }
+.btn-primary:disabled{ opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.agree-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:13px;
+  color:var(--gray);
+  padding:14px;
+  background:var(--light);
+  border-radius:12px;
+  margin-bottom:20px;
+  transition:0.2s ease;
+}
+.agree-row:has(input:checked){ background:rgba(23,212,179,0.1); color:var(--text); }
+.agree-row input{ margin-top:3px; accent-color:var(--primary); }
+
+/* ================= Live Flyer Preview (signature element) ================= */
+.preview-flyer{
+  position:sticky;
+  top:130px;
+}
+.preview-flyer .preview-label{
+  font-size:12px;
+  font-weight:800;
+  color:var(--gray);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.flyer-card{
+  position:relative;
+  background:var(--paper);
+  border-radius:8px;
+  padding:26px 24px 24px;
+  box-shadow:0 26px 60px rgba(15,23,42,0.16);
+  transform:rotate(1.2deg);
+  border:1px solid var(--line);
+  animation:paperSwayAlt 8s ease-in-out infinite;
+  transform-origin:top center;
+  transition:box-shadow 0.3s ease;
+  cursor:pointer;
+}
+.flyer-card:focus-visible{
+  outline:2.5px solid var(--primary);
+  outline-offset:4px;
+}
+.preview-flyer:hover .flyer-card{
+  animation-play-state:paused;
+  transform:rotate(0.3deg) translateY(-2px);
+  box-shadow:0 30px 70px rgba(15,23,42,0.2);
+}
+.flyer-card::before{
+  content:"";
+  position:absolute;
+  top:-9px; left:0; right:0; height:20px;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)) no-repeat 22px 0 / 44px 20px,
+    linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)) no-repeat calc(100% - 66px) 0 / 44px 20px;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+}
+.flyer-card::after{
+  content:"";
+  position:absolute;
+  left:16px; right:16px; bottom:52px; height:0;
+  border-top:1.5px dashed var(--line-strong);
+}
+
+@keyframes paperSwayAlt{
+  0%, 100%{ transform:rotate(1.2deg); }
+  50%{ transform:rotate(0.2deg) translateY(-3px); }
+}
+
+.flyer-photo{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  aspect-ratio:4/3;
+  border-radius:6px;
+  background:var(--light) center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#B9C3D4;
+  font-size:13px;
+  text-align:center;
+  margin-bottom:16px;
+  border:1px dashed var(--line);
+  transition:background 0.25s ease, border-color 0.25s ease;
+}
+.flyer-photo.has-photo{
+  border-style:solid;
+  border-color:var(--line-strong);
+}
+.flyer-photo-hint{
+  position:relative;
+  z-index:1;
+  padding:0 20px;
+  line-height:1.6;
+}
+.flyer-deal{
+  display:inline-block;
+  padding:4px 10px;
+  font-size:11px;
+  font-weight:800;
+  color:#fff;
+  background:var(--dark);
+  border-radius:4px;
+  margin-bottom:10px;
+  transition:0.2s ease;
+}
+.flyer-price{
+  font-family:var(--mono);
+  font-size:28px;
+  font-weight:700;
+  color:var(--tag-dark);
+  background:linear-gradient(180deg, transparent 62%, rgba(255,176,32,0.4) 62%);
+  display:inline-block;
+  margin-bottom:12px;
+  transition:0.15s ease;
+}
+.flyer-addr{
+  font-size:15px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:10px;
+  min-height:20px;
+}
+.flyer-spec{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--gray);
+  padding-bottom:14px;
+  margin-bottom:14px;
+  border-bottom:1px dashed var(--line);
+}
+.flyer-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  min-height:0;
+}
+.flyer-tags:empty{ display:none; }
+.flyer-tags span{
+  font-size:11px;
+  font-weight:700;
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(23,212,179,0.12);
+  color:#0F9C86;
+  animation:tagPop 0.25s var(--ease);
+}
+@keyframes tagPop{
+  from{ opacity:0; transform:scale(0.85); }
+  to{ opacity:1; transform:scale(1); }
+}
+.flyer-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  min-height:0;
+  margin-top:8px;
+}
+.flyer-options:empty{ display:none; margin-top:0; }
+.flyer-options span{
+  font-size:11px;
+  font-weight:700;
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(30,136,255,0.1);
+  color:var(--primary);
+  animation:tagPop 0.25s var(--ease);
+}
+.flyer-meta{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.flyer-meta:empty{ display:none; margin-top:0; padding-top:0; border-top:0; }
+.flyer-meta div{
+  font-size:11.5px;
+  color:var(--gray);
+  line-height:1.5;
+}
+.flyer-stamp{
+  position:absolute;
+  bottom:20px; right:18px;
+  font-size:10px; font-weight:900;
+  color:rgba(15,23,42,0.15);
+  letter-spacing:1.5px;
+  transform:rotate(-8deg);
+}
+.preview-note{
+  font-size:12px;
+  color:var(--gray);
+  margin-top:14px;
+  line-height:1.6;
+  padding:0 4px;
+}
+
+/* ---------- 카드 클릭 유도 힌트 ---------- */
+.flyer-detail-hint{
+  position:absolute;
+  bottom:20px; left:24px;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:var(--dark);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  opacity:0.85;
+  transition:0.2s var(--ease);
+}
+.preview-flyer:hover .flyer-detail-hint,
+.flyer-card:focus-visible .flyer-detail-hint{
+  opacity:1;
+  background:var(--primary);
+  transform:translateY(-2px);
+}
+
+/* ---------- 상세정보 모달 ---------- */
+.detail-modal{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.25s var(--ease), visibility 0.25s var(--ease);
+}
+.detail-modal.open{ opacity:1; visibility:visible; }
+.detail-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(15,23,42,0.55);
+  backdrop-filter:blur(2px);
+}
+.detail-modal-panel{
+  position:relative;
+  width:min(720px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  background:var(--paper, #fff);
+  border-radius:36px;
+  padding:48px 42px 42px;
+  box-shadow:0 40px 90px rgba(15,23,42,0.35);
+  transform:translateY(16px) scale(0.98);
+  transition:transform 0.25s var(--ease);
+}
+.detail-modal.open .detail-modal-panel{ transform:translateY(0) scale(1); }
+.detail-modal-close{
+  position:absolute;
+  top:27px; right:27px;
+  width:48px; height:48px;
+  border-radius:50%;
+  border:0;
+  background:var(--light);
+  color:var(--gray);
+  font-size:21px;
+  cursor:pointer;
+  transition:0.2s var(--ease);
+}
+.detail-modal-close:hover{ background:#e9eff8; color:var(--text); }
+.detail-modal-label{
+  font-size:18px;
+  font-weight:800;
+  color:var(--gray);
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:27px;
+}
+.detail-modal-label i{ color:var(--primary); }
+.detail-modal-summary{
+  padding-bottom:27px;
+  margin-bottom:27px;
+  border-bottom:1.5px dashed var(--line);
+}
+.detail-modal-summary .flyer-deal{
+  font-size:16.5px;
+  padding:6px 15px;
+  border-radius:6px;
+}
+.detail-modal-summary .flyer-price{ font-size:42px; margin-bottom:12px; }
+.detail-modal-summary .flyer-addr{ font-size:22.5px; margin-bottom:15px; }
+.detail-modal-summary .flyer-spec{ font-size:18px; gap:9px 21px; }
+.detail-modal-block{ margin-bottom:27px; }
+.detail-modal-block:last-child{ margin-bottom:0; }
+.detail-modal-block h4{
+  font-size:18.75px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:15px;
+}
+.detail-modal-block .flyer-tags,
+.detail-modal-block .flyer-options{ gap:9px; }
+.detail-modal-block .flyer-tags span,
+.detail-modal-block .flyer-options span{
+  font-size:16.5px;
+  padding:6px 13.5px;
+}
+.detail-modal-block .flyer-meta{ gap:6px; }
+.detail-modal-block .flyer-meta div{ font-size:17px; }
+
+/* ---------- 모달: 정보 탭 (교통정보/학군정보 공용) ---------- */
+.info-tabs{
+  display:flex;
+  gap:6px;
+  padding:4px;
+  background:var(--light);
+  border-radius:12px;
+  margin-bottom:14px;
+}
+.info-tab{
+  flex:1;
+  padding:10px 0;
+  border:0;
+  background:transparent;
+  border-radius:9px;
+  font-size:14px;
+  font-weight:800;
+  color:var(--gray);
+  cursor:pointer;
+  transition:0.2s var(--ease);
+}
+.info-tab:hover:not(.active){ color:var(--text); }
+.info-tab.active{
+  background:var(--dark);
+  color:#fff;
+}
+
+/* ---------- 모달: 도착지 검색 (교통정보) ---------- */
+.dest-search{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1.5px solid var(--line);
+  background:#fff;
+  margin-bottom:14px;
+}
+.dest-search i{ color:var(--gray); font-size:15px; }
+.dest-search input{
+  flex:1;
+  border:0;
+  background:transparent;
+  font-size:14px;
+  color:var(--text);
+}
+.dest-search input:focus{ outline:none; }
+.dest-search input::placeholder{ color:#A6B2C6; }
+
+/* ---------- 모달: 교통 결과 줄 (지하철/최소시간 탭) ---------- */
+.detail-modal-block .flyer-meta .transit-result-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:var(--light);
+  margin-bottom:8px;
+  font-size:inherit;
+}
+.detail-modal-block .flyer-meta .transit-result-row:last-child{ margin-bottom:0; }
+.transit-result-row i{ color:var(--primary); font-size:15px; flex-shrink:0; }
+.transit-station-name{
+  flex:1;
+  font-size:16px;
+  font-weight:700;
+  color:var(--text);
+}
+.transit-walk-time{
+  flex-shrink:0;
+  font-size:13px;
+  font-weight:800;
+  color:var(--primary);
+  background:rgba(30,136,255,0.1);
+  padding:5px 12px;
+  border-radius:999px;
+}
+
+/* 학군정보: 학교 하나당 한 줄 (추후 지도 연동을 위한 여유 공간 확보) */
+.detail-modal-block .flyer-meta .school-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:var(--light);
+  margin-bottom:8px;
+  font-size:inherit;
+}
+.detail-modal-block .flyer-meta .school-row:last-child{ margin-bottom:0; }
+.school-level-tag{
+  flex-shrink:0;
+  font-size:13px;
+  font-weight:800;
+  padding:5px 12px;
+  border-radius:999px;
+  background:rgba(30,136,255,0.12);
+  color:var(--primary);
+}
+.school-name{
+  flex:1;
+  font-size:16px;
+  font-weight:700;
+  color:var(--text);
+}
+.school-map-icon{
+  flex-shrink:0;
+  font-size:14px;
+  color:#CBD5E1;
+}
+
+.empty-hint{
+  font-size:18px;
+  color:#B9C3D4;
+  font-weight:500;
+}
+
+@media (max-width:700px){
+  .detail-modal-panel{ width:100%; padding:32px 24px 26px; border-radius:24px; }
+  .detail-modal-summary .flyer-price{ font-size:32px; }
+  .detail-modal-summary .flyer-addr{ font-size:18px; }
+  .detail-modal-block h4{ font-size:16px; }
+  .detail-modal-block .flyer-tags span,
+  .detail-modal-block .flyer-options span,
+  .detail-modal-block .flyer-meta div,
+  .empty-hint{ font-size:14px; }
+  .school-name{ font-size:14px; }
+  .school-level-tag{ font-size:11px; padding:4px 10px; }
+  .info-tab{ font-size:12.5px; padding:9px 0; }
+  .dest-search{ padding:10px 14px; }
+  .dest-search input{ font-size:13px; }
+  .transit-station-name{ font-size:14px; }
+  .transit-walk-time{ font-size:11.5px; padding:4px 10px; }
+}
+
+/* ================= Benefits ================= */
+.benefits{ width: min(1500px, 92%); margin: 0 auto 70px; }
+.section-head{ text-align:center; margin-bottom:36px; }
+.section-head h2{ font-size:28px; font-weight:900; color:var(--dark); margin-bottom:10px; }
+.section-head p{ color:var(--gray); font-size:14px; }
+.benefit-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.benefit-card{
+  background:var(--paper);
+  border-radius:20px;
+  padding:30px 26px;
+  box-shadow:0 14px 34px rgba(15,23,42,0.06);
+  border:1px solid var(--line);
+  transition:0.3s var(--ease);
+}
+.benefit-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 22px 44px rgba(15,23,42,0.1);
+  border-color:transparent;
+}
+.benefit-card i{
+  width:46px; height:46px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:14px;
+  background:var(--gradient-main);
+  color:#fff;
+  font-size:18px;
+  margin-bottom:16px;
+  transition:transform 0.3s var(--ease);
+}
+.benefit-card:hover i{ transform:rotate(-6deg) scale(1.06); }
+.benefit-card h3{ font-size:16px; font-weight:800; margin-bottom:8px; color:var(--dark); }
+.benefit-card p{ font-size:13px; color:var(--gray); line-height:1.6; }
+
+/* ================= FAQ ================= */
+.faq{ margin-bottom:70px; max-width:820px; margin-left:auto; margin-right:auto; }
+.faq details{
+  background:var(--paper);
+  border-radius:16px;
+  padding:18px 22px;
+  margin-bottom:10px;
+  border:1px solid var(--line);
+  transition:border-color 0.2s ease;
+}
+.faq details:hover{ border-color:var(--line-strong); }
+.faq details[open]{ border-color:var(--primary); }
+.faq summary{
+  cursor:pointer;
+  font-weight:800;
+  font-size:14px;
+  color:var(--text);
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::after{
+  content:"+";
+  font-size:20px;
+  color:var(--primary);
+  transition:transform 0.25s var(--ease);
+}
+.faq details[open] summary::after{ transform:rotate(45deg); }
+.faq p{
+  font-size:13px;
+  color:var(--gray);
+  margin-top:12px;
+  line-height:1.7;
+  animation:fadeUp 0.3s var(--ease);
+}
+
+/* ================= Final CTA ================= */
+.final-cta{
+  width: min(1500px, 92%);
+  margin: 0 auto 50px;
+  position:relative;
+  background:linear-gradient(135deg,#0F172A,#172033);
+  border-radius:32px;
+  padding:50px 40px;
+  text-align:center;
+  color:#fff;
+  overflow:hidden;
+}
+.final-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 15% 20%, rgba(30,136,255,0.25), transparent 45%),
+             radial-gradient(circle at 85% 80%, rgba(23,212,179,0.2), transparent 45%);
+  pointer-events:none;
+}
+.final-cta h2{ position:relative; font-size:26px; font-weight:900; margin-bottom:12px; }
+.final-cta p{ position:relative; color:#CBD5E1; font-size:14px; margin-bottom:24px; }
+.final-cta .cta-btn{ position:relative; }
+
+/* ================= Mobile ================= */
+@media (max-width:900px){
+  .reg-hero{ grid-template-columns:1fr; gap:34px; text-align:center; padding-top:86px; }
+  .hero-sub{ margin-left:auto; margin-right:auto; }
+  .hero-badges{ justify-content:center; }
+  .flyer-teaser{ display:none; }
+  .register-section{ grid-template-columns:1fr; }
+  .preview-flyer{ position:static; }
+  .listing-form{ padding:26px; }
+  .field-row{ grid-template-columns:1fr; }
+  .benefit-grid{ grid-template-columns:1fr; }
+  .reg-hero h1{ font-size:32px; }
+  .steps-nav{
+    overflow-x:auto;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .steps-nav::-webkit-scrollbar{ display:none; }
+  .step-tab span:not(.num){ display:none; }
+}
+
+/* 모션에 민감한 사용자를 위한 배려 */
+@media (prefers-reduced-motion: reduce){
+  .flyer-teaser,
+  .flyer-card,
+  .form-step.active,
+  .flyer-tags span,
+  .faq p{
+    animation:none !important;
+  }
+  .cta-btn,
+  .cta-btn i,
+  .cta-btn::before,
+  .btn-primary,
+  .benefit-card,
+  .benefit-card i,
+  .thumb img{
+    transition:none !important;
+  }
+}

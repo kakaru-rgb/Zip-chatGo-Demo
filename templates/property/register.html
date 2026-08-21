@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매물 등록 | 집찾GO</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706d1a4da6d31b1ee3225b688aaa6b0d&libraries=services&autoload=false"></script>
+<link rel="stylesheet" href="../../static/css/common.css">
+<link rel="stylesheet" href="../../static/css/register.css">
+</head>
+<body>
+
+<header class="main-header" id="mainHeader">
+  <div class="logo">
+    <a href="../../index.html"><img src="../../static/images/logo.png" alt="집찾GO"></a>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="top-nav" id="topNav">
+    <a href="../../templates/support/contact.html"><i class="fa-solid fa-headset"></i>고객센터</a>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <section class="reg-hero">
+    <div>
+      <span class="eyebrow">매물 등록</span>
+      <h1>우리 동네를 가장 잘 아는<br>사람에게, 내 집을 보여주세요</h1>
+      <p class="hero-sub">사진 몇 장과 기본 정보만 입력하면 등록 끝. 집찾GO 담당자 확인 후 24시간 이내에 게시돼요.</p>
+      <div class="hero-badges">
+        <span><i class="fa-solid fa-check"></i>등록비 무료</span>
+        <span><i class="fa-regular fa-clock"></i>평균 6분 소요</span>
+        <span><i class="fa-solid fa-shield-heart"></i>소유자 확인 후 게시</span>
+      </div>
+      <a href="#registerForm" class="cta-btn">지금 등록하기 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="flyer-teaser" aria-hidden="true">
+      <div class="fy-photo" id="fyPhoto">
+        <button type="button" class="fy-photo-nav prev" id="fyPhotoPrev" aria-label="이전 사진"><i class="fa-solid fa-chevron-left"></i></button>
+        <button type="button" class="fy-photo-nav next" id="fyPhotoNext" aria-label="다음 사진"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="fy-photo-dots" id="fyPhotoDots"></div>
+      </div>
+      <span class="fy-badge">매매</span>
+      <div class="fy-price">4억 8,000</div>
+      <div class="fy-addr">서울 마포구 합정동</div>
+      <div class="fy-spec">84㎡ · 방3 · 욕1 · 12/20층</div>
+      <span class="fy-watermark">예시</span>
+    </div>
+  </section>
+
+  <!-- STEP NAV -->
+  <nav class="steps-nav" aria-label="등록 단계">
+    <button type="button" class="step-tab active" data-step="1"><span class="num">01</span><span>기본정보</span></button>
+    <button type="button" class="step-tab" data-step="2"><span class="num">02</span><span>상세정보</span></button>
+    <button type="button" class="step-tab" data-step="3"><span class="num">03</span><span>사진</span></button>
+    <button type="button" class="step-tab" data-step="4"><span class="num">04</span><span>확인·등록</span></button>
+  </nav>
+
+  <!-- REGISTER FORM + PREVIEW -->
+  <section class="register-section" id="registerForm">
+    <form class="listing-form" id="listingForm">
+
+      <!-- STEP 1 -->
+      <div class="form-step active" data-step="1">
+        <h2>기본정보</h2>
+        <p class="step-desc">어떤 집을 어떤 방식으로 내놓으실 건가요?</p>
+
+        <div class="field">
+          <label>매물 유형</label>
+          <div class="chip-group" id="propertyTypeGroup">
+            <label class="chip selected"><input type="radio" name="propertyType" value="아파트" checked>아파트</label>
+            <label class="chip"><input type="radio" name="propertyType" value="빌라/연립">빌라·연립</label>
+            <label class="chip"><input type="radio" name="propertyType" value="원룸/투룸">원룸·투룸</label>
+            <label class="chip"><input type="radio" name="propertyType" value="단독주택">단독주택</label>
+            <label class="chip"><input type="radio" name="propertyType" value="오피스텔">오피스텔</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>거래 유형</label>
+          <div class="chip-group" id="dealTypeGroup">
+            <label class="chip selected"><input type="radio" name="dealType" value="매매" checked>매매</label>
+            <label class="chip"><input type="radio" name="dealType" value="전세">전세</label>
+            <label class="chip"><input type="radio" name="dealType" value="월세">월세</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="addr1">주소</label>
+          <div class="addr-input-row">
+            <input type="text" id="addr1" placeholder="도로명 주소를 입력해보세요 (예: 성남시 분당구 판교로 242)" autocomplete="off">
+            <button type="button" id="geoCheckBtn" class="geo-btn"><i class="fa-solid fa-location-crosshairs"></i> 위치 확인</button>
+            <ul class="addr-suggest-list" id="addrSuggestList"></ul>
+          </div>
+        </div>
+        <div class="field">
+          <label for="addr2">상세주소 (동/호수)</label>
+          <input type="text" id="addr2" placeholder="예: 3동 1204호">
+        </div>
+
+        <div class="field">
+          <label>위치 확인 <span class="badge-auto" id="mapStatusBadge" style="display:none">자동입력</span></label>
+          <div class="map-preview" id="mapPreview">
+            <div class="map-placeholder" id="mapPlaceholder">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <p>주소를 입력하고 '위치 확인'을 누르면<br>실제 지도에 위치가 표시돼요</p>
+            </div>
+            <div id="vworldMap" class="vworld-map"></div>
+          </div>
+          <p class="map-note" id="mapNote">주소를 입력하면 카카오맵으로 위치를 확인해요. 분당구 안이면 학군 정보도 함께 자동으로 채워져요.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" data-step="2">
+        <h2>상세정보</h2>
+        <p class="step-desc">집의 구조와 특징을 알려주세요.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="area">전용면적 (㎡)</label>
+            <input type="number" id="area" placeholder="예: 84">
+          </div>
+          <div class="field">
+            <label for="floor">층수 / 전체층</label>
+            <input type="text" id="floor" placeholder="예: 12/20">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="rooms">방 개수</label>
+            <input type="number" id="rooms" placeholder="예: 3">
+          </div>
+          <div class="field">
+            <label for="baths">욕실 개수</label>
+            <input type="number" id="baths" placeholder="예: 1">
+          </div>
+        </div>
+        <div class="field">
+          <label>이런 특징이 있어요</label>
+          <div class="tag-grid" id="tagGrid">
+            <label class="chip"><input type="checkbox" value="주차가능">주차가능</label>
+            <label class="chip"><input type="checkbox" value="엘리베이터">엘리베이터</label>
+            <label class="chip"><input type="checkbox" value="반려동물 가능">반려동물 가능</label>
+            <label class="chip"><input type="checkbox" value="신축">신축</label>
+            <label class="chip"><input type="checkbox" value="남향">남향</label>
+            <label class="chip"><input type="checkbox" value="즉시입주가능">즉시입주가능</label>
+          </div>
+          <div class="custom-tag-row">
+            <input type="text" id="customTagInput" placeholder="원하는 특징을 직접 입력해보세요 (예: 남향, 복층)" maxlength="10">
+            <button type="button" id="customTagAdd" class="custom-tag-btn"><i class="fa-solid fa-plus"></i> 추가</button>
+          </div>
+          <p class="custom-tag-note">최대 5개까지 직접 추가할 수 있어요.</p>
+        </div>
+
+        <div class="subsection-title"><i class="fa-solid fa-file-invoice-dollar"></i> 관리비 정보</div>
+        <div class="field-row">
+          <div class="field">
+            <label for="maintenanceFee">일반(공용) 관리비 (만원)</label>
+            <input type="text" id="maintenanceFee" placeholder="예: 8">
+          </div>
+          <div class="field">
+            <label for="etcFee">기타 관리비 (선택)</label>
+            <input type="text" id="etcFee" placeholder="예: 정화조 청소비 별도 5,000원">
+          </div>
+        </div>
+        <div class="field">
+          <label>관리비에 포함된 사용료</label>
+          <div class="chip-group" id="utilityGroup">
+            <label class="chip"><input type="checkbox" value="전기">전기</label>
+            <label class="chip"><input type="checkbox" value="수도">수도</label>
+            <label class="chip"><input type="checkbox" value="가스">가스</label>
+            <label class="chip"><input type="checkbox" value="인터넷">인터넷</label>
+            <label class="chip"><input type="checkbox" value="TV">TV</label>
+          </div>
+        </div>
+
+        <div class="subsection-title"><i class="fa-solid fa-plug"></i> 옵션 정보</div>
+        <div class="field">
+          <label>제공되는 옵션을 선택해주세요</label>
+          <div class="tag-grid" id="optionGrid">
+            <label class="chip"><input type="checkbox" value="에어컨">에어컨</label>
+            <label class="chip"><input type="checkbox" value="세탁기">세탁기</label>
+            <label class="chip"><input type="checkbox" value="냉장고">냉장고</label>
+            <label class="chip"><input type="checkbox" value="가스레인지">가스레인지</label>
+            <label class="chip"><input type="checkbox" value="전자레인지">전자레인지</label>
+            <label class="chip"><input type="checkbox" value="침대">침대</label>
+            <label class="chip"><input type="checkbox" value="싱크대">싱크대</label>
+            <label class="chip"><input type="checkbox" value="옷장">옷장</label>
+          </div>
+          <div class="custom-tag-row">
+            <input type="text" id="customOptionInput" placeholder="다른 옵션을 직접 입력해보세요 (예: 건조기)" maxlength="10">
+            <button type="button" id="customOptionAdd" class="custom-tag-btn"><i class="fa-solid fa-plus"></i> 추가</button>
+          </div>
+          <p class="custom-tag-note">최대 5개까지 직접 추가할 수 있어요.</p>
+        </div>
+
+        <div class="subsection-title">
+          <i class="fa-solid fa-train-subway"></i> 교통정보
+          <span class="badge-auto" id="transitAutoBadge" style="display:none">자동입력</span>
+        </div>
+        <div class="school-auto-panel" id="transitAutoPanel">
+          <div class="school-auto-empty" id="transitAutoEmpty">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>1단계에서 주소를 입력하고 '위치 확인'을 누르면<br>가까운 지하철역·버스정류장이 자동으로 채워져요.</p>
+          </div>
+          <div class="school-auto-result" id="transitAutoResult" style="display:none">
+            <div class="school-auto-row">
+              <span class="school-auto-level">지하철역</span>
+              <div class="school-auto-body" id="transitAutoBodySubway"></div>
+            </div>
+            <div class="school-auto-row">
+              <span class="school-auto-level">버스정류장</span>
+              <div class="school-auto-body" id="transitAutoBodyBus"></div>
+            </div>
+          </div>
+        </div>
+        <p class="custom-tag-note">교통정보는 입력이 아니라 주소 기준 직선거리로 자동 계산돼요. 실제 도보 경로 거리와는 다를 수 있어요.</p>
+
+        <div class="subsection-title">
+          <i class="fa-solid fa-graduation-cap"></i> 학군정보
+          <span class="badge-auto" id="schoolAutoBadge" style="display:none">자동입력</span>
+        </div>
+        <div class="school-auto-panel" id="schoolAutoPanel">
+          <div class="school-auto-empty" id="schoolAutoEmpty">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>1단계에서 주소를 입력하고 '위치 확인'을 누르면<br>학군 정보가 여기에 자동으로 채워져요.</p>
+          </div>
+          <div class="school-auto-result" id="schoolAutoResult" style="display:none">
+            <div class="school-auto-row" id="schoolAutoRowEl">
+              <span class="school-auto-level">초등학교</span>
+              <div class="school-auto-body" id="schoolAutoBodyEl"></div>
+            </div>
+            <div class="school-auto-row" id="schoolAutoRowMid">
+              <span class="school-auto-level">중학교</span>
+              <div class="school-auto-body" id="schoolAutoBodyMid"></div>
+            </div>
+            <div class="school-auto-row" id="schoolAutoRowHigh">
+              <span class="school-auto-level">고등학교</span>
+              <div class="school-auto-body" id="schoolAutoBodyHigh"></div>
+            </div>
+          </div>
+        </div>
+        <p class="custom-tag-note">학군 정보는 입력이 아니라 주소를 기반으로 자동 계산돼요. 등록자가 직접 확인한 정보가 아니므로 담당자 검토 시 한 번 더 확인해요.</p>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" data-step="3">
+        <h2>사진</h2>
+        <p class="step-desc">밝고 선명한 사진일수록 문의가 빨리 와요. 첫 번째 사진이 대표 사진이 돼요.</p>
+        <label class="upload-box" for="photoInput">
+          <i class="fa-solid fa-camera"></i>
+          클릭해서 사진 올리기 (여러 장 선택 가능, 최대 10장)
+        </label>
+        <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
+        <div class="thumb-grid" id="thumbGrid"></div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="form-step" data-step="4">
+        <h2>확인·등록</h2>
+        <p class="step-desc">가격과 연락처를 입력하면 등록 준비가 끝나요.</p>
+
+        <div class="field" id="saleFields">
+          <label for="price">매매가 (만원)</label>
+          <input type="text" id="price" placeholder="예: 48000">
+          <p class="price-hint" id="priceHint"></p>
+        </div>
+        <div class="field-row" id="rentFields" style="display:none">
+          <div class="field">
+            <label for="deposit">보증금 (만원)</label>
+            <input type="text" id="deposit" placeholder="예: 3000">
+            <p class="price-hint" id="depositHint"></p>
+          </div>
+          <div class="field">
+            <label for="monthly">월세 (만원)</label>
+            <input type="text" id="monthly" placeholder="예: 60">
+            <p class="price-hint" id="monthlyHint"></p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="ownerName">이름</label>
+            <input type="text" id="ownerName" placeholder="집주인 이름">
+          </div>
+          <div class="field">
+            <label for="ownerPhone">연락처</label>
+            <input type="tel" id="ownerPhone" placeholder="010-0000-0000">
+          </div>
+        </div>
+
+        <div class="agree-row">
+          <input type="checkbox" id="ownerCheck">
+          <label for="ownerCheck">본인이 소유자이거나 정당한 위임을 받았으며, 입력한 정보가 사실임을 확인합니다.</label>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn-ghost" id="prevBtn" style="visibility:hidden">이전</button>
+        <button type="button" class="btn-primary" id="nextBtn">다음</button>
+        <button type="submit" class="btn-primary" id="submitBtn" style="display:none">등록 완료</button>
+      </div>
+    </form>
+
+    <!-- LIVE PREVIEW (signature element) -->
+    <aside class="preview-flyer">
+      <p class="preview-label"><i class="fa-solid fa-eye"></i>구매자에게 이렇게 보여요</p>
+      <div class="flyer-card" id="flyerCard" role="button" tabindex="0" aria-label="상세정보 보기">
+        <div class="flyer-photo" id="flyerPhoto">
+          <span class="flyer-photo-hint" id="flyerPhotoHint">사진을 올리면<br>여기에 표시돼요</span>
+          <button type="button" class="fy-photo-nav prev" id="flyerPhotoPrev" aria-label="이전 사진" style="display:none"><i class="fa-solid fa-chevron-left"></i></button>
+          <button type="button" class="fy-photo-nav next" id="flyerPhotoNext" aria-label="다음 사진" style="display:none"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="fy-photo-dots" id="flyerPhotoDots"></div>
+        </div>
+        <span class="flyer-deal" id="flyerDeal">매매</span>
+        <div class="flyer-price" id="flyerPrice">가격 미입력</div>
+        <div class="flyer-addr" id="flyerAddr">주소를 입력해주세요</div>
+        <div class="flyer-spec" id="flyerSpec">면적 · 방 · 욕실 · 층수</div>
+        <span class="flyer-stamp">집찾GO</span>
+        <span class="flyer-detail-hint"><i class="fa-solid fa-expand"></i> 상세정보 보기</span>
+      </div>
+      <p class="preview-note">입력하는 즉시 미리보기가 바뀌어요. 카드를 누르면 상세정보를 볼 수 있어요.</p>
+    </aside>
+  </section>
+
+  <!-- 상세정보 모달 -->
+  <div class="detail-modal" id="detailModal" aria-hidden="true">
+    <div class="detail-modal-backdrop" id="detailModalBackdrop"></div>
+    <div class="detail-modal-panel" role="dialog" aria-label="매물 상세정보">
+      <button type="button" class="detail-modal-close" id="detailModalClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+      <p class="detail-modal-label"><i class="fa-solid fa-list-check"></i>상세정보 미리보기</p>
+      <div class="detail-modal-summary">
+        <span class="flyer-deal" id="modalDeal">매매</span>
+        <div class="flyer-price" id="modalPrice">가격 미입력</div>
+        <div class="flyer-addr" id="modalAddr">주소를 입력해주세요</div>
+        <div class="flyer-spec" id="modalSpec">면적 · 방 · 욕실 · 층수</div>
+      </div>
+      <div class="detail-modal-block">
+        <h4>이런 특징이 있어요</h4>
+        <div class="flyer-tags" id="flyerTags"></div>
+      </div>
+      <div class="detail-modal-block">
+        <h4>제공되는 옵션</h4>
+        <div class="flyer-options" id="flyerOptions"></div>
+      </div>
+      <div class="detail-modal-block">
+        <h4>관리비 정보</h4>
+        <div class="flyer-meta" id="flyerFee"></div>
+      </div>
+      <div class="detail-modal-block">
+        <h4>교통정보 <span class="badge-auto">자동입력</span></h4>
+        <div class="info-tabs" id="transitTabs">
+          <button type="button" class="info-tab active" data-transit-tab="subway">지하철</button>
+          <button type="button" class="info-tab" data-transit-tab="bus">버스</button>
+        </div>
+        <div class="flyer-meta" id="flyerTransit"></div>
+      </div>
+      <div class="detail-modal-block">
+        <h4>학군정보 <span class="badge-auto">자동입력</span></h4>
+        <div class="info-tabs" id="schoolTabs">
+          <button type="button" class="info-tab active" data-school-tab="el">초등학교</button>
+          <button type="button" class="info-tab" data-school-tab="mid">중학교</button>
+          <button type="button" class="info-tab" data-school-tab="high">고등학교</button>
+        </div>
+        <div class="flyer-meta" id="flyerSchool"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <section class="benefits">
+    <div class="section-head">
+      <h2>집찾GO에 등록하면 좋은 점</h2>
+      <p>부동산 사무실 여러 곳을 돌지 않아도, 우리 동네 매수자에게 바로 닿아요</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <i class="fa-solid fa-bolt"></i>
+        <h3>등록비 없이, 6분이면 끝</h3>
+        <p>중개수수료 걱정 없이 직접 등록해요. 사진과 정보만 있으면 바로 시작할 수 있어요.</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fa-solid fa-user-shield"></i>
+        <h3>소유자 확인 후 게시</h3>
+        <p>등록된 매물은 담당자가 한 번 더 확인한 뒤 게시돼서, 허위 매물 걱정이 없어요.</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fa-solid fa-location-dot"></i>
+        <h3>동네를 찾는 사람에게 우선 노출</h3>
+        <p>같은 동네, 같은 조건을 찾는 사람에게 먼저 보여줘서 문의로 이어질 확률이 높아요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="section-head">
+      <h2>자주 묻는 질문</h2>
+    </div>
+    <details>
+      <summary>등록은 정말 무료인가요?</summary>
+      <p>네, 매물 등록과 게시 모두 무료예요. 별도의 중개수수료 없이 직접 판매자와 구매자가 연결돼요.</p>
+    </details>
+    <details>
+      <summary>등록 후 얼마 만에 게시되나요?</summary>
+      <p>정보와 사진을 확인하는 데 보통 24시간이 걸려요. 확인이 끝나면 알림으로 알려드려요.</p>
+    </details>
+    <details>
+      <summary>임차인인데 대신 등록할 수 있나요?</summary>
+      <p>소유자의 위임을 받은 경우에만 등록할 수 있어요. 등록 시 위임 여부를 확인하는 절차가 있어요.</p>
+    </details>
+    <details>
+      <summary>등록한 정보는 나중에 수정할 수 있나요?</summary>
+      <p>네, 게시 이후에도 마이페이지에서 가격, 사진, 설명을 언제든지 수정할 수 있어요.</p>
+    </details>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>준비되셨다면, 지금 시작해보세요</h2>
+    <p>입력한 내용은 자동으로 저장되니 천천히 작성해도 괜찮아요.</p>
+    <a href="#registerForm" class="cta-btn">매물 등록 시작하기 <i class="fa-solid fa-arrow-right"></i></a>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="../../index.html">
+        <img src="../../static/images/logo.png" alt="집찾GO"></a>
+      <div>
+        <h2>집찾GO</h2>
+        <p>동네를 가장 잘 아는 사람들의 부동산 플랫폼</p>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="../../index.html">홈</a>
+      <a href="search.html">매물찾기</a>
+      <a href="register.html">매물 등록</a>
+      <a href="../support/guide.html">이용가이드</a>
+      <a href="../support/contact.html">고객센터</a>
+    </div>
+  </div>
+  <div class="footer-info">
+    <span>㈜집찾GO</span>
+    <span>대표 홍길동</span>
+    <span>사업자등록번호 000-00-00000</span>
+    <span>서울특별시 강남구 테헤란로 000</span>
+    <span>© 2026 JipchatGO. All rights reserved.</span>
+  </div>
+</footer>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="맨 위로 이동">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script>
+  // 헤더 스크롤 효과
+  const header = document.getElementById('mainHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // 모바일 메뉴
+  const menuBtn = document.getElementById('menuBtn');
+  const topNav = document.getElementById('topNav');
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('active');
+    topNav.classList.toggle('active');
+  });
+
+  // ---------- 칩(라디오/체크박스) 선택 UI ----------
+  function bindChip(chip) {
+    const input = chip.querySelector('input');
+    chip.addEventListener('click', (e) => {
+      if (e.target.closest('.chip-remove')) return; // 삭제 버튼 클릭 시 선택 토글 방지
+      if (input.type === 'radio') {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(i => {
+          i.closest('.chip').classList.remove('selected');
+        });
+        input.checked = true;
+        chip.classList.add('selected');
+      } else {
+        input.checked = !input.checked;
+        chip.classList.toggle('selected', input.checked);
+      }
+      // 프로그래밍적으로 checked를 바꾸면 change 이벤트가 자동으로 발생하지 않으므로 직접 발생시켜요.
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      updatePreview();
+    });
+  }
+  document.querySelectorAll('.chip').forEach(bindChip);
+
+  // ---------- 사용자 정의 태그/옵션 추가 (공용 함수) ----------
+  function setupCustomChipAdder({ gridEl, inputEl, btnEl, maxCount, duplicateMsg, limitMsg }) {
+    if (!gridEl || !inputEl || !btnEl) return;
+    let count = 0;
+
+    function add() {
+      const value = inputEl.value.trim();
+      if (!value) return;
+
+      if (count >= maxCount) {
+        alert(limitMsg);
+        return;
+      }
+      const exists = Array.from(gridEl.querySelectorAll('input')).some(
+        i => i.value.toLowerCase() === value.toLowerCase()
+      );
+      if (exists) {
+        alert(duplicateMsg);
+        return;
+      }
+
+      const chip = document.createElement('label');
+      chip.className = 'chip chip-custom selected';
+      chip.innerHTML = `
+        <input type="checkbox" value="${value}" checked>
+        ${value}
+        <span class="chip-remove" title="삭제"><i class="fa-solid fa-xmark"></i></span>
+      `;
+      gridEl.appendChild(chip);
+      bindChip(chip);
+
+      chip.querySelector('.chip-remove').addEventListener('click', () => {
+        chip.remove();
+        count--;
+        updatePreview();
+      });
+
+      count++;
+      inputEl.value = '';
+      updatePreview();
+    }
+
+    btnEl.addEventListener('click', add);
+    inputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        add();
+      }
+    });
+  }
+
+  setupCustomChipAdder({
+    gridEl: document.getElementById('tagGrid'),
+    inputEl: document.getElementById('customTagInput'),
+    btnEl: document.getElementById('customTagAdd'),
+    maxCount: 5,
+    duplicateMsg: '이미 추가된 특징이에요.',
+    limitMsg: '직접 추가할 수 있는 특징은 최대 5개예요.'
+  });
+
+  setupCustomChipAdder({
+    gridEl: document.getElementById('optionGrid'),
+    inputEl: document.getElementById('customOptionInput'),
+    btnEl: document.getElementById('customOptionAdd'),
+    maxCount: 5,
+    duplicateMsg: '이미 추가된 옵션이에요.',
+    limitMsg: '직접 추가할 수 있는 옵션은 최대 5개예요.'
+  });
+
+  // ---------- 카카오맵 연동: 지오코딩 / 검색 / 지도 / 학군 자동 매칭 ----------
+  let zoneData = { elementary: [], middle: [], high: [] };
+  let kakaoMap = null;
+  let kakaoMarker = null;
+  let kakaoZoneOverlays = [];
+  let kakaoGeocoder = null;
+  let currentSchoolMatch = null; // 1단계에서 확정된 학군 매칭 결과 (모달에서도 재사용)
+
+  // 카카오 SDK는 autoload=false로 불러왔기 때문에 직접 load()를 호출해줘야 해요.
+  if (typeof kakao !== 'undefined' && kakao.maps) {
+    kakao.maps.load(() => {
+      kakaoGeocoder = new kakao.maps.services.Geocoder();
+    });
+  } else {
+    console.error('[카카오맵] SDK를 불러오지 못했어요. appkey와 도메인 등록을 확인해주세요.');
+  }
+
+  // 학군 데이터 로드 (분당구)
+  Promise.all([
+    fetch('../../static/data/elementary_zones_bundang.json').then(r => r.json()).catch(() => []),
+    fetch('../../static/data/middle_zones_bundang.json').then(r => r.json()).catch(() => []),
+    fetch('../../static/data/high_zones_seongnam.json').then(r => r.json()).catch(() => [])
+  ]).then(([el, mid, high]) => {
+    zoneData = { elementary: el, middle: mid, high: high };
+  });
+
+  let transitData = { subway: [], bus: [] };
+  fetch('../../static/data/transit_points_bundang.json').then(r => r.json()).then(d => {
+    transitData = d;
+  }).catch(() => {});
+
+  // ---------- 두 좌표 사이 직선거리 (m) — Haversine ----------
+  function distanceMeters(lat1, lng1, lat2, lng2) {
+    const R = 6371000;
+    const p1 = lat1 * Math.PI / 180, p2 = lat2 * Math.PI / 180;
+    const dp = (lat2 - lat1) * Math.PI / 180;
+    const dl = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+    return Math.round(2 * R * Math.asin(Math.sqrt(a)));
+  }
+
+  // ---------- 주소 → 좌표가 확정되면 가까운 지하철역·버스정류장 찾기 ----------
+  function matchNearbyTransit(lng, lat) {
+    const withDist = (list, type) => list
+      .map(p => ({ ...p, type, distance: distanceMeters(lat, lng, p.lat, p.lng) }))
+      .sort((a, b) => a.distance - b.distance);
+    return {
+      subway: withDist(transitData.subway, 'subway').slice(0, 5),
+      bus: withDist(transitData.bus, 'bus').slice(0, 5)
+    };
+  }
+
+  function renderTransitAuto(match) {
+    const empty = document.getElementById('transitAutoEmpty');
+    const result = document.getElementById('transitAutoResult');
+    const badge = document.getElementById('transitAutoBadge');
+
+    if (!match || (!match.subway.length && !match.bus.length)) {
+      empty.style.display = '';
+      result.style.display = 'none';
+      badge.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    result.style.display = '';
+    badge.style.display = '';
+
+    document.getElementById('transitAutoBodySubway').innerHTML = match.subway.length
+      ? `<div class="school-auto-schools">${match.subway.slice(0, 3).map(s => `<span>${s.name}(${s.line}) · ${s.distance}m</span>`).join('')}</div>`
+      : `<p class="school-auto-note">반경 15km 안에 지하철역이 없어요</p>`;
+
+    document.getElementById('transitAutoBodyBus').innerHTML = match.bus.length
+      ? `<div class="school-auto-schools">${match.bus.slice(0, 3).map(s => `<span>${s.name} · ${s.distance}m</span>`).join('')}</div>`
+      : `<p class="school-auto-note">주변 버스정류장 정보가 없어요</p>`;
+  }
+
+  // ---------- 포인트-인-폴리곤 (Ray casting) ----------
+  function pointInRing(lng, lat, ring) {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const xi = ring[i][0], yi = ring[i][1];
+      const xj = ring[j][0], yj = ring[j][1];
+      const intersect = ((yi > lat) !== (yj > lat)) &&
+        (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+    }
+    return inside;
+  }
+  function pointInGeometry(lng, lat, geometry) {
+    if (!geometry) return false;
+    if (geometry.type === 'Polygon') {
+      if (!pointInRing(lng, lat, geometry.coordinates[0])) return false;
+      // 이후 링(구멍)에 들어가면 폴리곤 밖으로 취급
+      for (let k = 1; k < geometry.coordinates.length; k++) {
+        if (pointInRing(lng, lat, geometry.coordinates[k])) return false;
+      }
+      return true;
+    }
+    if (geometry.type === 'MultiPolygon') {
+      return geometry.coordinates.some(poly => pointInGeometry(lng, lat, { type: 'Polygon', coordinates: poly }));
+    }
+    return false;
+  }
+
+  // ---------- 주소 → 좌표가 확정되면 학군 3종 매칭 ----------
+  function matchSchoolZones(lng, lat) {
+    const elMatch = zoneData.elementary.find(z => pointInGeometry(lng, lat, z.geometry));
+    const midMatch = zoneData.middle.find(z => pointInGeometry(lng, lat, z.geometry));
+    const highMatch = zoneData.high.find(z => pointInGeometry(lng, lat, z.geometry));
+    return { el: elMatch || null, mid: midMatch || null, high: highMatch || null };
+  }
+
+  function renderSchoolAuto(match) {
+    const empty = document.getElementById('schoolAutoEmpty');
+    const result = document.getElementById('schoolAutoResult');
+    const badge = document.getElementById('schoolAutoBadge');
+
+    if (!match || (!match.el && !match.mid && !match.high)) {
+      empty.style.display = '';
+      result.style.display = 'none';
+      badge.style.display = 'none';
+      empty.innerHTML = `
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>이 주소는 학군 자동 조회 대상 지역이 아니에요.<br>(현재는 성남시 분당구만 지원돼요)</p>
+      `;
+      return;
+    }
+
+    empty.style.display = 'none';
+    result.style.display = '';
+    badge.style.display = '';
+
+    document.getElementById('schoolAutoBodyEl').innerHTML = match.el
+      ? `<div class="school-auto-schools">${match.el.schools.map(s => `<span>${s}</span>`).join('')}</div>` +
+        (match.el.type === 'joint' ? `<p class="school-auto-note">공동통학구역 — 위 학교 중 하나로 배정돼요</p>` : '')
+      : `<p class="school-auto-note">해당 없음</p>`;
+
+    document.getElementById('schoolAutoBodyMid').innerHTML = match.mid
+      ? `<p class="school-auto-zone">${match.mid.zone_name}</p><div class="school-auto-schools">${match.mid.schools.map(s => `<span>${s}</span>`).join('')}</div>` +
+        `<p class="school-auto-note">${match.mid.schools.length}개교 중 배정돼요</p>`
+      : `<p class="school-auto-note">해당 없음</p>`;
+
+    document.getElementById('schoolAutoBodyHigh').innerHTML = match.high
+      ? `<p class="school-auto-zone">${match.high.zone_name}${match.high.district_label ? ` (${match.high.district_label})` : ''}</p><div class="school-auto-schools">${match.high.schools.map(s => `<span>${s}</span>`).join('')}</div>` +
+        `<p class="school-auto-note">${match.high.schools.length}개교 중 배정돼요</p>`
+      : `<p class="school-auto-note">해당 없음</p>`;
+  }
+
+  // ---------- 지도 렌더링 (카카오맵) ----------
+  function geoRingToPath(ring) {
+    return ring.map(([lng, lat]) => new kakao.maps.LatLng(lat, lng));
+  }
+
+  function ensureMap(lng, lat) {
+    const mapEl = document.getElementById('vworldMap');
+    const center = new kakao.maps.LatLng(lat, lng);
+    if (!kakaoMap) {
+      kakaoMap = new kakao.maps.Map(mapEl, { center, level: 4 });
+    } else {
+      kakaoMap.setCenter(center);
+    }
+    if (kakaoMarker) kakaoMarker.setMap(null);
+    kakaoMarker = new kakao.maps.Marker({ position: center, map: kakaoMap });
+
+    kakaoZoneOverlays.forEach(p => p.setMap(null));
+    kakaoZoneOverlays = [];
+    setTimeout(() => kakaoMap.relayout(), 200);
+  }
+
+  function drawZonePolygon(zone, color) {
+    if (!zone || !kakaoMap) return;
+    const geom = zone.geometry;
+    const polygons = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
+    polygons.forEach(rings => {
+      const path = rings.map(geoRingToPath);
+      const polygon = new kakao.maps.Polygon({
+        map: kakaoMap,
+        path,
+        strokeWeight: 2,
+        strokeColor: color,
+        strokeOpacity: 0.9,
+        fillColor: color,
+        fillOpacity: 0.12
+      });
+      kakaoZoneOverlays.push(polygon);
+    });
+  }
+
+  // ---------- 지오코딩 확정 처리 (주소 검색 선택 또는 '위치 확인' 클릭 시 공통 실행) ----------
+  let currentTransitMatch = null;
+  function applyGeocodedLocation(addr, lng, lat) {
+    const mapPreview = document.getElementById('mapPreview');
+    const mapStatusBadge = document.getElementById('mapStatusBadge');
+    mapPreview.classList.add('located');
+    mapStatusBadge.style.display = '';
+
+    ensureMap(lng, lat);
+    currentSchoolMatch = matchSchoolZones(lng, lat);
+    if (currentSchoolMatch.el) drawZonePolygon(currentSchoolMatch.el, '#1E88FF');
+    if (currentSchoolMatch.mid) drawZonePolygon(currentSchoolMatch.mid, '#17D4B3');
+    if (currentSchoolMatch.high) drawZonePolygon(currentSchoolMatch.high, '#FFB020');
+
+    renderSchoolAuto(currentSchoolMatch);
+
+    currentTransitMatch = matchNearbyTransit(lng, lat);
+    renderTransitAuto(currentTransitMatch);
+
+    updatePreview();
+  }
+
+  // ---------- 카카오 Geocoder: 주소 검색 (자동완성 + 최종 확정 공용) ----------
+  const addr1Input = document.getElementById('addr1');
+  const addrSuggestList = document.getElementById('addrSuggestList');
+  let addrSearchTimer = null;
+
+  let kakaoPlaces = null; // addressSearch가 실패했을 때 쓸 키워드 검색 (더 관대하게 찾아줘요)
+
+  function searchAddress(query) {
+    return new Promise((resolve) => {
+      if (!kakaoPlaces) kakaoPlaces = new kakao.maps.services.Places();
+
+      // 키워드(장소) 검색을 먼저 시도해요. addressSearch보다 관대해서
+      // "판교로25번길 8-1"처럼 건물번호까지 타이핑하는 중에도 후보를 잘 찾아줘요.
+      kakaoPlaces.keywordSearch(query, (places, placesStatus) => {
+        if (placesStatus === kakao.maps.services.Status.OK && places.length) {
+          resolve(places.map(item => ({
+            text: item.road_address_name || item.address_name || item.place_name,
+            lng: Number(item.x),
+            lat: Number(item.y)
+          })));
+          return;
+        }
+
+        // 키워드 검색이 비어있으면, 정확한 주소 매칭용 addressSearch로 한 번 더 시도해요.
+        if (!kakaoGeocoder) {
+          console.warn('[카카오맵] Geocoder가 아직 준비되지 않았어요.');
+          resolve([]);
+          return;
+        }
+        kakaoGeocoder.addressSearch(query, (result, status) => {
+          if (status === kakao.maps.services.Status.OK) {
+            resolve(result.map(item => ({
+              text: (item.road_address && item.road_address.address_name) || item.address.address_name,
+              lng: Number(item.x),
+              lat: Number(item.y)
+            })));
+          } else {
+            resolve([]);
+          }
+        });
+      });
+    });
+  }
+
+  function renderSuggestions(items) {
+    if (!items.length) {
+      addrSuggestList.innerHTML = '';
+      addrSuggestList.classList.remove('show');
+      return;
+    }
+    addrSuggestList.innerHTML = items.map((item, i) => `
+      <li data-index="${i}">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>${item.text}</span>
+      </li>
+    `).join('');
+    addrSuggestList.classList.add('show');
+    addrSuggestList.querySelectorAll('li').forEach((li, i) => {
+      li.addEventListener('click', () => {
+        addr1Input.value = items[i].text;
+        addrSuggestList.classList.remove('show');
+        applyGeocodedLocation(items[i].text, items[i].lng, items[i].lat);
+      });
+    });
+  }
+
+  if (addr1Input) {
+    addr1Input.addEventListener('input', () => {
+      clearTimeout(addrSearchTimer);
+      const q = addr1Input.value.trim();
+      if (q.length < 4) {
+        renderSuggestions([]);
+        return;
+      }
+      addrSearchTimer = setTimeout(async () => {
+        const items = await searchAddress(q);
+        renderSuggestions(items);
+      }, 350);
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.field')) return;
+      if (!e.target.closest('#addrSuggestList') && e.target !== addr1Input) {
+        addrSuggestList.classList.remove('show');
+      }
+    });
+  }
+
+  // ---------- '위치 확인' 버튼 (직접 입력 후 바로 확정) ----------
+  const geoCheckBtn = document.getElementById('geoCheckBtn');
+  const mapPlaceholder = document.getElementById('mapPlaceholder');
+
+  async function geocodeAddress(addr) {
+    const items = await searchAddress(addr);
+    return items.length ? { lng: items[0].lng, lat: items[0].lat } : null;
+  }
+
+  if (geoCheckBtn) {
+    geoCheckBtn.addEventListener('click', async () => {
+      const addr = addr1Input.value.trim();
+      if (!addr) {
+        alert('주소를 먼저 입력해주세요.');
+        return;
+      }
+      geoCheckBtn.disabled = true;
+      geoCheckBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 확인 중';
+      const coord = await geocodeAddress(addr);
+      geoCheckBtn.disabled = false;
+      geoCheckBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> 위치 확인';
+
+      if (!coord) {
+        alert('입력하신 주소로 위치를 찾지 못했어요. 도로명 주소로 다시 입력해보시거나, 자동완성 목록에서 선택해주세요.');
+        return;
+      }
+      applyGeocodedLocation(addr, coord.lng, coord.lat);
+    });
+  }
+
+  // ---------- 모달: 교통정보 탭 (최소시간 / 지하철 / 버스) ----------
+  let activeTransitTab = 'fastest';
+  document.querySelectorAll('#transitTabs .info-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#transitTabs .info-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeTransitTab = tab.dataset.transitTab;
+      updatePreview();
+    });
+  });
+
+  const transitDestSearch = document.getElementById('transitDestSearch');
+  if (transitDestSearch) {
+    transitDestSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (transitDestSearch.value.trim()) {
+          alert('실제 서비스에서는 입력하신 도착지까지의 경로와 소요시간을 계산해드려요.');
+        }
+      }
+    });
+  }
+
+  // ---------- 모달: 학군정보 탭 (초등학교 / 중학교 / 고등학교) ----------
+  let activeSchoolTab = 'el';
+  document.querySelectorAll('#schoolTabs .info-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#schoolTabs .info-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeSchoolTab = tab.dataset.schoolTab;
+      updatePreview();
+    });
+  });
+
+  // ---------- 단계 이동 ----------
+  const steps = Array.from(document.querySelectorAll('.form-step'));
+  const stepTabs = Array.from(document.querySelectorAll('.step-tab'));
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  let current = 1;
+
+  function goToStep(n) {
+    current = n;
+    steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === n));
+    stepTabs.forEach(t => {
+      const stepNum = Number(t.dataset.step);
+      t.classList.toggle('active', stepNum === n);
+      t.classList.toggle('done', stepNum < n);
+    });
+    prevBtn.style.visibility = n === 1 ? 'hidden' : 'visible';
+    nextBtn.style.display = n === steps.length ? 'none' : 'inline-block';
+    submitBtn.style.display = n === steps.length ? 'inline-block' : 'none';
+    window.scrollTo({ top: document.getElementById('registerForm').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  nextBtn.addEventListener('click', () => { if (current < steps.length) goToStep(current + 1); });
+  prevBtn.addEventListener('click', () => { if (current > 1) goToStep(current - 1); });
+  stepTabs.forEach(tab => {
+    tab.addEventListener('click', () => goToStep(Number(tab.dataset.step)));
+  });
+
+  // ---------- 거래유형에 따른 가격 필드 전환 ----------
+  const saleFields = document.getElementById('saleFields');
+  const rentFields = document.getElementById('rentFields');
+  document.querySelectorAll('input[name="dealType"]').forEach(input => {
+    input.addEventListener('change', () => {
+      const isRent = input.value === '월세' || input.value === '전세';
+      saleFields.style.display = isRent ? 'none' : 'block';
+      rentFields.style.display = isRent ? 'grid' : 'none';
+      if (input.value === '전세') {
+        rentFields.querySelector('#monthly').closest('.field').style.display = 'none';
+      } else if (isRent) {
+        rentFields.querySelector('#monthly').closest('.field').style.display = 'block';
+      }
+      updatePreview();
+    });
+  });
+
+  // ---------- 사진 업로드 & 미리보기 (최대 10장, 화살표로 넘겨보기) ----------
+  const photoInput = document.getElementById('photoInput');
+  const thumbGrid = document.getElementById('thumbGrid');
+  const flyerPhoto = document.getElementById('flyerPhoto');
+  const flyerPhotoHint = document.getElementById('flyerPhotoHint');
+  const flyerPhotoPrev = document.getElementById('flyerPhotoPrev');
+  const flyerPhotoNext = document.getElementById('flyerPhotoNext');
+  const flyerPhotoDots = document.getElementById('flyerPhotoDots');
+  const PHOTO_MAX = 10;
+  let photos = [];
+  let flyerPhotoIndex = 0;
+
+  photoInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files).slice(0, PHOTO_MAX - photos.length);
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        photos.push(ev.target.result);
+        flyerPhotoIndex = photos.length - 1; // 방금 올린 사진을 바로 보여줘요
+        renderThumbs();
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  function renderThumbs() {
+    thumbGrid.innerHTML = '';
+    photos.forEach((src, i) => {
+      const div = document.createElement('div');
+      div.className = 'thumb' + (i === 0 ? ' main' : '');
+      div.innerHTML = `
+        <img src="${src}" alt="매물 사진 ${i + 1}">
+        ${i === 0 ? '<span class="main-tag">대표</span>' : ''}
+        <button type="button" class="thumb-remove" data-index="${i}" aria-label="사진 삭제"><i class="fa-solid fa-xmark"></i></button>
+      `;
+      thumbGrid.appendChild(div);
+    });
+    thumbGrid.querySelectorAll('.thumb-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = Number(btn.dataset.index);
+        photos.splice(i, 1);
+        if (flyerPhotoIndex >= photos.length) flyerPhotoIndex = Math.max(0, photos.length - 1);
+        renderThumbs();
+      });
+    });
+    renderFlyerPhotoCarousel();
+  }
+
+  function renderFlyerPhotoCarousel() {
+    const hasPhotos = photos.length > 0;
+    if (flyerPhotoIndex > photos.length - 1) flyerPhotoIndex = Math.max(0, photos.length - 1);
+
+    flyerPhoto.style.backgroundImage = hasPhotos ? `url(${photos[flyerPhotoIndex]})` : '';
+    flyerPhoto.classList.toggle('has-photo', hasPhotos);
+    flyerPhotoHint.style.display = hasPhotos ? 'none' : '';
+
+    const showNav = photos.length > 1;
+    flyerPhotoPrev.style.display = showNav ? '' : 'none';
+    flyerPhotoNext.style.display = showNav ? '' : 'none';
+    flyerPhotoDots.innerHTML = showNav
+      ? photos.map((_, i) => `<span class="${i === flyerPhotoIndex ? 'active' : ''}"></span>`).join('')
+      : '';
+  }
+
+  flyerPhotoPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!photos.length) return;
+    flyerPhotoIndex = (flyerPhotoIndex - 1 + photos.length) % photos.length;
+    renderFlyerPhotoCarousel();
+  });
+  flyerPhotoNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!photos.length) return;
+    flyerPhotoIndex = (flyerPhotoIndex + 1) % photos.length;
+    renderFlyerPhotoCarousel();
+  });
+
+  // ---------- 히어로 예시 카드 사진 캐러셀 (register_ex_1.png ~ register_ex_10.png) ----------
+  function preloadImage(path) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(path);
+      img.onerror = () => resolve(null);
+      img.src = path;
+    });
+  }
+
+  async function initFyPhotoCarousel() {
+    const numberedCandidates = [];
+    for (let i = 1; i <= 10; i++) numberedCandidates.push(`../../static/images/register_ex_${i}.png`);
+
+    const numberedResults = await Promise.all(numberedCandidates.map(preloadImage));
+    let slides = numberedResults.filter(Boolean);
+
+    if (!slides.length) {
+      // 번호 붙은 파일이 없으면, 기존 단일 파일(register_ex.png)로 대신해요.
+      const fallback = await preloadImage('../../static/images/register_ex.png');
+      if (fallback) slides = [fallback];
+    }
+    if (!slides.length) return; // 예시 사진이 하나도 없으면 빈 배경으로 둬요.
+
+    let idx = 0;
+    const fyPhoto = document.getElementById('fyPhoto');
+    const dotsEl = document.getElementById('fyPhotoDots');
+    const prevBtn = document.getElementById('fyPhotoPrev');
+    const nextBtn = document.getElementById('fyPhotoNext');
+
+    function render() {
+      fyPhoto.style.backgroundImage = `url("${slides[idx]}")`;
+      dotsEl.innerHTML = slides.length > 1
+        ? slides.map((_, i) => `<span class="${i === idx ? 'active' : ''}"></span>`).join('')
+        : '';
+    }
+    if (slides.length <= 1) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    } else {
+      prevBtn.addEventListener('click', () => { idx = (idx - 1 + slides.length) % slides.length; render(); });
+      nextBtn.addEventListener('click', () => { idx = (idx + 1) % slides.length; render(); });
+    }
+    render();
+  }
+  initFyPhotoCarousel();
+
+  // ---------- 억/만원 단위 변환 (가독성용) ----------
+  function formatKoreanPrice(manwon) {
+    const num = Number(manwon);
+    if (!num || isNaN(num)) return '';
+    const eok = Math.floor(num / 10000);
+    const rest = num % 10000;
+    if (eok > 0 && rest > 0) return `${eok}억 ${rest.toLocaleString('ko-KR')}만원`;
+    if (eok > 0) return `${eok}억원`;
+    return `${num.toLocaleString('ko-KR')}만원`;
+  }
+
+  // ---------- 가격 입력 콤마 포맷 + 억/만원 실시간 변환 힌트 ----------
+  const priceHintMap = { price: 'priceHint', deposit: 'depositHint', monthly: 'monthlyHint' };
+  ['price', 'deposit', 'monthly'].forEach(id => {
+    const el = document.getElementById(id);
+    const hintEl = document.getElementById(priceHintMap[id]);
+    el.addEventListener('input', () => {
+      const digits = el.value.replace(/[^0-9]/g, '');
+      el.value = digits ? Number(digits).toLocaleString('ko-KR') : '';
+      if (hintEl) hintEl.textContent = digits ? `= ${formatKoreanPrice(digits)}` : '';
+      updatePreview();
+    });
+  });
+
+  // ---------- 실시간 미리보기(전단지) 업데이트 ----------
+  const flyerDeal = document.getElementById('flyerDeal');
+  const flyerPrice = document.getElementById('flyerPrice');
+  const flyerAddr = document.getElementById('flyerAddr');
+  const flyerSpec = document.getElementById('flyerSpec');
+  const flyerTags = document.getElementById('flyerTags');
+  const flyerOptions = document.getElementById('flyerOptions');
+  const flyerFee = document.getElementById('flyerFee');
+  const flyerTransit = document.getElementById('flyerTransit');
+  const flyerSchool = document.getElementById('flyerSchool');
+  const modalDeal = document.getElementById('modalDeal');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalAddr = document.getElementById('modalAddr');
+  const modalSpec = document.getElementById('modalSpec');
+
+  function currentDealType() {
+    const checked = document.querySelector('input[name="dealType"]:checked');
+    return checked ? checked.value : '매매';
+  }
+
+  function updatePreview() {
+    const deal = currentDealType();
+    flyerDeal.textContent = deal;
+
+    if (deal === '매매') {
+      const price = document.getElementById('price').value;
+      flyerPrice.textContent = price ? formatKoreanPrice(price.replace(/[^0-9]/g, '')) : '가격 미입력';
+    } else if (deal === '전세') {
+      const deposit = document.getElementById('deposit').value;
+      flyerPrice.textContent = deposit ? `전세 ${formatKoreanPrice(deposit.replace(/[^0-9]/g, ''))}` : '보증금 미입력';
+    } else {
+      const deposit = document.getElementById('deposit').value;
+      const monthly = document.getElementById('monthly').value;
+      flyerPrice.textContent = (deposit || monthly)
+        ? `${formatKoreanPrice(deposit.replace(/[^0-9]/g, '')) || '0만원'} / ${formatKoreanPrice(monthly.replace(/[^0-9]/g, '')) || '0만원'}`
+        : '보증금/월세 미입력';
+    }
+
+    const addr1 = document.getElementById('addr1').value;
+    const addr2 = document.getElementById('addr2').value;
+    flyerAddr.textContent = addr1 ? `${addr1}${addr2 ? ' · ' + addr2 : ''}` : '주소를 입력해주세요';
+
+    const area = document.getElementById('area').value;
+    const rooms = document.getElementById('rooms').value;
+    const baths = document.getElementById('baths').value;
+    const floor = document.getElementById('floor').value;
+    const specParts = [];
+    if (area) specParts.push(`${area}㎡`);
+    if (rooms) specParts.push(`방${rooms}`);
+    if (baths) specParts.push(`욕${baths}`);
+    if (floor) specParts.push(`${floor}층`);
+    flyerSpec.textContent = specParts.length ? specParts.join(' · ') : '면적 · 방 · 욕실 · 층수';
+
+    const tags = Array.from(document.querySelectorAll('#tagGrid input:checked')).map(i => i.value);
+    flyerTags.innerHTML = tags.length ? tags.map(t => `<span>${t}</span>`).join('') : '<span class="empty-hint">아직 입력된 특징이 없어요</span>';
+
+    const options = Array.from(document.querySelectorAll('#optionGrid input:checked')).map(i => i.value);
+    flyerOptions.innerHTML = options.length ? options.map(o => `<span>${o}</span>`).join('') : '<span class="empty-hint">아직 입력된 옵션이 없어요</span>';
+
+    // 관리비 정보
+    const feeParts = [];
+    const fee = document.getElementById('maintenanceFee').value;
+    if (fee) feeParts.push(`일반(공용) 관리비 ${fee}만원`);
+    const ALL_UTILITIES = ['전기', '수도', '가스', '인터넷', 'TV'];
+    const utilities = Array.from(document.querySelectorAll('#utilityGroup input:checked')).map(i => i.value);
+    const notIncluded = ALL_UTILITIES.filter(u => !utilities.includes(u));
+    const etcFee = document.getElementById('etcFee').value;
+    const hasFeeInfo = Boolean(fee || etcFee || utilities.length);
+    if (utilities.length) feeParts.push(`포함: ${utilities.join(', ')}`);
+    if (hasFeeInfo && notIncluded.length) feeParts.push(`포함되지 않음: ${notIncluded.join(', ')}`);
+    if (etcFee) feeParts.push(etcFee);
+    flyerFee.innerHTML = feeParts.length
+      ? feeParts.map(m => `<div>${m}</div>`).join('')
+      : '<div class="empty-hint">관리비 정보를 입력하면 여기에 표시돼요</div>';
+
+    // 교통정보 (탭에 따라 다르게 표시 — 주소 기준 직선거리 자동 계산)
+    if (!currentTransitMatch) {
+      flyerTransit.innerHTML = '<div class="empty-hint">1단계에서 주소를 입력하고 위치를 확인하면 자동으로 표시돼요</div>';
+    } else if (activeTransitTab === 'bus') {
+      flyerTransit.innerHTML = currentTransitMatch.bus.length
+        ? currentTransitMatch.bus.map(s => `
+            <div class="transit-result-row">
+              <i class="fa-solid fa-bus"></i>
+              <span class="transit-station-name">${s.name}</span>
+              <span class="transit-walk-time">${s.distance}m</span>
+            </div>
+          `).join('')
+        : '<div class="empty-hint">주변 버스정류장 정보가 없어요</div>';
+    } else if (activeTransitTab === 'subway') {
+      flyerTransit.innerHTML = currentTransitMatch.subway.length
+        ? currentTransitMatch.subway.map(s => `
+            <div class="transit-result-row">
+              <i class="fa-solid fa-train-subway"></i>
+              <span class="transit-station-name">${s.name} (${s.line})</span>
+              <span class="transit-walk-time">${s.distance}m</span>
+            </div>
+          `).join('')
+        : '<div class="empty-hint">반경 15km 안에 지하철역이 없어요</div>';
+    } else {
+      // 최소시간 탭: 지하철·버스 통합해서 거리 가까운 순으로
+      const combined = [...currentTransitMatch.subway, ...currentTransitMatch.bus]
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 5);
+      flyerTransit.innerHTML = combined.length
+        ? combined.map(s => `
+            <div class="transit-result-row">
+              <i class="fa-solid ${s.type === 'subway' ? 'fa-train-subway' : 'fa-bus'}"></i>
+              <span class="transit-station-name">${s.name}${s.line ? ` (${s.line})` : ''}</span>
+              <span class="transit-walk-time">${s.distance}m</span>
+            </div>
+          `).join('')
+        : '<div class="empty-hint">주변 교통정보가 없어요</div>';
+    }
+
+    // 학군정보 (탭으로 선택한 학교급만 표시 — 주소 기반 자동 매칭 결과)
+    const schoolLabels = { el: '초등학교', mid: '중학교', high: '고등학교' };
+    const activeLabel = schoolLabels[activeSchoolTab];
+    const zoneMatch = currentSchoolMatch ? currentSchoolMatch[activeSchoolTab] : null;
+
+    if (!currentSchoolMatch) {
+      flyerSchool.innerHTML = `<div class="empty-hint">1단계에서 주소를 입력하고 위치를 확인하면 ${activeLabel} 학군이 자동으로 표시돼요</div>`;
+    } else if (!zoneMatch) {
+      flyerSchool.innerHTML = `<div class="empty-hint">이 주소는 ${activeLabel} 학군 자동 조회 대상 지역이 아니에요 (분당구만 지원)</div>`;
+    } else {
+      const zoneLabel = zoneMatch.zone_name
+        ? `${zoneMatch.zone_name}${zoneMatch.district_label ? ` (${zoneMatch.district_label})` : ''}`
+        : (zoneMatch.type === 'joint' ? '공동통학구역 (택1 배정)' : activeLabel + ' 통학구역');
+      flyerSchool.innerHTML = `
+        <div class="school-row">
+          <span class="school-level-tag">${zoneLabel}</span>
+        </div>
+      ` + zoneMatch.schools.map(name => `
+          <div class="school-row">
+            <span class="school-name">${name}</span>
+            <i class="fa-solid fa-location-dot school-map-icon" title="지도 연동됨"></i>
+          </div>
+        `).join('');
+    }
+
+    // 카드 요약과 동일한 내용을 상세정보 모달에도 반영해요.
+    modalDeal.textContent = flyerDeal.textContent;
+    modalPrice.textContent = flyerPrice.textContent;
+    modalAddr.textContent = flyerAddr.textContent;
+    modalSpec.textContent = flyerSpec.textContent;
+  }
+
+  document.querySelectorAll('#registerForm input, #registerForm select').forEach(el => {
+    el.addEventListener('input', updatePreview);
+    el.addEventListener('change', updatePreview);
+  });
+
+  // ---------- 제출 ----------
+  document.getElementById('listingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (current < steps.length) {
+      alert('아직 입력하지 않은 정보가 있어요. 마지막 단계까지 입력을 완료해주세요.');
+      return;
+    }
+    if (!document.getElementById('ownerCheck').checked) {
+      alert('소유자 확인 동의가 필요해요.');
+      return;
+    }
+    alert('매물 등록 신청이 접수됐어요. 담당자 확인 후 24시간 이내 게시돼요.');
+  });
+
+  updatePreview();
+
+  // ---------- 상세정보 모달 ----------
+  const flyerCard = document.getElementById('flyerCard');
+  const detailModal = document.getElementById('detailModal');
+  const detailModalBackdrop = document.getElementById('detailModalBackdrop');
+  const detailModalClose = document.getElementById('detailModalClose');
+
+  function openDetailModal() {
+    detailModal.classList.add('open');
+    detailModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetailModal() {
+    detailModal.classList.remove('open');
+    detailModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (flyerCard) {
+    flyerCard.addEventListener('click', openDetailModal);
+    flyerCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openDetailModal();
+      }
+    });
+  }
+  if (detailModalClose) detailModalClose.addEventListener('click', closeDetailModal);
+  if (detailModalBackdrop) detailModalBackdrop.addEventListener('click', closeDetailModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && detailModal.classList.contains('open')) closeDetailModal();
+  });
+
+  // ---------- Back to Top FAB ----------
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
+</body>
+</html>

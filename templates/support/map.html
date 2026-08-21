@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>부동산 지도 서비스</title>
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/map.css" />
+</head>
+<body>
+  <header>
+    <h1>부동산 지도</h1>
+  </header>
+
+  <main>
+    <aside>
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="지역, 단지명, 주소 검색" />
+        <button id="searchBtn">검색</button>
+      </div>
+
+      <div class="filter-box">
+        <select id="typeFilter">
+          <option value="">전체 유형</option>
+          <option value="아파트">아파트</option>
+          <option value="오피스텔">오피스텔</option>
+          <option value="빌라">빌라</option>
+        </select>
+
+        <select id="priceFilter">
+          <option value="">전체 가격</option>
+          <option value="50000">5억 이하</option>
+          <option value="70000">7억 이하</option>
+          <option value="100000">10억 이하</option>
+          <option value="150000">15억 이하</option>
+        </select>
+      </div>
+
+      <div class="result-header">
+        <strong id="resultCount">0</strong>개 매물
+      </div>
+
+      <div id="propertyList" class="property-list"></div>
+    </aside>
+
+    <section id="map"></section>
+  </main>
+
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=m4rxvrgqbo"></script>
+
+  <!-- 빠른 클러스터링 라이브러리 -->
+  <script src="https://unpkg.com/supercluster@8.0.1/dist/supercluster.min.js"></script>
+
+  <script src="../../static/js/map.js"></script>
+</body>
+</html>

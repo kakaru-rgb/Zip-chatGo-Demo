@@ -1,0 +1,378 @@
+/* ==========================
+   member.css
+   로그인 / 회원가입 공통
+========================== */
+
+.member-page {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(30, 136, 255, .12), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(23, 212, 179, .16), transparent 30%),
+    linear-gradient(135deg, #F8FAFC, #EEF7FF);
+}
+
+.member-card {
+  width: min(1050px, 100%);
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 34px;
+  padding: 34px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(226, 232, 240, .9);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, .12);
+  backdrop-filter: blur(16px);
+}
+
+.member-title {
+  position: relative;
+  overflow: hidden;
+  padding: 42px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, .28), transparent 34%),
+    linear-gradient(135deg, #1E88FF, #17D4B3);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.member-title::after {
+  content: "";
+  position: absolute;
+  right: -70px;
+  bottom: -70px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+}
+
+.member-badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .2);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+}
+
+.member-title h1 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -1.7px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.member-title h1 strong {
+  color: #EFFFFB;
+}
+
+.member-title p {
+  position: relative;
+  z-index: 1;
+  line-height: 1.7;
+  font-size: 16px;
+  opacity: .94;
+}
+
+.member-form {
+  padding: 18px 6px;
+  display: grid;
+  gap: 17px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  height: 54px;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid #CBD5E1;
+  transition: .25s ease;
+}
+
+.input-box i {
+  font-size: 20px;
+  color: #1E88FF;
+}
+
+.input-box input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  color: #0F172A;
+}
+
+.input-box input::placeholder {
+  color: #94A3B8;
+}
+
+.input-box:focus-within {
+  border-color: #1E88FF;
+  box-shadow: 0 0 0 4px rgba(30, 136, 255, .12);
+  transform: translateY(-1px);
+}
+
+.member-btn {
+  height: 56px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 19px;
+  background: linear-gradient(135deg, #1E88FF, #17D4B3);
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 18px 38px rgba(30, 136, 255, .24);
+  transition: .25s ease;
+}
+
+.member-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px rgba(30, 136, 255, .32);
+}
+
+.member-message {
+  min-height: 20px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.member-message.success {
+  color: #0F9F6E;
+}
+
+.member-message.error {
+  color: #E11D48;
+}
+
+.member-link {
+  text-align: center;
+  font-size: 14px;
+  color: #64748B;
+}
+
+.member-link a {
+  color: #1E88FF;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.top-nav a.active {
+  color: #1E88FF;
+  background: rgba(30, 136, 255, .1);
+}
+
+/* ==========================
+   모바일
+========================== */
+
+@media (max-width: 820px) {
+  .member-page {
+    padding: 95px 16px 36px;
+    align-items: flex-start;
+  }
+
+  .member-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    border-radius: 28px;
+    gap: 20px;
+  }
+
+  .member-title {
+    padding: 30px 24px;
+    border-radius: 24px;
+  }
+
+  .member-title h1 {
+    font-size: 30px;
+  }
+
+  .member-title p {
+    font-size: 14px;
+  }
+
+  .member-form {
+    padding: 4px;
+    gap: 14px;
+  }
+
+  .input-box {
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .member-btn {
+    height: 54px;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-page {
+    padding-top: 88px;
+  }
+
+  .member-title {
+    padding: 26px 22px;
+  }
+
+  .member-title h1 {
+    font-size: 27px;
+  }
+
+  .member-badge {
+    font-size: 13px;
+    padding: 8px 13px;
+  }
+}
+/* ==========================
+   로그인 옵션
+========================== */
+
+.login-card {
+  max-width: 980px;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -2px;
+  font-size: 14px;
+  color: #64748B;
+}
+
+.login-options label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.login-options input {
+  accent-color: #1E88FF;
+}
+
+.login-options a {
+  color: #1E88FF;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.demo-login {
+  margin-top: 3px;
+  padding: 17px;
+  border: 1px solid rgba(30, 136, 255, .18);
+  border-radius: 19px;
+  background: linear-gradient(135deg, rgba(30, 136, 255, .07), rgba(23, 212, 179, .09));
+}
+
+.demo-login-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.demo-login-title span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #0F172A;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.demo-login-title span i {
+  color: #1E88FF;
+  font-size: 20px;
+}
+
+.demo-login-title b {
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #0F9F84;
+  background: rgba(23, 212, 179, .14);
+  font-size: 10px;
+  letter-spacing: .8px;
+}
+
+.demo-login > p {
+  margin: 9px 0 13px;
+  color: #64748B;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.guest-login-btn {
+  width: 100%;
+  min-height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(30, 136, 255, .25);
+  border-radius: 14px;
+  color: #1E88FF;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+  transition: .22s ease;
+}
+
+.guest-login-btn:hover {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(135deg, #1E88FF, #17D4B3);
+  transform: translateY(-2px);
+}
+
+.guest-login-btn:disabled {
+  cursor: wait;
+  opacity: .75;
+  transform: none;
+}
+
+.guest-login-btn:disabled i {
+  animation: guest-spin .8s linear infinite;
+}
+
+@keyframes guest-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .login-options {
+    font-size: 13px;
+  }
+}

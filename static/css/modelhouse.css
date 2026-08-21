@@ -1,0 +1,124 @@
+:root { --ink:#132a2b; --deep:#073c3d; --mint:#adcfbd; --gold:#d9b979; --cream:#f7f4ed; }
+
+body { background: radial-gradient(circle at 12% 22%, rgba(174,207,190,.34), 
+    transparent 28%), radial-gradient(circle at 90% 78%, rgba(217,185,121,.2), transparent 26%), #f8f7f2; }
+
+.modelhouse-page { width:min(1320px, 92%); margin:0 auto; padding:154px 0 80px; min-height:calc(100vh - 260px); }
+
+.modelhouse-hero { display:grid; grid-template-columns:minmax(0,1.04fr) minmax(480px,.96fr); align-items:center; gap:52px; }
+
+.hero-copy { max-width:590px; display:flex; flex-direction:column; align-items:flex-start; }
+
+.eyebrow { display:flex; align-items:center; gap:10px; color:#668079; font-size:12px; letter-spacing:.18em; font-weight:800; margin-bottom:22px; }
+
+.eyebrow span { width:32px; height:1px; background:var(--gold); }
+
+.hero-copy h1 { max-width:530px; color:var(--ink); font-size:clamp(2.3rem,3.6vw,3.95rem); line-height:1.16; letter-spacing:-.058em; font-weight:750; text-wrap:balance; }
+
+.hero-copy h1 em { color:var(--deep); font-style:normal; position:relative; white-space:nowrap; }
+
+.hero-copy h1 em::after { content:""; height:12px; position:absolute; left:2%; right:1%; bottom:1px; z-index:-1; background:rgba(217,185,121,.44); border-radius:100%; }
+
+.hero-description { max-width:530px; margin-top:30px; color:#586764; font-size:17px; line-height:1.9; word-break:keep-all; }
+
+.hero-guide { display:inline-flex; align-items:center; gap:9px; margin-top:32px; padding:12px 16px; border:1px solid rgba(19,42,43,.11); border-radius:99px; background:rgba(255,255,255,.56); color:#536460; font-size:13px; }
+
+.hero-guide i { color:#bc9551; font-size:18px; }
+
+.phone-stage { position:relative; display:flex; align-items:center; flex-direction:column; justify-content:center; min-height:590px; isolation:isolate; }
+
+.stage-orbit { position:absolute; border:1px solid rgba(19,42,43,.09); border-radius:50%; z-index:-1; }
+
+.orbit-one { width:550px; height:370px; transform:rotate(-20deg); }.orbit-two { width:450px; height:490px; border-color:rgba(217,185,121,.28); transform:rotate(38deg); }
+
+.mobile-frame { width:min(100%, 488px); padding:12px 11px 10px; border:8px solid #183435; border-radius:42px; background:#183435; box-shadow:0 34px 65px rgba(8,39,38,.28), inset 0 0 0 1px rgba(255,255,255,.18); }
+
+.phone-speaker { width:64px; height:5px; border-radius:99px; background:#091d1e; margin:0 auto 9px; box-shadow:inset 0 1px 1px rgba(255,255,255,.18); }
+
+.phone-screen { overflow:hidden; border-radius:27px; background:#183435; }
+
+.screen-header { height:48px; padding:0 17px; color:#f8f7f2; display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.13em; }
+
+.screen-brand { font-weight:800; }.screen-brand b { color:#d9b979; }.live-mark { display:flex; gap:5px; align-items:center; font-size:9px; }.live-mark i { width:6px; height:6px; border-radius:50%; background:#c58d67; box-shadow:0 0 0 4px rgba(197,141,103,.16); }
+
+.scene-viewport { position:relative; height:428px; overflow:hidden; background:#526662; }
+
+.scene-image { position:absolute; inset:0; background:center / cover no-repeat; transform:scale(1.08); transition:opacity .9s ease, transform 6s ease; }.scene-image-next { opacity:0; }
+
+.scene-image-current { opacity:1; }.scene-image-current.zoom { transform:scale(1.19); }.scene-image-next.visible { opacity:1; transform:scale(1.09); }
+
+.scene-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,20,19,.02) 28%,rgba(6,20,19,.74) 100%); }
+
+.scene-copy { position:absolute; z-index:2; bottom:23px; left:23px; right:23px; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.35); }
+
+.scene-copy p { color:#e3c78f; font-size:10px; letter-spacing:.18em; margin-bottom:7px; }.scene-copy h2 { font-size:29px; letter-spacing:-.05em; margin-bottom:5px; }
+
+.scene-copy span { font-size:12px; color:rgba(255,255,255,.82); }
+
+.scene-progress { position:absolute; z-index:3; left:23px; right:23px; bottom:10px; height:2px; overflow:hidden; background:rgba(255,255,255,.35); }
+
+.scene-progress i { display:block; height:100%; width:0; background:#e4c27e; }
+
+.scene-progress i.running { animation:progress 4.6s linear forwards; } @keyframes progress { to { width:100%; } }
+
+.floorplan-overlay { position:absolute; inset:48px 45px 92px; z-index:1; display:none; border:6px solid rgba(251,248,239,.92); box-shadow:0 0 0 8px rgba(20,43,42,.2); background:rgba(237,232,218,.72); }
+
+.floorplan-overlay.active { display:block; animation:planIn .7s ease both; } @keyframes planIn { from { opacity:0; transform:scale(.9); } to { opacity:1; transform:scale(1); } }
+
+.plan-line { position:absolute; background:#254847; }
+
+.p1 { width:5px; height:75%; left:43%; }
+
+.p2 { height:5px; width:65%; left:0; top:45%; }
+
+.p3 { width:5px; height:57%; right:29%; bottom:0; }
+
+.plan-room { position:absolute; color:#284645; font-size:9px; letter-spacing:.08em; font-weight:800; }
+
+.r1{left:10%;top:17%}
+.r2{right:8%;top:18%}
+.r3{left:9%;bottom:15%}
+
+.screen-controls { height:58px; padding:0 16px; display:flex; align-items:center; justify-content:space-between; background:#f8f5ee; }
+
+.screen-controls button { width:29px; height:29px; border:0; border-radius:50%; color:#355753; background:#e6e4dc; cursor:pointer; transition:.2s; }
+
+.screen-controls button:hover { background:#cfb172; color:#fff; }
+
+.scene-dots { display:flex; gap:6px; }
+
+.scene-dots button { padding:0; width:6px; height:6px; border-radius:9px; border:0; background:#b3b8af; transition:.3s; }
+
+.scene-dots button.active { width:19px; background:#286360; }
+
+.phone-home { width:75px; height:4px; margin:8px auto 0; border-radius:99px; background:rgba(255,255,255,.7); }
+
+.stage-caption { margin-top:21px; color:#72817d; font-size:10px; letter-spacing:.19em; font-weight:800; }
+
+.stage-caption span { color:#c59d5c; padding:0 6px; }
+
+@media (max-width:1000px) { 
+.modelhouse-hero{grid-template-columns:1fr;gap:38px}
+.hero-copy{max-width:680px}
+.phone-stage{min-height:auto}
+.modelhouse-page{padding-top:128px}
+.hero-description{max-width:620px} }
+
+@media (max-width:600px) { 
+.modelhouse-page{width:90%;padding-top:108px;padding-bottom:46px}
+
+.hero-copy h1{font-size:2.7rem;line-height:1.16}
+
+.hero-description{font-size:15px;margin-top:23px}
+
+.hero-guide{font-size:11px;margin-top:24px}
+
+.phone-stage{margin-top:4px}
+
+.mobile-frame{width:100%;border-radius:33px;border-width:6px;padding:9px 8px 8px}
+
+.scene-viewport{height:380px}
+.phone-screen{border-radius:22px}
+.orbit-one{width:115%;height:300px}
+.orbit-two{width:92%;height:400px}
+.scene-copy h2{font-size:25px} }

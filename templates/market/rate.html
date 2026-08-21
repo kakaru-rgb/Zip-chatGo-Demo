@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      주택대출 금리 분석 | 집찾GO
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/sale.css">
+  </head>
+  <body>
+    <header class="main-header" id="mainHeader">
+      <a href="/index.html" class="logo">
+        <img src="/static/images/logo.png" alt="집찾GO">
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+      </button>
+      <nav class="top-nav" id="mobileNav">
+        <a class="guest-menu" href="/templates/member/login.html">
+          <i class="ti ti-login">
+          </i>
+          로그인
+        </a>
+        <a class="guest-menu" href="/templates/member/signup.html">
+          <i class="ti ti-user-plus">
+          </i>
+          회원가입
+        </a>
+        <a href="/templates/support/contact.html">
+          <i class="ti ti-headset">
+          </i>
+          고객센터
+        </a>
+        <a class="user-menu" href="/templates/favorite/favorite.html">
+          <i class="ti ti-heart">
+          </i>
+          관심매물
+        </a>
+        <a class="user-menu logout-btn" href="#">
+          <i class="ti ti-logout">
+          </i>
+          로그아웃
+        </a>
+      </nav>
+    </header>
+    <main class="sale-page">
+      <section class="sale-hero">
+        <div>
+          <span class="live-badge">
+            <i>
+            </i>
+            LIVE · 주택대출 금리
+          </span>
+          <h1>
+            금리 변화가 내 집 예산에
+            <br>
+            <strong>
+              미치는 영향을 계산하세요
+            </strong>
+          </h1>
+          <p>
+            대출금액과 기간, 상환방식을 입력해 월 상환액을 계산하고 주요 금리와 상품 조건을 비교합니다.
+          </p>
+        </div>
+        <div class="update-state">
+          <i class="ti ti-refresh">
+          </i>
+          <span>
+            기준 시각
+            <strong id="updatedAt">
+              --:--:--
+            </strong>
+          </span>
+        </div>
+      </section>
+      <section class="compare-filter rate-filter">
+        <label>
+          <span>
+            대출금액
+          </span>
+          <input id="loanAmount" type="number" value="30000" min="1000" step="1000">
+          <small>
+            만원
+          </small>
+        </label>
+        <label>
+          <span>
+            대출기간
+          </span>
+          <select id="loanYears">
+            <option value="10">
+              10년
+            </option>
+            <option value="20">
+              20년
+            </option>
+            <option value="30" selected>
+              30년
+            </option>
+            <option value="40">
+              40년
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            금리 유형
+          </span>
+          <select id="rateType">
+            <option value="fixed">
+              고정형
+            </option>
+            <option value="mixed" selected>
+              혼합형
+            </option>
+            <option value="variable">
+              변동형
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            상환 방식
+          </span>
+          <select id="repayment">
+            <option value="equal">
+              원리금균등
+            </option>
+            <option value="principal">
+              원금균등
+            </option>
+          </select>
+        </label>
+        <button id="calculateBtn" type="button">
+          <i class="ti ti-calculator">
+          </i>
+          계산하기
+        </button>
+      </section>
+      <div class="data-notice">
+        <i class="ti ti-info-circle">
+        </i>
+        <span>
+          학교 시연용 금리입니다. 실제 대출금리는 금융기관 심사, 신용도, 담보가치와 우대조건에 따라 달라집니다.
+        </span>
+      </div>
+      <section class="metric-grid">
+        <article>
+          <div class="metric-head">
+            <span>
+              예상 적용금리
+            </span>
+            <i class="ti ti-percentage">
+            </i>
+          </div>
+          <strong id="appliedRate">
+            -
+          </strong>
+          <p>
+            시연 상품 평균
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              첫 달 상환액
+            </span>
+            <i class="ti ti-wallet">
+            </i>
+          </div>
+          <strong id="monthlyPayment">
+            -
+          </strong>
+          <p id="paymentNote">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              총 이자 부담
+            </span>
+            <i class="ti ti-coins">
+            </i>
+          </div>
+          <strong id="totalInterest">
+            -
+          </strong>
+          <p id="interestRatio">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              금리 1%p 상승 시
+            </span>
+            <i class="ti ti-trending-up">
+            </i>
+          </div>
+          <strong id="stressPayment">
+            -
+          </strong>
+          <p>
+            월 상환액 증가분
+          </p>
+        </article>
+      </section>
+      <section class="dashboard-grid">
+        <article class="dashboard-card chart-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                RATE TREND
+              </span>
+              <h2>
+                주택담보대출 금리 추이
+              </h2>
+            </div>
+            <div class="chart-legend">
+              <span>
+                <i class="base-dot">
+                </i>
+                <b>
+                  혼합형 평균
+                </b>
+              </span>
+              <span>
+                <i class="compare-dot">
+                </i>
+                <b>
+                  변동형 평균
+                </b>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="rateChart">
+            </svg>
+          </div>
+        </article>
+        <aside class="dashboard-card compare-summary">
+          <div class="card-heading">
+            <div>
+              <span>
+                BURDEN CHECK
+              </span>
+              <h2>
+                상환 부담 진단
+              </h2>
+            </div>
+          </div>
+          <div class="ai-score-ring" id="burdenRing">
+            <strong id="burdenScore">
+              -
+            </strong>
+            <span>
+              부담지수
+            </span>
+          </div>
+          <div class="insight-box">
+            <i class="ti ti-bulb">
+            </i>
+            <p id="rateInsight">
+              조건을 입력해 주세요.
+            </p>
+          </div>
+        </aside>
+      </section>
+      <section class="dashboard-card transaction-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              PRODUCT COMPARISON
+            </span>
+            <h2>
+              주요 대출상품 조건 비교
+            </h2>
+          </div>
+          <small>
+            시연용 예시 · 우대금리 적용 전
+          </small>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  금융기관
+                </th>
+                <th>
+                  상품 유형
+                </th>
+                <th>
+                  금리 범위
+                </th>
+                <th>
+                  중도상환수수료
+                </th>
+                <th>
+                  최대 기간
+                </th>
+                <th>
+                  예상 월 상환액
+                </th>
+                <th>
+                  특징
+                </th>
+              </tr>
+            </thead>
+            <tbody id="loanTableBody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="dashboard-card">
+        <div class="card-heading">
+          <div>
+            <span>
+              CHECKLIST
+            </span>
+            <h2>
+              대출 실행 전 확인사항
+            </h2>
+          </div>
+        </div>
+        <div class="check-grid">
+          <article>
+            <i class="ti ti-file-description">
+            </i>
+            <h3>
+              DSR·LTV 한도
+            </h3>
+            <p>
+              소득과 기존 부채, 주택 가격에 따라 실제 한도를 확인하세요.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-discount-check">
+            </i>
+            <h3>
+              우대금리 조건
+            </h3>
+            <p>
+              급여이체, 카드 이용, 청약통장 등 조건별 유지 비용을 비교하세요.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-clock-dollar">
+            </i>
+            <h3>
+              중도상환 계획
+            </h3>
+            <p>
+              매도나 갈아타기 계획이 있다면 수수료 면제 시점을 확인하세요.
+            </p>
+          </article>
+        </div>
+      </section>
+      <nav class="sale-actions">
+        <a href="/templates/market/trend.html">
+          <i class="ti ti-arrow-left">
+          </i>
+          목록으로 돌아가기
+        </a>
+        <a href="/index.html">
+          <i class="ti ti-home">
+          </i>
+          메인으로 이동
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html">
+            <img src="/static/images/logo.png" alt="집찾GO">
+          </a>
+          <div>
+            <h2>
+              집찾GO
+            </h2>
+            <p>
+              AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.
+            </p>
+          </div>
+        </div>
+        <nav class="footer-links">
+          <a href="/index.html">
+            메인
+          </a>
+          <a href="/templates/market/trend.html">
+            부동산 분석
+          </a>
+          <a href="/templates/support/contact.html">
+            고객센터
+          </a>
+        </nav>
+      </div>
+      <div class="footer-info">
+        <span>
+          집찾GO
+        </span>
+        <span>
+          부동산 분석 서비스
+        </span>
+        <span>
+          실거래·지역·비용 정보를 한곳에서
+        </span>
+      </div>
+    </footer>
+    <script src="/static/js/common.js">
+    </script>
+    <script src="/static/js/rate.js">
+    </script>
+  </body>
+</html>

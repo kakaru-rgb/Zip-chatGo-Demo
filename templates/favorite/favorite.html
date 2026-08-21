@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관심목록 | 집찾GO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../../static/css/common.css">
+  <link rel="stylesheet" href="../../static/css/favorite.css">
+</head>
+<body class="favorite-page">
+  <header class="main-header" id="mainHeader">
+    <a href="../../index.html" class="logo">
+      <img src="../../static/images/logo.png" alt="집찾GO">
+    </a>
+
+    <button class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="메뉴 열기"
+            aria-controls="mobileNav"
+            aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="top-nav" id="mobileNav">
+      <a class="guest-menu" href="../member/login.html">
+        <i class="ti ti-login" aria-hidden="true"></i>
+        로그인
+      </a>
+      <a class="guest-menu" href="../member/signup.html">
+        <i class="ti ti-user-plus" aria-hidden="true"></i>
+        회원가입
+      </a>
+      <a href="../support/contact.html">
+        <i class="ti ti-headset" aria-hidden="true"></i>
+        고객센터
+      </a>
+      <a class="user-menu is-current" href="favorite.html" aria-current="page">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        관심매물
+      </a>
+      <a class="user-menu logout-btn" href="#">
+        <i class="ti ti-logout" aria-hidden="true"></i>
+        로그아웃
+      </a>
+    </nav>
+  </header>
+
+  <main class="favorite-main">
+    <section class="favorite-content" aria-labelledby="favoriteTitle">
+      <div class="favorite-heading">
+        <p class="favorite-eyebrow">MY FAVORITES</p>
+        <h1 id="favoriteTitle">관심목록</h1>
+        <p id="favoriteSummary" class="favorite-summary" aria-live="polite">
+          총 <strong>0개</strong>의 관심목록이 있습니다.
+        </p>
+      </div>
+
+      <div id="favoriteGrid" class="favorite-grid" aria-live="polite"></div>
+
+      <section id="favoriteEmpty" class="favorite-empty" hidden>
+        <span class="favorite-empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21S4 16.5 4 9.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 3.5C20 16.5 12 21 12 21Z"/>
+          </svg>
+        </span>
+        <h2>아직 관심 매물이 없습니다</h2>
+        <p>지도에서 마음에 드는 매물의 하트를 눌러 저장해 보세요.</p>
+        <a href="../property/map.html">지도에서 매물 둘러보기</a>
+      </section>
+    </section>
+  </main>
+
+  <footer class="trend-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html">
+          <img src="../../static/images/logo.png" alt="집찾GO">
+        </a>
+        <div>
+          <h2>집찾GO</h2>
+          <p>AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.</p>
+        </div>
+      </div>
+      <div class="footer-menu">
+        <a href="../../index.html">메인</a>
+        <a href="../property/map.html">지도</a>
+        <a href="../property/register.html">매물 등록</a>
+        <a href="../support/Servise.html">서비스 소개</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        집찾GO | AI 부동산 추천 플랫폼
+        <span>시장 데이터는 참고용 정보입니다.</span>
+        <span>help@jipchatgo.com</span>
+      </p>
+      <p>Copyright 2026 집찾GO. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../../static/js/common.js"></script>
+  <script src="../../static/js/favorite.js"></script>
+</body>
+</html>

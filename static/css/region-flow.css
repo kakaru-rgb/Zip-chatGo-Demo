@@ -1,0 +1,171 @@
+.flow-hero {
+  background:radial-gradient(circle at 82% 18%,rgba(30,136,255,.3),transparent 30%),linear-gradient(135deg,#0f172a,#17446f 58%,#0d8078)
+}
+.flow-layout {
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:1.45fr .55fr;
+  gap:16px
+}
+.flow-map-card {
+  min-width:0
+}
+.flow-map {
+  position:relative;
+  min-height:430px;
+  overflow:hidden;
+  border-radius:22px;
+  background:radial-gradient(circle at center,rgba(30,136,255,.1),transparent 45%),linear-gradient(135deg,#f8fbff,#edf7f7)
+}
+.flow-map::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(rgba(30,136,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,136,255,.05) 1px,transparent 1px);
+  background-size:32px 32px
+}
+.flow-map svg {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1
+}
+.flow-line {
+  fill:none;
+  stroke:#1e88ff;
+  stroke-linecap:round;
+  stroke-dasharray:9 7;
+  animation:flowDash 3s linear infinite
+}
+.flow-line.alt {
+  stroke:#17c9aa
+}
+@keyframes flowDash {
+  to {
+    stroke-dashoffset:-32
+  }
+}
+.origin-node,.destination-node {
+  position:absolute;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  text-align:center;
+  font-weight:900;
+  box-shadow:0 13px 30px rgba(15,23,42,.18)
+}
+.origin-node {
+  left:50%;
+  top:50%;
+  width:105px;
+  height:105px;
+  transform:translate(-50%,-50%);
+  color:#fff;
+  background:linear-gradient(135deg,#1e88ff,#745eff);
+  font-size:16px;
+  border:7px solid rgba(255,255,255,.8)
+}
+.origin-node small,.destination-node small {
+  display:block;
+  font-size:9px;
+  font-weight:700;
+  opacity:.8
+}
+.destination-node {
+  width:76px;
+  height:76px;
+  transform:translate(-50%,-50%);
+  color:#17304f;
+  background:#fff;
+  border:4px solid rgba(23,201,170,.25);
+  font-size:12px
+}
+.flow-ranking {
+  display:grid;
+  gap:11px
+}
+.flow-rank-item {
+  padding:13px;
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  align-items:center;
+  gap:9px;
+  border-radius:15px;
+  background:#f8fafc
+}
+.flow-rank-item>b {
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  color:#1e88ff;
+  background:#eaf4ff
+}
+.flow-rank-item span {
+  font-size:13px;
+  font-weight:900
+}
+.flow-rank-item small {
+  display:block;
+  margin-top:3px;
+  color:#94a3b8;
+  font-size:10px
+}
+.flow-rank-item strong {
+  color:#e5484d;
+  font-size:12px
+}
+.flow-insight {
+  margin-top:0
+}
+.reason-list {
+  margin-top:14px;
+  display:grid;
+  gap:8px
+}
+.reason-list p {
+  padding:11px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-radius:12px;
+  color:#526177;
+  background:#f8fafc;
+  font-size:12px
+}
+.reason-list i {
+  color:#17b99d;
+  font-size:18px
+}
+@media(max-width:950px) {
+  .flow-layout {
+    grid-template-columns:1fr
+  }
+  .flow-map {
+    min-height:390px
+  }
+}
+@media(max-width:600px) {
+  .flow-map {
+    min-height:350px
+  }
+  .origin-node {
+    width:88px;
+    height:88px;
+    font-size:14px
+  }
+  .destination-node {
+    width:67px;
+    height:67px;
+    font-size:11px
+  }
+  .flow-map-card {
+    padding:14px
+  }
+  .flow-map-card .card-heading small {
+    display:none
+  }
+}

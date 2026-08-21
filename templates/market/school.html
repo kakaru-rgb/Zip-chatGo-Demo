@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      학군과 교육환경 분석 | 집찾GO
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/sale.css">
+  </head>
+  <body>
+    <header class="main-header" id="mainHeader">
+      <a href="/index.html" class="logo">
+        <img src="/static/images/logo.png" alt="집찾GO">
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+      </button>
+      <nav class="top-nav" id="mobileNav">
+        <a class="guest-menu" href="/templates/member/login.html">
+          <i class="ti ti-login">
+          </i>
+          로그인
+        </a>
+        <a class="guest-menu" href="/templates/member/signup.html">
+          <i class="ti ti-user-plus">
+          </i>
+          회원가입
+        </a>
+        <a href="/templates/support/contact.html">
+          <i class="ti ti-headset">
+          </i>
+          고객센터
+        </a>
+        <a class="user-menu" href="/templates/favorite/favorite.html">
+          <i class="ti ti-heart">
+          </i>
+          관심매물
+        </a>
+        <a class="user-menu logout-btn" href="#">
+          <i class="ti ti-logout">
+          </i>
+          로그아웃
+        </a>
+      </nav>
+    </header>
+    <main class="sale-page">
+      <section class="sale-hero school-hero">
+        <div>
+          <span class="live-badge">
+            <i>
+            </i>
+            LIVE · 교육환경 분석
+          </span>
+          <h1>
+            학교만이 아니라 아이의 하루를
+            <br>
+            <strong>
+              함께 살펴보세요
+            </strong>
+          </h1>
+          <p>
+            학교 접근성, 통학 환경, 교육 인프라와 주거비를 함께 비교해 가족에게 맞는 생활권을 찾습니다.
+          </p>
+        </div>
+        <div class="update-state">
+          <i class="ti ti-refresh">
+          </i>
+          <span>
+            기준 시각
+            <strong id="updatedAt">
+              --:--:--
+            </strong>
+          </span>
+        </div>
+      </section>
+      <section class="compare-filter">
+        <label>
+          <span>
+            분석 지역
+          </span>
+          <select id="regionFilter">
+          </select>
+        </label>
+        <label>
+          <span>
+            학교급
+          </span>
+          <select id="schoolLevel">
+            <option value="elementary">
+              초등학교
+            </option>
+            <option value="middle" selected>
+              중학교
+            </option>
+            <option value="high">
+              고등학교
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            통학 범위
+          </span>
+          <select id="distanceFilter">
+            <option value="10">
+              도보 10분
+            </option>
+            <option value="15" selected>
+              도보 15분
+            </option>
+            <option value="20">
+              도보 20분
+            </option>
+          </select>
+        </label>
+        <label>
+          <span>
+            주거 면적
+          </span>
+          <select id="areaFilter">
+            <option value="all" selected>
+              전체 면적
+            </option>
+            <option value="59">
+              59㎡
+            </option>
+            <option value="84">
+              84㎡
+            </option>
+            <option value="114">
+              114㎡
+            </option>
+          </select>
+        </label>
+        <button id="analyzeBtn" type="button">
+          <i class="ti ti-school">
+          </i>
+          교육환경 분석
+        </button>
+      </section>
+      <div class="data-notice">
+        <i class="ti ti-info-circle">
+        </i>
+        <span>
+          학교 시연용 샘플 데이터입니다. 배정 학교와 통학구역은 매년 달라질 수 있으므로 교육청과 학교알리미의 최신 정보를 확인하세요.
+        </span>
+      </div>
+      <section class="metric-grid">
+        <article>
+          <div class="metric-head">
+            <span>
+              범위 내 학교
+            </span>
+            <i class="ti ti-school">
+            </i>
+          </div>
+          <strong id="schoolCount">
+            -
+          </strong>
+          <p id="levelText">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              평균 통학시간
+            </span>
+            <i class="ti ti-walk">
+            </i>
+          </div>
+          <strong id="walkTime">
+            -
+          </strong>
+          <p id="walkText">
+            -
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              교육 인프라
+            </span>
+            <i class="ti ti-books">
+            </i>
+          </div>
+          <strong id="academyCount">
+            -
+          </strong>
+          <p>
+            학원·도서관 등
+          </p>
+        </article>
+        <article>
+          <div class="metric-head">
+            <span>
+              교육환경 점수
+            </span>
+            <i class="ti ti-rosette-discount-check">
+            </i>
+          </div>
+          <strong id="educationScore">
+            -
+          </strong>
+          <p id="scoreText">
+            -
+          </p>
+        </article>
+      </section>
+      <section class="dashboard-grid">
+        <article class="dashboard-card">
+          <div class="card-heading">
+            <div>
+              <span>
+                EDUCATION BALANCE
+              </span>
+              <h2>
+                교육환경 세부지표
+              </h2>
+            </div>
+            <small id="balanceRegion">
+              -
+            </small>
+          </div>
+          <div class="education-bars" id="educationBars">
+          </div>
+        </article>
+        <aside class="dashboard-card compare-summary">
+          <div class="card-heading">
+            <div>
+              <span>
+                HOUSING COST
+              </span>
+              <h2>
+                학군과 주거비
+              </h2>
+            </div>
+          </div>
+          <div class="cost-summary">
+            <span>
+              선택 면적 평균 매매가
+            </span>
+            <strong id="housingPrice">
+              -
+            </strong>
+            <p id="pricePremium">
+              -
+            </p>
+          </div>
+          <div class="insight-box">
+            <i class="ti ti-bulb">
+            </i>
+            <p id="schoolInsight">
+              조건을 선택해 주세요.
+            </p>
+          </div>
+        </aside>
+      </section>
+      <section class="dashboard-card ranking-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              NEARBY SCHOOLS
+            </span>
+            <h2>
+              주요 학교와 통학환경
+            </h2>
+          </div>
+          <small>
+            거리와 학생 수는 시연용 예시입니다
+          </small>
+        </div>
+        <div class="school-card-grid" id="schoolCards">
+        </div>
+      </section>
+      <section class="dashboard-card transaction-section">
+        <div class="card-heading">
+          <div>
+            <span>
+              REGION COMPARISON
+            </span>
+            <h2>
+              서울 주요 지역 교육환경 비교
+            </h2>
+          </div>
+          <label class="table-search">
+            <i class="ti ti-search">
+            </i>
+            <input id="regionSearch" type="search" placeholder="지역명 검색">
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  지역
+                </th>
+                <th>
+                  학교 수
+                </th>
+                <th>
+                  통학시간
+                </th>
+                <th>
+                  교육 인프라
+                </th>
+                <th>
+                  84㎡ 평균가
+                </th>
+                <th>
+                  교육점수
+                </th>
+                <th>
+                  특징
+                </th>
+              </tr>
+            </thead>
+            <tbody id="schoolTableBody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="dashboard-card">
+        <div class="card-heading">
+          <div>
+            <span>
+              PARENT CHECKLIST
+            </span>
+            <h2>
+              집을 보기 전 교육환경 체크
+            </h2>
+          </div>
+        </div>
+        <div class="check-grid">
+          <article>
+            <i class="ti ti-map-pin-check">
+            </i>
+            <h3>
+              실제 배정 학교
+            </h3>
+            <p>
+              같은 단지라도 동과 주소에 따라 배정 학교가 달라질 수 있습니다.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-road">
+            </i>
+            <h3>
+              통학로 안전
+            </h3>
+            <p>
+              큰 도로 횡단, 보도 분리, 야간 조명과 경사를 직접 확인하세요.
+            </p>
+          </article>
+          <article>
+            <i class="ti ti-users">
+            </i>
+            <h3>
+              아이의 생활동선
+            </h3>
+            <p>
+              학교뿐 아니라 돌봄, 학원, 공원과 보호자의 이동도 함께 살펴보세요.
+            </p>
+          </article>
+        </div>
+      </section>
+      <nav class="sale-actions">
+        <a href="/templates/market/trend.html">
+          <i class="ti ti-arrow-left">
+          </i>
+          목록으로 돌아가기
+        </a>
+        <a href="/index.html">
+          <i class="ti ti-home">
+          </i>
+          메인으로 이동
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html">
+            <img src="/static/images/logo.png" alt="집찾GO">
+          </a>
+          <div>
+            <h2>
+              집찾GO
+            </h2>
+            <p>
+              AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.
+            </p>
+          </div>
+        </div>
+        <nav class="footer-links">
+          <a href="/index.html">
+            메인
+          </a>
+          <a href="/templates/market/trend.html">
+            부동산 분석
+          </a>
+          <a href="/templates/support/contact.html">
+            고객센터
+          </a>
+        </nav>
+      </div>
+      <div class="footer-info">
+        <span>
+          집찾GO
+        </span>
+        <span>
+          부동산 분석 서비스
+        </span>
+        <span>
+          실거래·지역·비용 정보를 한곳에서
+        </span>
+      </div>
+    </footer>
+    <script src="/static/js/common.js">
+    </script>
+    <script src="/static/js/school.js">
+    </script>
+  </body>
+</html>

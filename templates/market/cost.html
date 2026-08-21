@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>매매 비용 계산기 | 집찾GO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="/static/css/common.css">
+  <link rel="stylesheet" href="/static/css/market-detail.css">
+</head>
+<body>
+  <header class="main-header" id="mainHeader">
+    <a href="/index.html" class="logo"><img src="/static/images/logo.png" alt="집찾GO"></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="top-nav" id="mobileNav">
+      <a class="guest-menu" href="/templates/member/login.html"><i class="ti ti-login"></i>로그인</a>
+      <a class="guest-menu" href="/templates/member/signup.html"><i class="ti ti-user-plus"></i>회원가입</a>
+      <a href="/templates/support/contact.html"><i class="ti ti-headset"></i>고객센터</a>
+      <a class="user-menu" href="/templates/favorite/favorite.html"><i class="ti ti-heart"></i>관심매물</a>
+      <a class="user-menu logout-btn" href="#"><i class="ti ti-logout"></i>로그아웃</a>
+    </nav>
+  </header>
+
+  <main class="market-detail-page cost-page">
+    <section class="detail-hero">
+      <span class="detail-badge"><i class="ti ti-calculator"></i> 매매 실무 계산</span>
+      <h1>계약 전에 필요한 비용을<br><span>미리 계산하세요</span></h1>
+      <p>중개수수료, 취득세, 실제 현금 필요액은 거래 조건만 입력하면 간편하게 계산할 수 있습니다.</p>
+    </section>
+
+    <section class="cost-grid">
+      <article class="cost-card" id="brokerage">
+        <div class="cost-card-head">
+          <i class="ti ti-receipt-2"></i>
+          <div>
+            <span>01</span>
+            <h2>중개수수료 계산</h2>
+          </div>
+        </div>
+        <div class="cost-form">
+          <label><span>거래유형</span><select id="brokerageType"><option value="sale">매매</option><option value="jeonse">전세</option><option value="monthly">월세</option></select></label>
+          <label><span>보증금/거래금액</span><input id="brokeragePrice" type="number" min="0" step="1000"><small>만원</small><em class="amount-preview" data-amount-preview-for="brokeragePrice">-</em></label>
+          <label><span>월세</span><input id="monthlyRent" type="number" min="0" step="10"><small>만원</small><em class="amount-preview" data-amount-preview-for="monthlyRent">-</em></label>
+        </div>
+        <div class="cost-result">
+          <span>예상 상한 수수료</span>
+          <strong id="brokerageFee">-</strong>
+          <p id="brokerageInfo">-</p>
+        </div>
+      </article>
+
+      <article class="cost-card" id="acquisition">
+        <div class="cost-card-head">
+          <i class="ti ti-file-percent"></i>
+          <div>
+            <span>02</span>
+            <h2>취득세 계산</h2>
+          </div>
+        </div>
+        <div class="cost-form">
+          <label><span>주택가격</span><input id="homePrice" type="number" min="0" step="1000"><small>만원</small><em class="amount-preview" data-amount-preview-for="homePrice">-</em></label>
+          <label><span>보유 주택 수</span><select id="houseCount"><option value="1">1주택</option><option value="2">2주택</option><option value="3">3주택 이상</option></select></label>
+          <label><span>전용면적</span><select id="homeArea"><option value="small">85㎡ 이하</option><option value="large">85㎡ 초과</option></select></label>
+        </div>
+        <div class="cost-result">
+          <span>예상 취득 관련 세금</span>
+          <strong id="acquisitionTax">-</strong>
+          <p id="acquisitionInfo">-</p>
+        </div>
+      </article>
+
+      <article class="cost-card" id="budget">
+        <div class="cost-card-head">
+          <i class="ti ti-wallet"></i>
+          <div>
+            <span>03</span>
+            <h2>자금계획 계산</h2>
+          </div>
+        </div>
+        <div class="cost-form">
+          <label><span>매매가</span><input id="budgetPrice" type="number" min="0" step="1000"><small>만원</small><em class="amount-preview" data-amount-preview-for="budgetPrice">-</em></label>
+          <label><span>대출예정액</span><input id="loanPlan" type="number" min="0" step="1000"><small>만원</small><em class="amount-preview" data-amount-preview-for="loanPlan">-</em></label>
+          <label><span>기타비용 <b class="label-hint">(등기·법무사·이사비 등)</b></span><input id="extraCost" type="number" min="0" step="100"><small>만원</small><em class="amount-preview" data-amount-preview-for="extraCost">-</em></label>
+        </div>
+        <div class="cost-result">
+          <span>필요 현금 예상액</span>
+          <strong id="cashNeeded">-</strong>
+          <p id="budgetInfo">-</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-panel cost-note">
+      <h2>계산 전 확인사항</h2>
+      <ul class="point-list">
+        <li><i class="ti ti-check"></i>중개수수료는 법정 상한요율 기준이며 실제 보수는 중개사와 협의될 수 있습니다.</li>
+        <li><i class="ti ti-check"></i>취득세는 주택 수, 조정대상지역 여부, 생애최초 감면 등 개인 조건에 따라 달라질 수 있습니다.</li>
+        <li><i class="ti ti-check"></i>등기비, 인지세, 이사비, 수리비, 선수관리비 같은 부대비용은 별도로 여유 있게 잡는 것이 좋습니다.</li>
+      </ul>
+    </section>
+
+    <nav class="sale-actions">
+      <a href="/templates/market/trend.html"><i class="ti ti-arrow-left"></i>목록으로 돌아가기</a>
+      <a href="/index.html"><i class="ti ti-home"></i>메인으로 이동</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/index.html"><img src="/static/images/logo.png" alt="집찾GO"></a>
+        <div>
+          <h2>집찾GO</h2>
+          <p>AI와 데이터로 나에게 맞는 집을 더 쉽고 빠르게 찾습니다.</p>
+        </div>
+      </div>
+      <nav class="footer-links">
+        <a href="/index.html">메인</a>
+        <a href="/templates/market/trend.html">부동산 분석</a>
+        <a href="/templates/property/local.html">회사 서비스</a>
+        <a href="/templates/support/contact.html">고객센터</a>
+      </nav>
+    </div>
+    <div class="footer-info">
+        <span>
+          집찾GO
+        </span>
+        <span>
+          부동산 분석 서비스
+        </span>
+        <span>
+          실거래·지역·비용 정보를 한곳에서
+        </span>
+      </div>
+    </footer>
+
+  <script src="/static/js/cost.js"></script>
+  <script src="/static/js/common.js"></script>
+</body>
+</html>
